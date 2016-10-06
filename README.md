@@ -2,5 +2,7 @@
 Group members:
 <br>
 Vishnu Chittari
+<br>
 Jerry Dai
+<br>
 Joseph VanderStel
