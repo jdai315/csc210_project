@@ -45,10 +45,17 @@ def login():
     
 @app.route("/logout")
 def logout():
-    session.pop('user')
-    flash("Successfully logged out")
+    try:
+        session.pop('user')
+        flash("Successfully logged out")
+    except Exception:
+        pass
     return redirect("/")
-    
+
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
 @app.route("/register", methods=["GET","POST"])
 def register():
     if request.method == "GET":

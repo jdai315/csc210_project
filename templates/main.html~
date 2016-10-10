@@ -1,35 +1,11 @@
-<html>
+{% extends 'base.html' %}
 
-<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
-
-<head>
-
-  <title> saurin </title>
-
-</head>
-
-<body>
-
-  <div class="pure-menu pure-menu-open pure-menu-horizontal">
-    <a href="/" class="pure-menu-heading">saurin</a>
-
-    <ul>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li class="pure-menu-selected"><a href="/">Home</a></li>
-      <li class="pure-menu-selected"><a href="/logout">Logout</a></li>
-    </ul>
-  
-  </div>
-
+{% block content %}
   <div class="splash-container">
     <div class="splash">
-      <h1 class="splash-head">saurin</h1>
+      <h1 class="splash-head">CSC 210 Milestone #2</h1>
       <p class="splash-subead">
-	just a small little mongoDB project
+	simple login/register for milestone #2
       {% with msgs = get_flashed_messages() %}
       {% if msgs %}
       {%- for msg in msgs %}
@@ -41,12 +17,10 @@
       {% endwith %}
       </p>
       <p>
-	<a href="/login" class="pure-button pure-button-primary">Login!</a>
-	<a href="/register" class="pure-button pure-button-primary">Register!</a>
+	<a href="/login" class="pure-button pure-button-primary">Login</a>
+	<a href="/register" class="pure-button pure-button-primary">Register</a>
       </p>
     </div>
   </div>
 
-</body>
-
-</html>
+{% endblock %}
