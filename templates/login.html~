@@ -4,14 +4,14 @@
 
 <head>
 
-  <title>CSC 210 Project</title>
+  <title> saurin </title>
 
 </head>
 
 <body>
 
   <div class="pure-menu pure-menu-open pure-menu-horizontal">
-    <a href="/" class="pure-menu-heading">CSC210</a>
+    <a href="/" class="pure-menu-heading">saurin</a>
 
     <ul>
       <li></li>
@@ -25,7 +25,7 @@
   
   </div>
 
-  <h2 class="content-head is-center">Register</h2>
+  <h2 class="content-head is-center">Login</h2>
 
   {% with msgs = get_flashed_messages() %}
   {% if msgs %}
@@ -37,11 +37,10 @@
   {% endif %}
   {% endwith %}
 
-
   <form method="POST" class="pure-form pure-form-aligned">
-   
+
     <fieldset>
-      <legend>Create your account</legend>
+      <legend>Login to your saurin account</legend>
 
       <div class="pure-control-group">
 	<label for="uname">Username</label>
@@ -53,7 +52,7 @@
 	<input name="pw" type="text" placeholder="Password">
       </div>
 
-      <button type="submit" class="pure-button pure-button-primary">Register</button>
+      <button type="submit" class="pure-button pure-button-primary">Submit</button>
 
    </fieldset>
 

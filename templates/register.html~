@@ -4,14 +4,14 @@
 
 <head>
 
-  <title>CSC 210 Project</title>
+  <title> saurin </title>
 
 </head>
 
 <body>
 
   <div class="pure-menu pure-menu-open pure-menu-horizontal">
-    <a href="/" class="pure-menu-heading">CSC210</a>
+    <a href="/" class="pure-menu-heading">saurin</a>
 
     <ul>
       <li></li>
@@ -41,7 +41,7 @@
   <form method="POST" class="pure-form pure-form-aligned">
    
     <fieldset>
-      <legend>Create your account</legend>
+      <legend>Create your saurin account</legend>
 
       <div class="pure-control-group">
 	<label for="uname">Username</label>

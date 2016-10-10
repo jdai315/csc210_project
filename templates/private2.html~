@@ -28,7 +28,7 @@
 
   <div class="content-wrapper">
     <h2 class="content-head is-center">Welcome {{user}} to the Platinum Page</h2>
-    <div class="pure-g-r">
+    <div class="pure-g">
       <p>
 	Hi again!
       </p>

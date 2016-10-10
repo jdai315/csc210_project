@@ -4,14 +4,14 @@
 
 <head>
 
-  <title>CSC 210 Project</title>
+  <title> saurin </title>
 
 </head>
 
 <body>
 
   <div class="pure-menu pure-menu-open pure-menu-horizontal">
-    <a href="/" class="pure-menu-heading">CSC 210</a>
+    <a href="/" class="pure-menu-heading">saurin</a>
 
     <ul>
       <li></li>
@@ -27,9 +27,9 @@
 
   <div class="splash-container">
     <div class="splash">
-      <h1 class="splash-head">CSC 210 Milestone #2</h1>
+      <h1 class="splash-head">saurin</h1>
       <p class="splash-subead">
-	simple login/register for milestone #2
+	just a small little mongoDB project
       {% with msgs = get_flashed_messages() %}
       {% if msgs %}
       {%- for msg in msgs %}
@@ -41,8 +41,8 @@
       {% endwith %}
       </p>
       <p>
-	<a href="/login" class="pure-button pure-button-primary">Login</a>
-	<a href="/register" class="pure-button pure-button-primary">Register</a>
+	<a href="/login" class="pure-button pure-button-primary">Login!</a>
+	<a href="/register" class="pure-button pure-button-primary">Register!</a>
       </p>
     </div>
   </div>
