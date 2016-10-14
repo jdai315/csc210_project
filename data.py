@@ -16,7 +16,7 @@ def addNew(username, password):
 
     #if it isnt already in the table, insert it
     if exist is None:
-        c.execute('INSERT OR IGNORE INTO users(name, pw) VALUES(\"' + username + '\", \"' + password + '\")')
+        c.execute('INSERT OR IGNORE INTO users(name, pw) VALUES(?,?)', (username, password))
         conn.commit()
         conn.close()
         return True
