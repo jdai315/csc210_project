@@ -2,17 +2,48 @@
 
 {% block content %}
 
-  <div class="splash-container">
-    <div class="splash">
-      <h1 class="splash-head">About</h1>
-      <p class="splash-subead">
-	A final project for CSC 210. The authors are:
-      </p>
-      <ul>
-	<li>Vishnu Chittari</li>
-	<li>Jerry Dai</li>
-	<li>Joseph VanderStel</li>
+
+{% set active_page = "about" %}
+{% set navigation_bar = [
+('/', 'main', 'Home'),
+('/about', 'about', 'About'),
+('/login', 'login', 'Login'),
+('/register', 'register', 'Register')
+] -%}
+
+<div class="header">
+    <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+        <a class="pure-menu-heading" href="/">Novel</a>
+        
+        <ul class="pure-menu-list">
+            {% for href, id, caption in navigation_bar %}
+            <li class="pure-menu-item {% if id == active_page %}pure-menu-selected{% endif %}"><a href="{{ href|e }}" class="pure-menu-link">{{ caption|e }}</a></li>
+            {% endfor %}
+        </ul>
     </div>
-  </div>
+</div>
+
+    <div class="content">
+        <div class=" l-box-lrg pure-g">
+            <div class="pure-u-1">
+                
+                <h1 class="content-head is-center">About</h2>
+                    
+                    <p>
+                    A final project for CSC 210. The authors are:
+                    </p>
+                    <ul>
+                        <li>Vishnu Chittari</li>
+                        <li>Jerry Dai</li>
+                        <li>Joseph VanderStel</li>
+
+            </div>
+        </div>
+    </div>
+    
+    
+
+    
+
 
 {% endblock %}

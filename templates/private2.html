@@ -2,17 +2,40 @@
 
 {% block content %}
 
-  <div class="content-wrapper">
-    <h2 class="content-head is-center">Welcome {{user}} to the Platinum Page</h2>
-    <div class="pure-g-r">
-      <p>
-	Hi again!
-      </p>
-      <p>
-	<a href="/private1" class="pure-button pure-button-primary">Next</a>
-      </p>
-    </div>
+{% set active_page = "main" %}
+{% set navigation_bar = [
+('/', 'main', 'Home'),
+('/about', 'about', 'About'),
+('/logout', 'logout', 'Logout'),
 
-  </div>
+] -%}
+
+<div class="header">
+    <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+        <a class="pure-menu-heading" href="/">Novel</a>
+        
+        <ul class="pure-menu-list">
+            {% for href, id, caption in navigation_bar %}
+            <li class="pure-menu-item {% if id == active_page %}pure-menu-selected{% endif %}"><a href="{{ href|e }}" class="pure-menu-link">{{ caption|e }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+</div>
+
+<div class="content-wrapper">
+    <h2 class="content-head is-center">Welcome {{user}} to the Platinum Page</h2>
+    
+    <div class="pure-g-r">
+        <p>
+        Hi.
+        </p>
+        <p>
+        <a href="/private1" class="pure-button pure-button-primary">Next</a>
+        </p>
+    </div>
+    
+</div>
 
 {% endblock %}

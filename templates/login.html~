@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <h2 class="content-head is-center">Login</h2>
+
+  {% with msgs = get_flashed_messages() %}
+  {% if msgs %}
+  {%- for msg in msgs %}
+  <div class="alert alert-info">
+    {{ msg }}
+  </div>
+  {% endfor -%}
+  {% endif %}
+  {% endwith %}
+
+  <form method="POST" class="pure-form pure-form-aligned">
+
+    <fieldset>
+      <legend>Login to your account</legend>
+
+      <div class="pure-control-group">
+	<label for="uname">Username</label>
+	<input name="uname" type="text" placeholder="Username">
+      </div>
+
+      <div class="pure-control-group">
+	<label for="pw">Password</label>
+	<input name="pw" type="text" placeholder="Password">
+      </div>
+
+      <button type="submit" class="pure-button pure-button-primary">Submit</button>
+
+   </fieldset>
+
+  </form>
+
+{% endblock %}

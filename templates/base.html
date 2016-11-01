@@ -1,30 +1,45 @@
-<!DOCTYPE html>
-
+<!doctype html>
 <html lang="en">
-  
-  <head>
-    <meta charset="utf-8">
-    <title>CSC 210 Project</title>
-    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
-  </head>
-  
-  <body>
-
-    <div class="pure-menu pure-menu-open pure-menu-horizontal">
-      
-      <a href="/" class="pure-menu-heading">CSC 210</a>
-      
-      <ul>
-	<li class="pure-menu-selected"><a href="/">Home</a></li>
-	<li class="pure-menu-selected"><a href="/about">About</a></li>
-	<li class="pure-menu-selected"><a href="/logout">Logout</a></li>
-      </ul>
-      
-    </div>
-    
-    {% block content %}
-    {% endblock %}
-    
-  </body>
-
+    <head>
+        <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <meta name="description" content="TH 201 grading protal">
+                    
+                    <title>CSC 210 Project</title>
+                    
+                    
+                    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+                        
+                        
+                        <!--[if lte IE 8]>
+                         
+                         <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-old-ie-min.css">
+                         
+                         <![endif]-->
+                        <!--[if gt IE 8]><!-->
+                        
+                        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+                            
+                            <!--<![endif]-->
+                            
+                            
+                            <!--[if lte IE 8]>
+                             <link rel="stylesheet" href="css/layouts/styles-old-ie.css">
+                             <![endif]-->
+                            <!--[if gt IE 8]><!-->
+                            <link rel="stylesheet" href="static/css/layouts/styles.css?q=27">
+                                <!--<![endif]-->
+                                
+                                </head>
+    <body>
+        
+        {% block content %}
+        {% endblock %}
+        
+        <div class="footer l-box is-center">
+            Novel © 2016
+        </div>
+        
+        
+    </body>
 </html>

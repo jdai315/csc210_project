@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <div class="splash-container">
+    <div class="splash">
+      <h1 class="splash-head">CSC 210 Milestone #2</h1>
+      <p class="splash-subead">
+	simple login/register for milestone #2
+      </p>
+      <p>
+	<a href="/" class="pure-button pure-button-primary">Logout</a>
+      </p>
+    </div>
+  </div>
+
+{% endblock %}
