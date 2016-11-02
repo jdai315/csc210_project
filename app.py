@@ -18,11 +18,6 @@ def authenticate(func):
 def main():
     if 'user' in session:
         return private1()
-    button = request.args.get("b",None)
-    if button == 'login':
-        return login()
-    elif button == 'regist':
-        return register()
     else:
         return render_template("main.html")
 
@@ -81,16 +76,6 @@ def private1():
         return render_template("private1.html",user=session['user'])
     else:
         return private2()
-
-@app.route("/private2")
-#private pages
-@authenticate
-def private2():
-    button = request.args.get("b",None)
-    if button == None:
-        return render_template("private2.html",user=session['user'])
-    else:
-        return private1()
 
 @app.route("/public")
 #public pages
