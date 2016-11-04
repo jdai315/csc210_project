@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, flash, session
+from flask import Flask, render_template, request, redirect, flash, session, make_response
 from functools import wraps
 import data
 
@@ -72,19 +72,18 @@ def register():
             return redirect("/register")
 
 
-#store cookies
-@app.route('/main')
-def index():
-    resp = make_response(render_template('private1.html'))
+
+#set cookies
+@app.route('/login')
+def set_cookies():
+    resp = make_response(render_template('main.html'))
     resp.set_cookie('user', user_id)
     return resp
 
-
 #read cookies
-@app.route('/private1')
-def index():
+@app.route('/login')
+def read_cookies():
     user_id = request.cookies.get('user_id')
-
 
 @app.route("/private1")
 #private pages
