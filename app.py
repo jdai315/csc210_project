@@ -83,7 +83,7 @@ def set_cookies():
 #read cookies
 @app.route('/login')
 def read_cookies():
-    user_id = request.cookies.get('user_id')
+    user_id = request.cookies.get('user')
 
 @app.route("/private1")
 #private pages
