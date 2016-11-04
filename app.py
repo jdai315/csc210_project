@@ -67,6 +67,20 @@ def register():
             return redirect("/register")
 
 
+#store cookies
+@app.route('/')
+def index():
+    resp = make_response(render_template('private1.html'))
+    resp.set_cookie('user', user_id)
+    return resp
+
+
+#read cookies
+@app.route('/')
+def index():
+    user_id = request.cookies.get('user_id')
+
+
 @app.route("/private1")
 #private pages
 @authenticate
