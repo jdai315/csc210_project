@@ -74,14 +74,14 @@ def register():
 
 
 #set cookies
-@app.route('/login')
+@app.route("/")
 def set_cookies():
-    resp = make_response(render_template('private1.html'))
+    resp = make_response(render_template("private1.html"))
     resp.set_cookie('user', user_id)
     return resp
 
 #read cookies
-@app.route('/login')
+@app.route("/")
 def read_cookies():
     user_id = request.cookies.get('user')
 
