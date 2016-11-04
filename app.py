@@ -18,6 +18,11 @@ def authenticate(func):
 def main():
     if 'user' in session:
         return private1()
+    button = request.args.get("b",None)
+    if button == 'login':
+        return login()
+    elif button == 'regist':
+        return register()
     else:
         return render_template("main.html")
 
@@ -37,7 +42,7 @@ def login():
         else:
             flash("Invalid Username or Password!")
             return redirect("/login")
-    
+
 @app.route("/logout")
 def logout():
     try:
@@ -68,7 +73,7 @@ def register():
 
 
 #store cookies
-@app.route('/')
+@app.route('/main')
 def index():
     resp = make_response(render_template('private1.html'))
     resp.set_cookie('user', user_id)
@@ -76,7 +81,7 @@ def index():
 
 
 #read cookies
-@app.route('/')
+@app.route('/private1')
 def index():
     user_id = request.cookies.get('user_id')
 
@@ -90,6 +95,16 @@ def private1():
         return render_template("private1.html",user=session['user'])
     else:
         return private2()
+
+@app.route("/private2")
+#private pages
+@authenticate
+def private2():
+    button = request.args.get("b",None)
+    if button == None:
+        return render_template("private2.html",user=session['user'])
+    else:
+        return private1()
 
 @app.route("/public")
 #public pages
