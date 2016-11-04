@@ -77,7 +77,7 @@ def register():
 @app.route("/")
 def set_cookies():
     resp = make_response(render_template("private1.html"))
-    resp.set_cookie('user', user_id)
+    resp.set_cookie('user', user_id, expires=600000000)
     return resp
 
 #read cookies
