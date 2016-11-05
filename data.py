@@ -1,10 +1,10 @@
 import sqlite3
 
 #add new uname/pw to database
-def addNew(username, password):
+def addUser(username, password):
 
     #connect to the database 'userpw'
-    conn = sqlite3.connect("userpw")
+    conn = sqlite3.connect("database")
     c = conn.cursor()
 
     #create a table if it doesn't exist where usernames are in 'name' and passwords are in 'pw'
@@ -28,10 +28,10 @@ def addNew(username, password):
         return False
 
 #check if user/pw matches
-def check(username, password):
+def checkUser(username, password):
 
     #connect to the database 'userpw'
-    conn = sqlite3.connect("userpw")
+    conn = sqlite3.connect("database")
     c = conn.cursor()
 
     #fetch the correct password associated with this username
@@ -47,3 +47,33 @@ def check(username, password):
         conn.close()
         #this converts the database value into a string
         return password == exist[0].encode("ascii")
+
+def addStory(title, content, user):
+    
+    #connect to the database 'userpw'
+    conn = sqlite3.connect("database")
+    c = conn.cursor()
+    
+    #create a table if it doesn't exist where usernames are in 'name' and passwords are in 'pw'
+    c.execute('CREATE TABLE IF NOT EXISTS stories(title varchar(24) primary key, content varchar(100), user varchar(24), FOREIGN KEY(user) REFERENCES users(name))')
+
+    #this is where the cursor checks if the username already exists
+    c.execute('SELECT content from stories where title= ? and user= ?',(title, user))
+    exist = c.fetchone()
+    
+    #if it isnt already in the table, insert it
+    if exist is None:
+        c.execute('INSERT OR IGNORE INTO stories(title, content, user) VALUES(?,?,?)', (title, content, user))
+        conn.commit()
+        conn.close()
+        return True
+
+#otherwise, return false to tell app.py that registering failed
+    else:
+        conn.commit()
+        conn.close()
+        return False
+
+
+
+

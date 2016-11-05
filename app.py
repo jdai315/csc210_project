@@ -36,9 +36,9 @@ def login():
         user_id = request.form["uname"]
         password = request.form["pw"]
         #check login, send to private page if successful
-        if data.check(user_id, password):
+        if data.checkUser(user_id, password):
             session['user'] = user_id
-            return private1()
+            return redirect("/login")
         else:
             flash("Invalid Username or Password!")
             return redirect("/login")
@@ -58,13 +58,13 @@ def about():
 
 @app.route("/register", methods=["GET","POST"])
 def register():
-    if request.method == "GET":
+    if request.method == 'GET':
         return render_template("register.html")
     else:
         user_id = request.form["uname"]
         password = request.form["pw"]
         #add new data to db, if taken dont do anything
-        if data.addNew(user_id, password):
+        if data.addUser(user_id, password):
             flash("Successfully registered!")
             return redirect("/")
         else:
@@ -86,36 +86,24 @@ def set_cookies():
 def read_cookies():
     user_id = request.cookies.get('user')
 
-@app.route("/private1")
+@app.route("/private1", methods=["GET","POST"])
 #private pages
 @authenticate
 def private1():
-    button = request.args.get("b",None)
-    if button == None:
+    if request.method == 'GET':
         return render_template("private1.html",user=session['user'])
+    
     else:
-        return private2()
+        title = request.form["title"]
+        content = request.form["content"]
 
-@app.route("/private2")
-#private pages
-@authenticate
-def private2():
-    button = request.args.get("b",None)
-    if button == None:
-        return render_template("private2.html",user=session['user'])
-    else:
-        return private1()
+        if data.addStory(title, content, session['user']):
+            return "bleeh"
+        
+        else:
+            flash("A story with this title already exists!")
+            return render_template("private1.html",user=session['user'])
 
-@app.route("/public")
-#public pages
-def public():
-    button = request.args.get("b", None)
-    if button == 'home':
-        return redirect("/main")
-    else:
-        return render_template("public.html")
-
-#main
 if __name__ == "__main__":
     app.debug = True
     app.run(host="0.0.0.0", port=5678)

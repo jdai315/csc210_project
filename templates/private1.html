@@ -8,9 +8,17 @@
 ('/logout', 'logout', 'Logout'),
 ] -%}
 
+
+
+<!-- load jQuery -->
+<!--<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>-->
+
+<!-- include JS -->
+<!--<script type="text/javascript" src="lecture08.js"></script>-->
+
 <div class="header">
     <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
-        <a class="pure-menu-heading" href="/">Novel</a>
+        <a class="pure-menu-heading" href="/private1">Novel</a>
         
         <ul class="pure-menu-list">
             {% for href, id, caption in navigation_bar %}
@@ -19,8 +27,6 @@
         </ul>
     </div>
 </div>
-
-
 
 
 
@@ -36,22 +42,22 @@
 <div class="pure-g">
 <div class="l-box-lrg pure-u-1 pure-u-md-3-5">
 <div class="content-subhead">Add a story</div>
-<form class="pure-form">
+<form method="POST" class="pure-form">
     <fieldset>
-        <input type="text" class="pure-input-1" placeholder="Story Title">
-        <textarea class="pure-input-1" placeholder="Story Content"></textarea>
+        <input name="title" type="text" class="pure-input-1" placeholder="Story Title">
+        <textarea name="content" class="pure-input-1" placeholder="Story Content"></textarea>
     </fieldset>
-    <button type="submit" class="pure-button pure-input-1-4 pure-button-primary is-center">Submit</button>
+    <button type="submit" class="pure-button pure-input-1-3 pure-button-primary is-center">Submit</button>
+
 </form>
 </div>
 
 <div class="l-box-lrg pure-u-1 pure-u-md-2-5">
 <div class="content-subhead">Current stories</div>
+
+
 </div>
-
 </div> <!-- end of l-box-->
-
-
 </div></div>
 </div> <!-- end of content-->
 
