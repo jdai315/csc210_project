@@ -98,11 +98,21 @@ def private1():
         content = request.form["content"]
 
         if data.addStory(title, content, session['user']):
-            return "bleeh"
-        
+            flash("Story successfully added!")
         else:
             flash("A story with this title already exists!")
-            return render_template("private1.html",user=session['user'])
+        return render_template("private1.html",user=session['user'])
+
+@app.route("/stories", methods=["GET","POST"])
+@authenticate
+def stories():
+    if request.method == 'GET':
+        return render_template("stories.html", user=session['user'])
+    else:
+        title = request.form["findTitle"]
+        content = data.getStory(title, session['user'])
+        return render_template("stories.html", user=session['user'], loadContent=content)
+
 
 if __name__ == "__main__":
     app.debug = True

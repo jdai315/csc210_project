@@ -54,7 +54,7 @@ def addStory(title, content, user):
     conn = sqlite3.connect("database")
     c = conn.cursor()
     
-    #create a table if it doesn't exist where usernames are in 'name' and passwords are in 'pw'
+    #create a table if it doesn't exist
     c.execute('CREATE TABLE IF NOT EXISTS stories(title varchar(24) primary key, content varchar(100), user varchar(24), FOREIGN KEY(user) REFERENCES users(name))')
 
     #this is where the cursor checks if the username already exists
@@ -68,11 +68,29 @@ def addStory(title, content, user):
         conn.close()
         return True
 
-#otherwise, return false to tell app.py that registering failed
     else:
         conn.commit()
         conn.close()
         return False
+
+def getStory(title, user):
+    
+    conn = sqlite3.connect("database")
+    c = conn.cursor()
+    
+    c.execute('SELECT content FROM stories WHERE title= ? AND user= ?', (title, user))
+    exist = c.fetchone()
+
+    if exist is None:
+        conn.commit()
+        conn.close()
+        return "No story of yours with this title was found."
+    
+    else:
+        conn.commit()
+        conn.close()
+        return exist
+    
 
 
 

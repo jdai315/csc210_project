@@ -14,9 +14,10 @@ cursor = conn.cursor()
 
 data = {} # dictionary to store the response name/value pairs before JSON conversion
 
-for story in cursor.execute("SELECT * FROM stories WHERE user=?", [user]):
-    data[story[0]] = story[1]
+for story in cursor.execute('SELECT pw FROM users WHERE name=?',(user,)):
+    data['title'] = story
+    data['content'] = story[1]
 
-    print json.dumps(data)
+json.dumps(data)
 
 
