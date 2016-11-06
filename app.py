@@ -17,7 +17,7 @@ def authenticate(func):
 @app.route("/main")
 def main():
     if 'user' in session:
-        return private1()
+        return addstory()
     button = request.args.get("b",None)
     if button == 'login':
         return login()
@@ -29,7 +29,7 @@ def main():
 @app.route("/login", methods=["GET","POST"])
 def login():
     if 'user' in session:
-        return private1()
+        return addstory()
     if request.method == 'GET':
         return render_template("login.html")
     else:
@@ -38,7 +38,7 @@ def login():
         #check login, send to private page if successful
         if data.checkUser(user_id, password):
             session['user'] = user_id
-            return redirect("/login")
+            return redirect("/addstory")
         else:
             flash("Invalid Username or Password!")
             return redirect("/login")
@@ -76,7 +76,7 @@ def register():
 #set cookies
 @app.route("/login")
 def set_cookies():
-    resp = make_response(render_template("private1.html"))
+    resp = make_response(render_template("addstory.html"))
     resp.set_cookie('user', user_id, expires=600000000)
     return resp
 
@@ -86,22 +86,29 @@ def set_cookies():
 def read_cookies():
     user_id = request.cookies.get('user')
 
-@app.route("/private1", methods=["GET","POST"])
-#private pages
+@app.route("/addstory", methods=["GET","POST"])
+#private page only available to logged-in users
 @authenticate
-def private1():
+def addstory():
     if request.method == 'GET':
-        return render_template("private1.html",user=session['user'])
-    
+        return render_template("addstory.html", user=session['user'])    
     else:
         title = request.form["title"]
         content = request.form["content"]
 
-        if data.addStory(title, content, session['user']):
+        if not(title and not title.isspace()):
+            flash("Please add a title to your story")
+            return redirect("/addstory")
+        elif not(content and not content.isspace()):
+            flash("Story must have content!")
+            return redirect("/addstory")
+        elif data.addStory(title, content, session['user']):
             flash("Story successfully added!")
+            return render_template("addstory.html",user=session['user'])
         else:
             flash("A story with this title already exists!")
-        return render_template("private1.html",user=session['user'])
+            return render_template("addstory.html",user=session['user'])
+            
 
 @app.route("/stories", methods=["GET","POST"])
 @authenticate
@@ -111,7 +118,13 @@ def stories():
     else:
         title = request.form["findTitle"]
         content = data.getStory(title, session['user'])
-        return render_template("stories.html", user=session['user'], loadContent=content)
+
+        if not(title and not title.isspace()):
+            flash("Please type a title to search for")
+            return redirect("/stories")
+        else:
+            flash("Search results")
+            return render_template("stories.html", user=session['user'], loadTitle=title, loadContent=content)
 
 
 if __name__ == "__main__":

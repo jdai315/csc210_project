@@ -89,7 +89,7 @@ def getStory(title, user):
     else:
         conn.commit()
         conn.close()
-        return exist
+        return exist[0].encode("ascii")
     
 
 

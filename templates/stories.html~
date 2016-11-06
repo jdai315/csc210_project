@@ -59,10 +59,12 @@
         
 	</div>
 
-	<div class="l-box-lrg pure-u-1 pure-u-md-3-5">	  
-	  <h3 class="content-subhead">{{ loadTitle|safe }}</h3>>
-          <p class="break"> {{ loadContent|safe }} </p>
-        </div>
+	<div class="l-box-lrg pure-u-1 pure-u-md-2-5">	  
+	  <h3 class="content-subhead">{{ loadTitle|safe }}</h3>
+	  <div id="story">
+            <p class="break"> {{ loadContent|safe }} </p>
+          </div>
+	</div>
 	
       </div> <!-- end of l-box-->
     </div>

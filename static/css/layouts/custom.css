@@ -1,0 +1,29 @@
+#flashed {
+	 color: black;
+	 background-color: #FBFFC4;
+	 text-align: center;
+	 text-transform: uppercase;
+	 font: 16px;
+}
+
+#icon_png {
+	  display: block;
+	  margin: 0 auto;
+}
+
+#icon_name {
+	   text-align: center;
+}
+
+.break {
+       overflow-wrap: break-word;
+       word-wrap: break-word;
+
+       -webkit-hyphens: auto;
+       -ms-hyphens: auto;
+       -moz-hyphens: auto;
+       hyphens: auto;
+}
+
+/*https://css-tricks.com/snippets/css/prevent-long-urls-from-breaking-out-of-container/ */
+/*word break code source*/

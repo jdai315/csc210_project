@@ -1,26 +1,116 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <div class="splash-container">
+
+{% set active_page = "main" %}
+{% set navigation_bar = [
+('/', 'main', 'Home'),
+('/about', 'about', 'About'),
+('/login', 'login', 'Login'),
+('/register', 'register', 'Register')
+] -%}
+
+<div class="header">
+    <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+        <a class="pure-menu-heading" href="/">Novel</a>
+        
+        <ul class="pure-menu-list">
+            {% for href, id, caption in navigation_bar %}
+            <li class="pure-menu-item {% if id == active_page %}pure-menu-selected{% endif %}"><a href="{{ href|e }}" class="pure-menu-link">{{ caption|e }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+
+<div class="splash-container">
     <div class="splash">
-      <h1 class="splash-head">CSC 210 Milestone #2</h1>
-      <p class="splash-subead">
-	simple login/register for milestone #2
+      
       {% with msgs = get_flashed_messages() %}
       {% if msgs %}
       {%- for msg in msgs %}
-      <div class="alert alert-info">
-	{{ msg }}
+      <div class="alert alert-info splash-subhead" id="flashed">
+        {{ msg }}
       </div>
       {% endfor -%}
       {% endif %}
       {% endwith %}
-      </p>
-      <p>
-	<a href="/login" class="pure-button pure-button-primary">Login</a>
-	<a href="/register" class="pure-button pure-button-primary">Register</a>
-      </p>
+      
+        <div class="splash-container">
+            <div class="splash">
+                <h1 class="splash-head">Let's create stories together</h1>
+                <p class="splash-subhead">
+                Log in or register to get started
+                </p>
+                <p>
+                <a href="/login" class="pure-button pure-button-primary">Login</a>
+                <a href="/register" class="pure-button pure-button-primary">Register</a>
+                </p>
+            </div>
+        </div>
+    
     </div>
-  </div>
+</div>
+
+<div class="content-wrapper">
+    <div class="content">
+        <h2 class="content-head is-center">A collaborate storywriting platform</h2>
+        
+        <div class="pure-g">
+            <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+                
+                <h3 class="content-subhead" id="icon_name">
+                    Submit
+                </h3>
+		<img class="pure-img-responsive" alt="File Icons" width="96" src="static/img/icons/idea.png" id="icon_png">
+                <p id="icon_name">
+                Post original story ideas for the community to read.
+                </p>
+            </div>
+            <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+                <h3 class="content-subhead" id="icon_name">
+                    Contribute
+                </h3>
+		<img class="pure-img-responsive" alt="File Icons" width="96" src="static/img/icons/edit.png" id="icon_png">
+                <p id="icon_name">
+                  Make suggestions or add onto other's story ideas.
+                </p>
+            </div>
+            <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+                <h3 class="content-subhead" id="icon_name">
+                    Collaborate
+                </h3>
+		<img class="pure-img-responsive" alt="File Icons" width="96" src="static/img/icons/users.png" id="icon_png">
+                <p id="icon_name">
+                  Find co-authors to push your idea to the next step.
+                </p>
+            </div>
+            <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+                <h3 class="content-subhead" id="icon_name">
+                    Publish
+                </h3>
+		<img class="pure-img-responsive" alt="File Icons" width="96" src="static/img/icons/mail.png" id="icon_png">
+                <p id="icon_name">
+                  Reveal a completed piece ready to be shared with the world.
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="ribbon l-box-lrg pure-g">
+        <div class="l-box-lrg is-center pure-u-1 pure-u-md-1-2 pure-u-lg-2-5">
+            <img class="pure-img-responsive" alt="File Icons" width="300" src="static/img/kitteh.jpg">
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-3-5">
+            
+            <h2 class="content-head content-head-ribbon">This image is not a test.</h2>
+            
+            <p>
+            It is meant to be here. Be inspired.
+            </p>
+        </div>
+    </div>
+    
 
 {% endblock %}
