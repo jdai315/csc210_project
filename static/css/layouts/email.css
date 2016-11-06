@@ -29,13 +29,31 @@ a {
     color: #fff;
     background: #1b98f8;
     margin: 1em 0;
+    padding-left: 12px;
+    padding-right: 12px;
 }
+
 .secondary-button {
     background: #fff;
     border: 1px solid #ddd;
     color: #666;
+    margin-top: 5px;
     padding: 0.5em 2em;
     font-size: 80%;
+}
+
+.button-success,
+.button-error {
+    border-radius: 20px;
+    font-size: 90%;
+}
+
+.button-success {
+    background: rgb(28, 184, 65);
+}
+
+.button-error {
+    background: rgb(202, 60, 60);
 }
 
 /*

@@ -5,6 +5,7 @@
 {% set active_page = "addStory" %}
 
 {% set navigation_bar = [
+('/home', 'home', 'Home'),
 ('/addstory', 'addStory', 'Add Story'),
 ('/stories', 'findStory', 'Find a Story'),
 ('/logout', 'logout', 'Logout'),
@@ -20,7 +21,7 @@
 
 <div class="header">
   <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
-    <a class="pure-menu-heading" href="/addstory">Novel</a>
+    <a class="pure-menu-heading" href="/home">Novel</a>
     
     <ul class="pure-menu-list">
       {% for href, id, caption in navigation_bar %}

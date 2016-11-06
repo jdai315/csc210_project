@@ -17,7 +17,7 @@ def authenticate(func):
 @app.route("/main")
 def main():
     if 'user' in session:
-        return addstory()
+        return home()
     button = request.args.get("b",None)
     if button == 'login':
         return login()
@@ -126,7 +126,16 @@ def stories():
             flash("Search results")
             return render_template("stories.html", user=session['user'], loadTitle=title, loadContent=content)
 
+@app.route("/home", methods=["GET","POST"])
+@authenticate
+def home():
+    if 'user' in session:
+        return render_template("home.html", user=session['user'])
+    else:
+        return redirect("/")
 
+
+    
 if __name__ == "__main__":
     app.debug = True
     app.run(host="0.0.0.0", port=5678)

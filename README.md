@@ -5,6 +5,12 @@
 Latest push updates (Sun Nov, 6):
 <br>
 <ul>
+	<li>Added a Home page</li>
+</ul>
+<br>
+Push updates (Sun Nov, 6):
+<br>
+<ul>
 	<li>Replaced filler text on main page</li>
 	<li>Standardized formats across templates (around base.html)</li>
 	<li>Rerouted 'private1.html' to 'addstory.html'</li>

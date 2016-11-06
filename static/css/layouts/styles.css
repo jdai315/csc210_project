@@ -35,6 +35,8 @@ label {
  */
 .l-box {
     padding: 1em;
+    position: fixed;
+    bottom: 0;
 }
 
 .l-box-lrg {
