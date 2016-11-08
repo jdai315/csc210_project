@@ -108,29 +108,31 @@ def addstory():
         else:
             flash("A story with this title already exists!")
             return render_template("addstory.html",user=session['user'])
-            
 
-@app.route("/stories", methods=["GET","POST"])
-@authenticate
-def stories():
-    if request.method == 'GET':
-        return render_template("stories.html", user=session['user'])
-    else:
-        title = request.form["findTitle"]
-        content = data.getStory(title, session['user'])
 
-        if not(title and not title.isspace()):
-            flash("Please type a title to search for")
-            return redirect("/stories")
-        else:
-            flash("Search results")
-            return render_template("stories.html", user=session['user'], loadTitle=title, loadContent=content)
+##@app.route("/stories", methods=["GET","POST"])
+##@authenticate
+##def stories():
+##    if request.method == 'GET':
+##        return render_template("stories.html", user=session['user'])
+##    else:
+##        title = request.form["findTitle"]
+##        content = data.getStory(title, session['user'])
+##
+##        if not(title and not title.isspace()):
+##            flash("Please type a title to search for")
+##            return redirect("/stories")
+##        else:
+##            flash("Search results")
+##            return render_template("stories.html", user=session['user'], loadTitle=title, loadContent=content)
 
 @app.route("/home", methods=["GET","POST"])
 @authenticate
 def home():
     if 'user' in session:
-        return render_template("home.html", user=session['user'])
+        user = session['user']
+        contents = data.getStory(session['user'])
+        return render_template("home.html", user=session['user'], contents=contents)
     else:
         return redirect("/")
 

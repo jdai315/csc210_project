@@ -2,7 +2,17 @@
 <br>
 <h2>Currently working on Milestone #4</h2>
 <br>
-Latest push updates (Sun Nov, 6):
+
+Latest push updates (Nov, 8):
+<br>
+<ul>
+<li>Editted app.py and home.html to automatically load current stories from database, displayed in middle column</li>
+<li>Added story.js which implements jQuery to dynamically update page view on click</li>
+
+</ul>
+<br>
+
+Push updates (Sun Nov, 6):
 <br>
 <ul>
 	<li>Added a Home page</li>

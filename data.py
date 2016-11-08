@@ -73,23 +73,23 @@ def addStory(title, content, user):
         conn.close()
         return False
 
-def getStory(title, user):
+def getStory(user):
     
     conn = sqlite3.connect("database")
     c = conn.cursor()
     
-    c.execute('SELECT content FROM stories WHERE title= ? AND user= ?', (title, user))
-    exist = c.fetchone()
+    c.execute('SELECT * FROM stories WHERE user= ?', (user,))
+    exist = c.fetchall()
 
     if exist is None:
         conn.commit()
         conn.close()
-        return "No story of yours with this title was found."
+        return "You have no stories."
     
     else:
         conn.commit()
         conn.close()
-        return exist[0].encode("ascii")
+        return exist
     
 
 
