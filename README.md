@@ -6,7 +6,7 @@
 Latest push updates (Nov, 8):
 <br>
 <ul>
-<li>Editted app.py and home.html to automatically load current stories from database, displayed in middle column</li>
+<li>Edited app.py and home.html to automatically load current stories from database, displayed in middle column</li>
 <li>Added story.js which implements jQuery to dynamically update page view on click</li>
 
 </ul>
