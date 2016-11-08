@@ -38,7 +38,7 @@ def login():
         #check login, send to private page if successful
         if data.checkUser(user_id, password):
             session['user'] = user_id
-            return redirect("/addstory")
+            return redirect("/home")
         else:
             flash("Invalid Username or Password!")
             return redirect("/login")
@@ -76,7 +76,7 @@ def register():
 #set cookies
 @app.route("/login")
 def set_cookies():
-    resp = make_response(render_template("addstory.html"))
+    resp = make_response(render_template("home.html"))
     resp.set_cookie('user', user_id, expires=600000000)
     return resp
 
