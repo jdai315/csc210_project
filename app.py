@@ -104,7 +104,7 @@ def addstory():
             return redirect("/addstory")
         elif data.addStory(title, content, session['user']):
             flash("Story successfully added!")
-            return render_template("addstory.html",user=session['user'])
+            return redirect("/home")
         else:
             flash("A story with this title already exists!")
             return render_template("addstory.html",user=session['user'])
