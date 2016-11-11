@@ -163,11 +163,12 @@ a {
     .email-subject {
         margin: 0;
     }
-    .email-name {
+    .email-name, .email-date {
         text-transform: uppercase;
         color: #999;
+
     }
-    .email-desc {
+    .email-desc, .email-date {
         font-size: 80%;
         margin: 0.4em 0;
     }

@@ -1,4 +1,8 @@
 import sqlite3
+import datetime, time
+
+def adapt_datetime(ts):
+    return time.mktime(ts.timetuple())
 
 #add new uname/pw to database
 def addUser(username, password):
@@ -53,9 +57,11 @@ def addStory(title, content, user):
     #connect to the database 'userpw'
     conn = sqlite3.connect("database")
     c = conn.cursor()
-    
+    now = datetime.datetime.now()
+        
     #create a table if it doesn't exist
-    c.execute('CREATE TABLE IF NOT EXISTS stories(title varchar(24) primary key, content varchar(100), user varchar(24), FOREIGN KEY(user) REFERENCES users(name))')
+    #c.execute('DROP TABLE stories')
+    c.execute('CREATE TABLE IF NOT EXISTS stories(title varchar(24) primary key, content varchar(100), date text, user varchar(24), FOREIGN KEY(user) REFERENCES users(name))')
 
     #this is where the cursor checks if the username already exists
     c.execute('SELECT content from stories where title= ? and user= ?',(title, user))
@@ -63,7 +69,7 @@ def addStory(title, content, user):
     
     #if it isnt already in the table, insert it
     if exist is None:
-        c.execute('INSERT OR IGNORE INTO stories(title, content, user) VALUES(?,?,?)', (title, content, user))
+        c.execute('INSERT OR IGNORE INTO stories(title, content, date, user) VALUES(?,?,?,?)', (title, content, now, user))
         conn.commit()
         conn.close()
         return True
