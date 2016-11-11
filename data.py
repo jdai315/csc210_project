@@ -79,12 +79,17 @@ def addStory(title, content, user):
         conn.close()
         return False
 
-def getStory(user):
+def getStories(user=0, others=0):
     
     conn = sqlite3.connect("database")
     c = conn.cursor()
-    
-    c.execute('SELECT * FROM stories WHERE user= ?', (user,))
+    if (user==0):
+        c.execute('SELECT * FROM stories')
+    elif (others==1):
+        c.execute('SELECT * FROM stories WHERE user!= ?', (user,))
+    else:
+        c.execute('SELECT * FROM stories WHERE user= ?', (user,))
+        
     exist = c.fetchall()
 
     if exist is None:
