@@ -7,10 +7,10 @@ app.secret_key = "wow"
 
 def authenticate(func):
     @wraps(func)
-    def inner(*args):
+    def inner(*args, **kwargs):
         if 'user' not in session:
             return redirect("/")
-        return func(*args)
+        return func(*args, **kwargs)
     return inner
 
 @app.route("/")
@@ -126,8 +126,8 @@ def addstory():
 ##            flash("Search results")
 ##            return render_template("stories.html", user=session['user'], loadTitle=title, loadContent=content)
 
-@app.route("/home", methods=["GET","POST"], defaults={'filters': 'all'})
-@app.route("/home/<filters>", methods=["GET","POST"], defaults={'filters': 'all'})
+@app.route("/home", defaults={'filters': 'all'}, methods=["GET","POST"])
+@app.route("/home/<filters>")
 @authenticate
 def home(filters): 
     if 'user' in session:
