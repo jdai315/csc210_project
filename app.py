@@ -17,7 +17,7 @@ def authenticate(func):
 @app.route("/main")
 def main():
     if 'user' in session:
-        return home()
+        return home("/main")
     button = request.args.get("b",None)
     if button == 'login':
         return login()
