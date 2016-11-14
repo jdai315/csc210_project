@@ -3,7 +3,20 @@
 <h2>Currently working on Milestone #4</h2>
 <br>
 
-Latest push updates (Nov, 8):
+Latest push updates (Nov, 13):
+<br>
+<ul>
+<li>Made the most recent stories display at the top</li>
+<li>Show message if user has no stories and tries to filter "My Stories"</li>
+<li>Fixed bug on story authorship</li>
+<li>Selected story remains highlighted through JQuery</li>
+<li>Stories on feed are truncated to the same size, expandable on click</li>
+<li>Fixed container size for story</li>
+<li>Rerout newly registered users to their home page</li>
+</ul>
+<br>
+
+Push updates (Nov, 8):
 <br>
 <ul>
 <li>Edited app.py and home.html to automatically load current stories from database, displayed in middle column</li>

@@ -89,13 +89,16 @@ def getStories(user=0, others=0):
         c.execute('SELECT * FROM stories WHERE user!= ?', (user,))
     else:
         c.execute('SELECT * FROM stories WHERE user= ?', (user,))
-        
-    exist = c.fetchall()
 
+#reverse the order of the stories to show most recent at the top
+    ex = c.fetchall()
+    exist = ex[::-1]
+    
     if exist is None:
         conn.commit()
         conn.close()
-        return "You have no stories."
+        print "you have no stories"
+        return null
     
     else:
         conn.commit()

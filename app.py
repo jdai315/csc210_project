@@ -65,8 +65,8 @@ def register():
         password = request.form["pw"]
         #add new data to db, if taken dont do anything
         if data.addUser(user_id, password):
-            flash("Successfully registered!")
-            return redirect("/")
+            session['user'] = user_id
+            return redirect("/home")
         else:
             flash("Sorry, the username is already taken.")
             return redirect("/register")

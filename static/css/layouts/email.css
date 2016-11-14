@@ -70,7 +70,7 @@ a {
     width: 100%;
     height: 40px;
     position: relative;
-    background: rgb(37, 42, 58);
+    background: #2d3e50;
     text-align: center;
 }
 /* Show the "Menu" button on phones */
@@ -152,30 +152,33 @@ a {
     border-bottom: 1px solid #ddd;
     border-left: 6px solid transparent;
 }
-    .email-avatar {
-        border-radius: 3px;
-        margin-right: 0.5em;
-    }
-    .email-name,
-    .email-subject {
-        margin: 0;
-    }
-    .email-name, .email-date {
-        text-transform: uppercase;
-        color: #999;
+.email-avatar {
+    border-radius: 3px;
+    margin-right: 0.5em;
+}
+.email-name,
+.email-subject {
+    margin: 0;
+}
+.email-name, .email-date {
+    text-transform: uppercase;
+    color: #999;
+    
+}
+.email-desc, .email-date {
+    font-size: 80%;
+    margin: 0.4em 0;
+}
 
-    }
-    .email-desc, .email-date {
-        font-size: 80%;
-        margin: 0.4em 0;
-    }
-
+.email-item:hover {
+    background-color: #F2F2F2;
+}
+  
 .email-item-selected {
-    background: #eee;
+    background-color: #F2F2F2;
+    font-weight: bold;
 }
-.email-item-unread {
-    border-left: 6px solid #1b98f8;
-}
+
 
 /* Email Content Styles */
 .email-content-header, .email-content-body, .email-content-footer {
@@ -255,13 +258,14 @@ a {
     }
 
     #main {
+	visibility: hidden;
         position: fixed;
         top: 33%;
         right: 0;
         bottom: 0;
         left: 150px;
         overflow: auto;
-        width: auto; /* so that it's not 100% */
+        width: 95%; /* so that it's not 100% */
     }
 
 }

@@ -27,3 +27,14 @@
 
 /*https://css-tricks.com/snippets/css/prevent-long-urls-from-breaking-out-of-container/ */
 /*word break code source*/
+
+.cut-off {
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.nostory {
+    text-align: center;
+}
