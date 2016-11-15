@@ -214,6 +214,79 @@ a {
 
 
 /*
+ * -- MODAL BOX FOR ADDING STORY --
+ *
+ *
+ */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 0px;
+    border: 1px solid #888;
+    width: 80%;
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+}
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: #2d3e50;
+}
+
+.modal-text {
+    color: #1F8DD6;
+}
+.modal-body {
+    padding: 2px 16px;
+}
+
+.modal-footer {
+    height: 50px;
+    padding: 2px 16px;
+    background-color: #2d3e50;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top: 0; opacity:1}
+}
+        
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top: 0; opacity:1}
+}
+
+
+/*
  * -- TABLET (AND UP) MEDIA QUERIES --
  * On tablets and other medium-sized devices, we want to customize some
  * of the mobile styles.

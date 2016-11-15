@@ -15,8 +15,6 @@
 <!-- load jQuery -->
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
-<!-- include JS -->
-<script type="text/javascript" src="/static/story.js"></script>
 <!--
     <script>
       
@@ -56,6 +54,31 @@
 
 <!--website body-->
 
+<div id="addStory" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">x</span>
+            <h2 class="modal-text"> Add a story </h2>
+        </div>
+        <div class="modal-body" style="padding: 40px;">
+            <form method="POST" class="pure-form pure-form-stacked">
+                <fieldset>
+                    <label for="title">Story Title</label>
+                    <input name="title" type="text" class="pure-input-1" placeholder="Title">
+                        
+                        <label for="content">Story Content</label>
+                        <textarea name="content" class="pure-input-1" placeholder="Write here!"></textarea>
+                        </fieldset>
+                <button type="submit" class="pure-button pure-input-1-3 pure-button-primary is-center">Submit</button>
+                
+            </form>
+        </div>
+        <div class="modal-footer">
+
+        </div>
+    </div>
+</div>
+
 <div id="layout" class="content pure-g buffer">
   
   <div id="nav" class="pure-u">
@@ -69,7 +92,7 @@
 	</ul>
       </div>
       
-      <button class="primary-button pure-button" onclick="window.location='/addstory';">Add New Story</button>
+      <button id="modalBtn" class="primary-button pure-button">Add New Story</button>
       
       <div class="pure-menu">
         <ul class="pure-menu-list">
@@ -142,7 +165,9 @@
 </div>
 
 
-
+<!-- include JS -->
+<script type="text/javascript" src="/static/home1.js"></script>
+<script type="text/javascript" src="/static/home2.js"></script>
 <script src="http://yui.yahooapis.com/3.17.2/build/yui/yui-min.js"></script>
 
 {% endblock %}
