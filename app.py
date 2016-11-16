@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, flash, session, make_response
+from flask import Flask, render_template, request, redirect, flash, session, make_response, jsonify
 from functools import wraps
 import data
 
@@ -143,6 +143,12 @@ def home(filters):
         return redirect("/")
 
 
+@app.route('/ajax', methods=["GET", "POST"])
+@authenticate
+def ajax():
+    json = request.json
+    print(json)
+    return jsonify(json)
 
 
     
