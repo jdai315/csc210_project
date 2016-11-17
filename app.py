@@ -144,11 +144,11 @@ def home(filters):
 
 
 @app.route('/ajax', methods=["GET", "POST"])
-@authenticate
 def ajax():
-    json = request.json
-    print(json)
-    return jsonify(json)
+    title = request.form["title"]
+    content = request.form["content"]
+    data.addStory(title, content, session['user'])
+    return jsonify(title=title, content=content, user=session['user'])
 
 
     

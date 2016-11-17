@@ -15,9 +15,110 @@
 <!-- load jQuery -->
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
-
 <script>
-      
+    function loadXMLDoc()
+    {
+        var req = new XMLHttpRequest()
+        req.onreadystatechange = function()
+        {
+            if (req.readyState == 4)
+            {
+                if (req.status != 200)
+                {
+                    console.log("error")
+                }
+                else
+                {
+                    console.log("working!")
+                    var response = JSON.parse(req.responseText)
+                        // create a new div element
+                        // and give it some content
+                    
+                    var newDiv = document.createElement("div")
+                    newDiv.className += "email-item pure-g"
+                    
+                    var childDiv = document.createElement("div")
+                    newDiv.className += "pure-u-3-4"
+                    
+                    var span1 = document.createElement("span")
+                    span1.className += "email-label-mine"
+                    
+                    var h5 = document.createElement("h5")
+                    h5.className += "email-name"
+                    
+                    var h4 = document.createElement("h4")
+                    h4.className += "email-subject"
+                    
+                    var pdate = document.createElement("p")
+                    pdate.className += "email-date"
+                    
+                    var span2 = document.createElement("span")
+                    
+                    var pdesc = document.createElement("p")
+                    pdesc.style.wordwrap = "break-word"
+                    pdesc.className += "email-desc cut-off"
+                    
+                
+                    
+                    var newTitle = document.createTextNode(response.title)
+                    var newContent = document.createTextNode(response.content)
+                    var name = document.createTextNode(response.user)
+                    
+                    pdesc.appendChild(newContent)
+                    h4.appendChild(newTitle)
+                    h5.appendChild(name)
+                    
+                    childDiv.appendChild(pdesc)
+                    childDiv.insertBefore(pdate, pdesc)
+                    childDiv.insertBefore(h4, pdate)
+                    childDiv.insertBefore(h5, h4)
+                    childDiv.insertBefore(span1, h5)
+                    newDiv.appendChild(childDiv) //add the text node to the newly created div.
+                        
+                        // add the newly created element and its content into the DOM
+                    var currentDiv = document.getElementById("ajaxposts")
+                    
+                    var list = document.getElementById("list")   // Get the <ul> element to insert a new node
+                    list.insertBefore(newDiv, currentDiv)
+                    
+                    //$( "#ajaxposts" ).before( newDiv )
+                
+                    
+                }
+            }
+        }
+        
+        req.open('POST', '/ajax')
+        req.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+        var tit = document.getElementById('title').value
+        var con = document.getElementById('content').value
+        var postVars = 'title='+tit+'&content='+con
+        req.send(postVars)
+        
+        return false
+    }
+</script>
+
+
+<!-- 
+ 
+ <div class="email-item pure-g">
+ <div class="pure-u-3-4">
+ <span class="email-label-mine"></span>
+ <h5 class="email-name"> </h5>
+ 
+ <h4 class="email-subject"></h4>
+ <p class="email-date"><span></span></p>
+ <p style="word-wrap: break-word" class="email-desc cut-off">
+ </p>
+ </div>
+ </div>
+ 
+ -->
+<!-- document.getElementById('bro').innerHTML = response.title      document.body.insertBefore(newDiv, currentDiv)-->
+<!--
+<script>
+ 
 $(function() {
       $('#btn').click(function() {
             var data = JSON.stringify($('.myForm').serializeArray());
@@ -27,6 +128,7 @@ $(function() {
                 data: data,
                 type: 'POST',
                 success: function(response) {
+                   console.log('testing');
                    console.log(response);
                 },
                 error: function(error) {
@@ -37,7 +139,7 @@ $(function() {
 });
       
 </script>
- 
+ -->
 
 <!--
     <div class="header">
@@ -65,12 +167,12 @@ $(function() {
             <form method="POST" class="myForm pure-form pure-form-stacked">
                 <fieldset>
                     <label for="title">Story Title</label>
-                    <input name="title" type="text" class="pure-input-1" placeholder="Title">
+                    <input name="title" id="title" type="text" class="pure-input-1" placeholder="Title">
                         
                         <label for="content">Story Content</label>
-                        <textarea name="content" class="pure-input-1" placeholder="Write here!"></textarea>
+                        <textarea name="content" id="content" class="pure-input-1" placeholder="Write here!"></textarea>
                         </fieldset>
-                <button type="submit" id="btn" class="pure-button pure-input-1-3 pure-button-primary is-center">Submit</button>
+                <button type="submit" id="submit" class="pure-button pure-input-1-3 pure-button-primary is-center">Submit</button>
                 
             </form>
         </div>
@@ -89,7 +191,8 @@ $(function() {
       
       <div class="pure-u">
 	<ul class="pure-menu-list">
-	  <li class="pure-menu-item"><a href="/home" class="pure-menu-link">Welcome {{user}}!</a></li>
+        <li class="pure-menu-item"><a href="/home" class="pure-menu-link">Welcome {{user}}!</a>
+</li>
 	</ul>
       </div>
       
@@ -113,7 +216,8 @@ $(function() {
   {% if contents[0] != null %}
 
   <div id="list" class="pure-u-1">
-    
+      
+    <div id="ajaxposts"></div>
     {% for content in contents %}
     <div class="email-item pure-g">
         <div class="pure-u-3-4">
@@ -128,6 +232,7 @@ $(function() {
         </div>
     </div>
     {% endfor %}
+    
 
   <!-- email-item-selected is a class in the email item -->
     
@@ -152,7 +257,8 @@ $(function() {
         </div>
       </div>
       
-      <div style="word-wrap: break-word" class="email-content-body"><img src="static/img/icons/doc.png" width="256"></div>
+      <div style="word-wrap: break-word" class="email-content-body"><img src="static/img/icons/doc.png" width="256">
+      </div>
       
     </div>
   </div>
@@ -168,7 +274,7 @@ $(function() {
 
 <!-- include JS -->
 <script type="text/javascript" src="/static/home1.js"></script>
-<script type="text/javascript" src="/static/home2.js"></script>
+<script type="text/javascript" src="/static/ajax.js"></script>
 <script src="http://yui.yahooapis.com/3.17.2/build/yui/yui-min.js"></script>
 
 {% endblock %}

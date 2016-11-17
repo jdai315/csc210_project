@@ -21,5 +21,25 @@ $(document).ready(function() {
 	$('.email-content-author').html(author);
 
     });
+                  
+    var modal = document.getElementById('addStory');
+                  
+    var btn = document.getElementById("modalBtn");
+                  
+    var close = document.getElementsByClassName("close")[0];
+    var submit = document.getElementById("submit");
+                  
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+                  
+    close.onclick = function() {
+        modal.style.display = "none";
+    }
+                  
+    submit.onclick = function() {
+        modal.style.display = "none";
+        return loadXMLDoc();
+    }
 });
 
