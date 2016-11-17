@@ -247,10 +247,29 @@ $(function() {
           From <a class="email-content-author"></a> at <span class="email-content-date"></span>
           </p>
         </div>
-	
         <div class="email-content-controls pure-u-1-2">
-          <button class="button-success pure-button">Upvote</button>
-          <button class="button-error pure-button">Downvote</button>
+        
+          <script type ="text/javascript">
+
+          var Upvote = 0
+          function pClick(){
+            Upvote += 1;
+            document.getElementById("Upvote").innerHTML = Upvote;
+          };
+          </script>
+          <button class="button-success pure-button" onClick="pClick()">Upvote</button>
+          <p>Clicks: <a id="Upvote">0</a></p>
+
+           <script type ="text/javascript">
+
+          var dVote = 0
+          function dClick(){
+            dVote += 1;
+            document.getElementById("dVote").innerHTML = dVote;
+          };
+          </script>
+          <button class="button-error pure-button" onClick="dClick()">dVote</button>
+          <p>Clicks: <a id="dVote">0</a></p>
           <button class="secondary-button pure-button edit">Edit Story</button>
           <button class="secondary-button pure-button delete">Delete Story</button>
 
