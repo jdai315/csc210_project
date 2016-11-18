@@ -104,6 +104,16 @@ def getStories(user=0, others=0):
         conn.commit()
         conn.close()
         return exist
+
+def editStory(user=0, others=0):
+
+    conn = sqlite3.connect("database")
+    c = conn.cursor()
+
+    #Edit from the table if youre the user to write it
+    c.execute('UPDATE TABLE SET stories(title varchar(24) primary key, content varchar(100), date text, user varchar(24), FOREIGN KEY(user) REFERENCES users(name))')
+
+
     
 
 

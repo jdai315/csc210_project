@@ -109,6 +109,15 @@ def addstory():
             flash("A story with this title already exists!")
             return render_template("addstory.html",user=session['user'])
 
+#Edit story based on the addstory, call on the existing item intact and change content
+@app.route("/addstory", methods=["GET","POST"])
+@authenticate
+def editStory():
+    if request.method == "GET":
+        return render_template("addstory.html", user=session['user'])
+    else:
+        title = request.form["title"]
+        content = request.form["content"]
 
 ##@app.route("/stories", methods=["GET","POST"])
 ##@authenticate
