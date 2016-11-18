@@ -232,9 +232,9 @@ $(function() {
           <li class="pure-menu-item"><a href="/logout" class="pure-menu-link">Logout</a></li>
 	  
           <li class="pure-menu-heading">Filter Feed</li>
-          <li class="pure-menu-item"><a href="/home/all" class="pure-menu-link filter"><span>All Stories</span></a></li>
-	  <li class="pure-menu-item"><a href="/home/mine" class="pure-menu-link filter"><span class="email-label-mine"></span>My Stories</a></li>
-	  <li class="pure-menu-item"><a href="/home/others" class="pure-menu-link filter"><span class="email-label-others"></span>Other Stories</a></li>
+          <li class="pure-menu-item"><p id="all" class="pure-menu-link"><span>All Stories</span></p></li>
+	  <li class="pure-menu-item"><p id="mine" class="pure-menu-link"><span class="email-label-mine"></span>My Stories</p></li>
+	  <li class="pure-menu-item"><p id="others" class="pure-menu-link"><span class="email-label-others"></span>Other Stories</p></li>
 	</ul>
       </div>
       
@@ -250,7 +250,7 @@ $(function() {
     <div class="email-item pure-g">
         <div class="pure-u-3-4">
           {% if content[3]|safe == user %}
-	  <span class="email-label-mine"></span> {% else %} <span class="email-label-others"></span> {% endif %} <h5 class="email-name">{{ content[3]|safe }} </h5>
+	  <span class="email-label-mine filter_mine"></span> {% else %} <span class="email-label-others filter_others"></span> {% endif %} <h5 class="email-name">{{ content[3]|safe }} </h5>
           
           <h4 class="email-subject">{{ content[0]|safe }} </h4>
 	  <p class="email-date"><span>{{ content[2]|safe }} </span></p>

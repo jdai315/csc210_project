@@ -4,10 +4,8 @@ $(document).ready(function() {
     $('.email-item').click(function() {
         console.log("clicked");
 	$('#main').css({visibility: "visible"});
-        /* Not sure why these aren't working. It's something to do with jQuery, not CSS. */
         $('.email-item').removeClass("email-item-selected");
         $(this).addClass("email-item-selected");
-        /*****/
         
         title = $(this).find('.email-subject').html();
         date = $(this).find('.email-date').html();
@@ -41,5 +39,32 @@ $(document).ready(function() {
         modal.style.display = "none";
         return loadXMLDoc();
     }
+
+    var filter_all = document.getElementById("all");
+    var filter_mine = document.getElementById("mine");
+    var filter_others = document.getElementById("others");
+
+    filter_all.onclick = function() {
+	$('.filter_mine').parent().parent().css({display: "block"});
+	$('.filter_others').parent().parent().css({display: "block"});
+	$('.pure-menu-link').removeClass("filter_selected");
+	$(this).addClass("filter_selected");
+    }
+
+    filter_mine.onclick = function() {
+	$('.filter_mine').parent().parent().css({display: "block"});
+	$('.filter_others').parent().parent().css({display: "none"});
+	$('.pure-menu-link').removeClass("filter_selected");
+	$(this).addClass("filter_selected");
+    }
+
+    filter_others.onclick = function() {
+	$('.filter_mine').parent().parent().css({display: "none"});
+	$('.filter_others').parent().parent().css({display: "block"});
+	$('.pure-menu-link').removeClass("filter_selected");
+	$(this).addClass("filter_selected");
+    }
+
+    
 });
 

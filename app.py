@@ -135,18 +135,11 @@ def editStory():
 ##            flash("Search results")
 ##            return render_template("stories.html", user=session['user'], loadTitle=title, loadContent=content)
 
-@app.route("/home", defaults={'filters': 'all'}, methods=["GET","POST"])
-@app.route("/home/<filters>")
+@app.route("/home",  methods=["GET","POST"])
 @authenticate
-def home(filters): 
+def home(): 
     if 'user' in session:
-        user = session['user']
-        if (filters=="mine"):
-            contents = data.getStories(session['user'])
-        elif (filters=="others"):
-            contents = data.getStories(session['user'], 1)
-        else:
-            contents = data.getStories()
+        contents = data.getStories()
         return render_template("home.html", user=session['user'], contents=contents)
     else:
         return redirect("/")

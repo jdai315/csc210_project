@@ -106,14 +106,27 @@ a {
     border: none;
     text-align: left;
 }
-    #nav .pure-menu-link:hover,
-    #nav .pure-menu-link:focus {
-        background: rgb(55, 60, 90);
-    }
+
+#nav .pure-menu-item {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
     #nav .pure-menu-link {
         color: #fff;
+	margin: 0px;
         margin-left: 0.5em;
+	margin-right: 0.5em;
     }
+
+    #nav .pure-menu-link:hover {
+        background-color: black;
+    }
+
+    .filter_selected {
+	background-color: black;
+    }
+
     #nav .pure-menu-heading {
         border-bottom: none;
         font-size:110%;
@@ -134,7 +147,8 @@ a {
     width: 15px;
     height: 15px;
     display: inline-block;
-    margin-right: 0.5em;
+    margin: 0px;
+    margin-right: 0.25em;
     border-radius: 3px;
 }
 .email-label-others {
@@ -173,7 +187,7 @@ a {
 .email-item:hover {
     background-color: #F2F2F2;
 }
-  
+
 .email-item-selected {
     background-color: #F2F2F2;
     font-weight: bold;

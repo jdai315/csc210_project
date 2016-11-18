@@ -3,7 +3,16 @@
 <h2>Currently working on Milestone #4</h2>
 <br>
 
-Latest push updates (Nov, 13):
+Latest push updates (Nov, 18):
+<br>
+<ul>
+<li>Added AJAX story creation - Jo</li>
+<li>Added upvote/downvote system, animation - V<li>
+<li>Added dynamic story filtering - Je</li>
+</ul>
+<br>
+
+Push updates (Nov, 13):
 <br>
 <ul>
 <li>Made the most recent stories display at the top</li>
