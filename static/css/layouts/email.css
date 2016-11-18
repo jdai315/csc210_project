@@ -237,10 +237,10 @@ a {
     padding: 0px;
     border: 1px solid #888;
     width: 80%;
-    -webkit-animation-name: animatetop;
+    -webkit-animation-name: bounceInDown;
     -webkit-animation-duration: 0.4s;
-    animation-name: animatetop;
-    animation-duration: 0.4s;
+    animation-name: bounceInDown;
+    animation-duration: 2s;
 }
 
 .modal-header {
@@ -275,15 +275,7 @@ a {
     cursor: pointer;
 }
 
-@-webkit-keyframes animatetop {
-    from {top:-300px; opacity:0}
-    to {top: 0; opacity:1}
-}
-        
-@keyframes animatetop {
-    from {top:-300px; opacity:0}
-    to {top: 0; opacity:1}
-}
+
 
 
 /*
