@@ -52,6 +52,9 @@ def checkUser(username, password):
         #this converts the database value into a string
         return password == exist[0].encode("ascii")
 
+
+
+#add a new ROOT story
 def addStory(title, content, user):
     
     #connect to the database 'userpw'
@@ -61,7 +64,7 @@ def addStory(title, content, user):
         
     #create a table if it doesn't exist
     #c.execute('DROP TABLE stories')
-    c.execute('CREATE TABLE IF NOT EXISTS stories(title varchar(24) primary key, content varchar(100), date text, user varchar(24), FOREIGN KEY(user) REFERENCES users(name))')
+    c.execute('CREATE TABLE IF NOT EXISTS stories(id integer primary key, title varchar(24), content varchar(100), date text, user varchar(24), parentid integer, FOREIGN KEY(user) REFERENCES users(name))')
 
     #this is where the cursor checks if the username already exists
     c.execute('SELECT content from stories where title= ? and user= ?',(title, user))

@@ -1,5 +1,8 @@
 $(document).ready(function() {
     console.log("home page loaded");
+                  
+                  
+    //*** Displaying story content ***//
 
     $('.email-item').click(function() {
         console.log("clicked");
@@ -20,6 +23,8 @@ $(document).ready(function() {
 
     });
                   
+    //*** Adding story using ajax ***//
+                  
     var modal = document.getElementById('addStory');
                   
     var btn = document.getElementById("modalBtn");
@@ -39,6 +44,24 @@ $(document).ready(function() {
         modal.style.display = "none";
         return loadXMLDoc();
     }
+                  
+    //*** Editing story using ajax ***//
+                  
+    //var edit = document.getElementsByClassName("edit")[0]
+                  
+    $('.edit').click(function() {
+        $body = $('.email-content-body').html();
+                     $text = $("<textarea>", {name: "content", "class": "pure-input-1", rows: 12, cols: 67, contenteditable: "true"});
+        $text.val($body);
+        $('.email-content-body').html($text);
+    })
+    //<textarea id='' class='' name='notes' rows='12' cols='67' contenteditable='true' ></textarea>
+    //<textarea name="content" id="content" class="pure-input-1" placeholder="Write here!"></textarea>
+                     
+                     
+                  
+                  
+    //*** Filtering stories ***//
 
     var filter_all = document.getElementById("all");
     var filter_mine = document.getElementById("mine");
