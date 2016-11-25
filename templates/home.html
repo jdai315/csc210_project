@@ -142,11 +142,11 @@
           var Upvote = 0
           function pClick(){
             Upvote += 1;
-            document.getElementById("Upvote").innerHTML = Upvote;
+            document.getElementById("upVote").innerHTML = Upvote;
           };
           </script>
-          <button class="button-success pure-button" onClick="pClick()">Upvote</button>
-          <p> <a id="Upvote">0</a></p>
+          <button class="button-success pure-button" onClick="pClick()">Upvote &nbsp;<a id="upVote">0</a></button>
+          
 
            <script type ="text/javascript">
 
@@ -156,8 +156,8 @@
             document.getElementById("dVote").innerHTML = dVote;
           };
           </script>
-          <button class="button-error pure-button" onClick="dClick()">Downvote</button>
-          <p>  <a id="dVote">0</a>  </p>
+          <button class="button-error pure-button" onClick="dClick()">Downvote &nbsp;<a id="dVote">0</a></button>
+          
           <button class="secondary-button pure-button edit">Edit Story</button>
           <button class="secondary-button pure-button delete">Delete Story</button>
           <script type ="text/javascript">

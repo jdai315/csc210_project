@@ -226,6 +226,9 @@ a {
         height: 40px;
     }
 
+#dVote, #upVote {
+    color: white;
+}
 
 /*
  * -- MODAL BOX FOR ADDING STORY --
