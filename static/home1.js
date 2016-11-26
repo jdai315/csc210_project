@@ -26,9 +26,7 @@ $(document).ready(function() {
     //*** Adding story using ajax ***//
                   
     var modal = document.getElementById('addStory');
-                  
     var btn = document.getElementById("modalBtn");
-                  
     var close = document.getElementsByClassName("close")[0];
     var submit = document.getElementById("submit");
                   
@@ -46,19 +44,28 @@ $(document).ready(function() {
     }
                   
     //*** Editing story using ajax ***//
-                  
-    //var edit = document.getElementsByClassName("edit")[0]
-                  
+       
     $('.edit').click(function() {
-        $body = $('.email-content-body').html();
-                     $text = $("<textarea>", {name: "content", "class": "pure-input-1", rows: 12, cols: 67, contenteditable: "true"});
-        $text.val($body);
-        $('.email-content-body').html($text);
+        $('.email-content-body').attr("contenteditable", "true");
+        $(this).css({display: "none"});
+        $('.delete').css({display: "none"});
+        $('.submitbranch').css({display: "inline"});
+        $('.cancel').css({display: "inline"});
+
+                     
     })
-    //<textarea id='' class='' name='notes' rows='12' cols='67' contenteditable='true' ></textarea>
-    //<textarea name="content" id="content" class="pure-input-1" placeholder="Write here!"></textarea>
+                  
+    $('.cancel').click(function() {
+        $('.email-content-body').attr("contenteditable", "false");
+        $(this).css({display: "none"});
+        $('.delete').css({display: "inline"});
+        $('.submitbranch').css({display: "none"});
+        $('.edit').css({display: "inline"});
+
                      
-                     
+    })
+
+      
                   
                   
     //*** Filtering stories ***//
