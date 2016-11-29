@@ -109,13 +109,14 @@
     {% for content in contents %}
     <div class="email-item pure-g">
         <div class="pure-u-3-4">
-          {% if content[3]|safe == user %}
-	  <span class="email-label-mine filter_mine"></span> {% else %} <span class="email-label-others filter_others"></span> {% endif %} <h5 class="email-name">{{ content[3]|safe }} </h5>
+          {% if content[4]|safe == user %}
+	  <span class="email-label-mine filter_mine"></span> {% else %} <span class="email-label-others filter_others"></span> {% endif %} <h5 class="email-name">{{ content[4]|safe }}</h5>
           
-          <h4 class="email-subject">{{ content[0]|safe }} </h4>
-	  <p class="email-date"><span>{{ content[2]|safe }} </span></p>
+          <h4 class="email-subject">{{ content[1]|safe }} </h4>
+	  <p class="email-date"><span>{{ content[3]|safe }} </span></p>
+      ID:<p class="email-id"><span>{{ content[0]|safe }}</span></p><p>ParentID: {{ content[5]|safe }}</p>
           <p style="word-wrap: break-word" class="email-desc cut-off">
-            {{ content[1]|safe }}
+            {{ content[2]|safe }}
           </p>
         </div>
     </div>
@@ -132,7 +133,8 @@
         <div class="pure-u-1-2">
           <h1 class="email-content-title"></h1>
           <p class="email-content-subtitle">
-          From <a class="email-content-author"></a> at <span class="email-content-date"></span>
+          From <a class="email-content-author"></a> at <span class="email-content-date"></span><BR>
+          <span class="email-content-id"></span>
           </p>
         </div>
         <div class="email-content-controls pure-u-1-2">
@@ -148,7 +150,7 @@
           <button class="button-success pure-button" onClick="pClick()">Upvote &nbsp;<a id="upVote">0</a></button>
           
 
-           <script type ="text/javascript">
+          <script type ="text/javascript">
 
           var dVote = 0
           function dClick(){

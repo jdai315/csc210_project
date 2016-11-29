@@ -1,5 +1,6 @@
-function loadXMLDoc()
+function addStory()
 {
+    console.log("entering ajax.js");
     var req = new XMLHttpRequest()
     req.onreadystatechange = function()
     {
@@ -60,7 +61,7 @@ function loadXMLDoc()
                 // add the newly created element and its content into the DOM
                 var currentDiv = document.getElementById("ajaxposts")
                 
-                var list = document.getElementById("list")   // Get the <ul> element to insert a new node
+                var list = document.getElementById("list")
                 list.insertBefore(newDiv, currentDiv)
                 
                 //$( "#ajaxposts" ).before( newDiv )
@@ -70,7 +71,7 @@ function loadXMLDoc()
         }
     }
     
-    req.open('POST', '/ajax')
+    req.open('POST', '/add')
     req.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
     var tit = document.getElementById('title').value
     var con = document.getElementById('content').value
@@ -79,4 +80,39 @@ function loadXMLDoc()
     
     return false
 }
+
+
+function addEdit()
+{
+    var req = new XMLHttpRequest()
+    req.onreadystatechange = function()
+    {
+        if (req.readyState == 4)
+        {
+            if (req.status != 200)
+            {
+                console.log("error")
+            }
+            else
+            {
+                console.log("success")
+            }
+        }
+    }
+    
+    req.open('POST', '/edit')
+    req.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+    var tit = document.getElementsByClassName('email-content-title')[0].innerText
+    var con = document.getElementsByClassName('email-content-body')[0].innerText
+    var parentid = document.getElementsByClassName('email-content-id')[0].innerText
+    var postVars = 'title='+tit+'&content='+con+'&parentid='+parentid
+    req.send(postVars)
+    
+    return false
+}
+
+
+
+
+
 

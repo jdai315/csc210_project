@@ -6,20 +6,21 @@ $(document).ready(function() {
 
     $('.email-item').click(function() {
         console.log("clicked");
-	$('#main').css({visibility: "visible"});
+        $('#main').css({visibility: "visible"});
         $('.email-item').removeClass("email-item-selected");
         $(this).addClass("email-item-selected");
         
         title = $(this).find('.email-subject').html();
         date = $(this).find('.email-date').html();
         content = $(this).find('.email-desc').html();
-	author = $(this).find('.email-name').html();
+        author = $(this).find('.email-name').html();
+        id = $(this).find('.email-id').html();
 
-
-	$('.email-content-title').html(title);
+        $('.email-content-title').html(title);
         $('.email-content-date').html(date);
         $('.email-content-body').html(content);
-	$('.email-content-author').html(author);
+        $('.email-content-author').html(author);
+        $('.email-content-id').html(id);
 
     });
                   
@@ -40,7 +41,9 @@ $(document).ready(function() {
                   
     submit.onclick = function() {
         modal.style.display = "none";
-        return loadXMLDoc();
+        console.log("home1.js triggered");
+        return addStory();
+                  
     }
                   
     //*** Editing story using ajax ***//
@@ -51,21 +54,20 @@ $(document).ready(function() {
         $('.delete').css({display: "none"});
         $('.submitbranch').css({display: "inline"});
         $('.cancel').css({display: "inline"});
-
-                     
     })
                   
-    $('.cancel').click(function() {
+    $('.cancel, .email-item').click(function() {
         $('.email-content-body').attr("contenteditable", "false");
-        $(this).css({display: "none"});
+        $('.cancel').css({display: "none"});
         $('.delete').css({display: "inline"});
         $('.submitbranch').css({display: "none"});
         $('.edit').css({display: "inline"});
-
-                     
     })
 
-      
+    $('.submitbranch').click(function() {
+        return addEdit();
+        $('#main').css({visibility: "hidden"});
+    })
                   
                   
     //*** Filtering stories ***//

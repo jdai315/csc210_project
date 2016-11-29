@@ -17,7 +17,7 @@ def authenticate(func):
 @app.route("/main")
 def main():
     if 'user' in session:
-        return home("/main")
+        return home()
     button = request.args.get("b",None)
     if button == 'login':
         return login()
@@ -110,14 +110,14 @@ def addstory():
             return render_template("addstory.html",user=session['user'])
 
 #Edit story based on the addstory, call on the existing item intact and change content
-@app.route("/addstory", methods=["GET","POST"])
-@authenticate
-def editStory():
-    if request.method == "GET":
-        return render_template("addstory.html", user=session['user'])
-    else:
-        title = request.form["title"]
-        content = request.form["content"]
+##@app.route("/addstory", methods=["GET","POST"])
+##@authenticate
+##def editStory():
+##    if request.method == "GET":
+##        return render_template("addstory.html", user=session['user'])
+##    else:
+##        title = request.form["title"]
+##        content = request.form["content"]
 
 ##@app.route("/stories", methods=["GET","POST"])
 ##@authenticate
@@ -135,6 +135,14 @@ def editStory():
 ##            flash("Search results")
 ##            return render_template("stories.html", user=session['user'], loadTitle=title, loadContent=content)
 
+
+@app.route("/add", methods=["GET", "POST"])
+def add():
+    title = request.form["title"]
+    content = request.form["content"]
+    data.addStory(title, content, session['user'])
+    return jsonify(title=title, content=content, user=session['user'])
+
 @app.route("/home",  methods=["GET","POST"])
 @authenticate
 def home(): 
@@ -144,15 +152,13 @@ def home():
     else:
         return redirect("/")
 
-
-@app.route('/ajax', methods=["GET", "POST"])
-def ajax():
+@app.route('/edit', methods=["GET", "POST"])
+def edit():
     title = request.form["title"]
     content = request.form["content"]
-    data.addStory(title, content, session['user'])
+    parentid = request.form["parentid"]
+    data.addStory(title, content, session['user'], parentid)
     return jsonify(title=title, content=content, user=session['user'])
-
-
     
 if __name__ == "__main__":
     app.debug = True

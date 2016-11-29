@@ -39,7 +39,7 @@ def checkUser(username, password):
     c = conn.cursor()
 
     #fetch the correct password associated with this username
-    c.execute('SELECT pw from users where name= ?',(username,))
+    c.execute('SELECT pw from users WHERE name= ?',(username,))
     exist = c.fetchone()
 
     #if user doesnt exist, test fails. if password isnt the same as the stored password, test fails. otherwise, the test passes.
@@ -54,25 +54,26 @@ def checkUser(username, password):
 
 
 
-#add a new ROOT story
-def addStory(title, content, user):
+#add a new story (if the story is a root, parentid=None)
+def addStory(title, content, user, parentid=None):
     
-    #connect to the database 'userpw'
+    #connect to 'database'
     conn = sqlite3.connect("database")
     c = conn.cursor()
     now = datetime.datetime.now()
         
     #create a table if it doesn't exist
-    #c.execute('DROP TABLE stories')
+    # (drop the table if you need to start from scratch)
+ #   c.execute('DROP TABLE stories')
     c.execute('CREATE TABLE IF NOT EXISTS stories(id integer primary key, title varchar(24), content varchar(100), date text, user varchar(24), parentid integer, FOREIGN KEY(user) REFERENCES users(name))')
 
-    #this is where the cursor checks if the username already exists
-    c.execute('SELECT content from stories where title= ? and user= ?',(title, user))
+    #this is where the cursor checks if the story already exists
+    c.execute('SELECT content FROM stories WHERE title= ? AND user= ? AND parentid= ?',(title, user, parentid))
     exist = c.fetchone()
     
     #if it isnt already in the table, insert it
     if exist is None:
-        c.execute('INSERT OR IGNORE INTO stories(title, content, date, user) VALUES(?,?,?,?)', (title, content, now, user))
+        c.execute('INSERT OR IGNORE INTO stories(title, content, date, user, parentid) VALUES(?,?,?,?,?)', (title, content, now, user, parentid))
         conn.commit()
         conn.close()
         return True
@@ -82,16 +83,12 @@ def addStory(title, content, user):
         conn.close()
         return False
 
-def getStories(user=0, others=0):
+def getStories():
     
     conn = sqlite3.connect("database")
     c = conn.cursor()
-    if (user==0):
-        c.execute('SELECT * FROM stories')
-    elif (others==1):
-        c.execute('SELECT * FROM stories WHERE user!= ?', (user,))
-    else:
-        c.execute('SELECT * FROM stories WHERE user= ?', (user,))
+    c.execute('CREATE TABLE IF NOT EXISTS stories(id integer primary key, title varchar(24), content varchar(100), date text, user varchar(24), parentid integer, FOREIGN KEY(user) REFERENCES users(name))')
+    c.execute('SELECT * FROM stories') # fetch only root stories (those without a parent)
 
 #reverse the order of the stories to show most recent at the top
     ex = c.fetchall()
@@ -108,13 +105,18 @@ def getStories(user=0, others=0):
         conn.close()
         return exist
 
-def editStory(user=0, others=0):
 
-    conn = sqlite3.connect("database")
-    c = conn.cursor()
 
-    #Edit from the table if youre the user to write it
-    c.execute('UPDATE TABLE SET stories(title varchar(24) primary key, content varchar(100), date text, user varchar(24), FOREIGN KEY(user) REFERENCES users(name))')
+
+# JV: I'm not sure who wrote this, so I commented it out for reference
+
+##def editStory(user=0, others=0):
+##
+##    conn = sqlite3.connect("database")
+##    c = conn.cursor()
+##
+##    #Edit from the table if youre the user to write it
+##    c.execute('UPDATE TABLE SET stories(title varchar(24) primary key, content varchar(100), date text, user varchar(24), FOREIGN KEY(user) REFERENCES users(name))')
 
 
     
