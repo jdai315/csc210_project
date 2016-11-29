@@ -193,6 +193,10 @@ a {
     font-weight: bold;
 }
 
+.email-content {
+    height: 85%;
+    }
+
 
 /* Email Content Styles */
 .email-content-header, .email-content-body, .email-content-footer {

@@ -68,8 +68,57 @@ $(document).ready(function() {
         return addEdit();
         $('#main').css({visibility: "hidden"});
     })
-                  
-                  
+
+    //*** Drawing tree ***//
+    
+
+/*
+    var canvas = document.querySelector('canvas'),
+    ctx = canvas.getContext('2d');
+    canvas.style.backgroundColor = 'rgba(158, 167, 184, 0.2)';
+    fitToContainer(canvas);
+    var x = canvas.width/2;
+    var y = 50;
+    ctx.beginPath();
+    
+
+    
+    var myImage = new Image();
+    myImage.src = 'static/img/icons/doc.png';
+    myImage.onload = function(){ctx.drawImage(myImage,x-25,y-25,50,50);}
+    ctx.moveTo(x,y);
+
+    ctx.lineTo(startX,300);
+    //ctx.strokeStyle="red";
+    ctx.stroke();
+
+    function fitToContainer(canvas){
+        canvas.style.width='100%';
+        canvas.style.height='100%';
+        canvas.width  = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+    }
+        
+        */
+        
+        
+    var MAP_WIDTH  = 620;
+    var MAP_HEIGHT = 600;
+
+    var mapContainer = document.getElementById("raphael");
+    var map = new Raphael(mapContainer, MAP_WIDTH, MAP_HEIGHT);
+    
+    var style = {
+        stroke: "#aaa",
+        "stroke-width": 2,
+        "stroke-linejoin": "round",
+        cursor: "pointer"
+        };
+
+map
+  .path("m 300,150 30,50 -80,90 12,5 z")
+  .attr(style);
+        
     //*** Filtering stories ***//
 
     var filter_all = document.getElementById("all");
