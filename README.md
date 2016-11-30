@@ -1,9 +1,9 @@
 <h1>CSC 210 Final Project</h1>
 <br>
-<h2>Currently working on Milestone #4</h2>
+<h2>Currently working on Milestone #5</h2>
 <br>
 
-Latest push updates (Nov, 18):
+Push updates (Nov, 18):
 <br>
 <ul>
 <li>Added AJAX story creation - Jo</li>
