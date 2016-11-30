@@ -101,6 +101,7 @@ a {
  * -- NAV BAR STYLES --
  * Styling the default .pure-menu to look a little more unique.
  */
+
 #nav .pure-menu {
     background: transparent;
     border: none;
@@ -112,26 +113,26 @@ a {
     margin-bottom: 2px;
 }
 
-    #nav .pure-menu-link {
-        color: #fff;
-	margin: 0px;
-        margin-left: 0.5em;
-	margin-right: 0.5em;
-    }
+#nav .pure-menu-link {
+    color: #fff;
+    margin: 0px;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
 
-    #nav .pure-menu-link:hover {
-        background-color: black;
-    }
+#nav .pure-menu-link:hover {
+    background-color: black;
+}
 
-    .filter_selected {
-	background-color: black;
-    }
+.filter_selected {
+    background-color: black;
+}
 
-    #nav .pure-menu-heading {
-        border-bottom: none;
-        font-size:110%;
-        color: rgb(75, 113, 151);
-    }
+#nav .pure-menu-heading {
+    border-bottom: none;
+    font-size:110%;
+    color: rgb(75, 113, 151);
+}
 
 
 /*
@@ -162,10 +163,12 @@ a {
 
 /* Email Item Styles */
 .email-item {
-    padding: 0.9em 1em;
+    padding: 10px;
+    padding-right: 0px;
     border-bottom: 1px solid #ddd;
     border-left: 6px solid transparent;
 }
+
 .email-avatar {
     border-radius: 3px;
     margin-right: 0.5em;
@@ -304,11 +307,12 @@ a {
  * On tablets and other medium-sized devices, we want to customize some
  * of the mobile styles.
  */
+
 @media (min-width: 40em) {
 
     /* Move the layout over so we can fit the nav + list in on the left */
     #layout {
-        padding-left:500px; /* "left col (nav + list)" width */
+        padding-left:550px; /* "left col (nav + list)" width */
         position: relative;
     }
 
@@ -320,8 +324,8 @@ a {
         overflow: auto;
     }
     #nav {
-        margin-left:-500px; /* "left col (nav + list)" width */
-        width:150px;
+        margin-left:-550px; /* "left col (nav + list)" width */
+        width:200px;
         height: 100%;
     }
 
@@ -349,7 +353,7 @@ a {
         top: 33%;
         right: 0;
         bottom: 0;
-        left: 150px;
+        left: 200px;
         overflow: auto;
         width: 95%; /* so that it's not 100% */
     }

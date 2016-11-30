@@ -3,6 +3,15 @@
 <h2>Currently working on Milestone #5</h2>
 <br>
 
+Push updates (Nov, 30):
+<br>
+<ul>
+<li>Added a profile page where users can update their passwords and check their activity</li>
+<li>Visual tree structure in the works (will probably use Raphael.js)<li>
+<li>Database representation of tree completed</li>
+</ul>
+<br>
+
 Push updates (Nov, 18):
 <br>
 <ul>

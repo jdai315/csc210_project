@@ -1,28 +1,48 @@
 $(document).ready(function() {
     console.log("home page loaded");
-                  
-                  
+
+    // this following code is specific only to the /profile page //
+    var url = "http://localhost:5678/profile";
+
+    console.log(location.href);
+    
+    if(location.href==url){
+	$('#main').css({visibility: "visible"});
+	if($('.filter_mine').length === 0){
+	    $('#list').append("<div id='no_stories' class='pure-g'><div id='none' class='pure-u-3-4'>You do not have any stories!<p>Get started by clicking the<br />'Add New Story' button to the left.</p></div></div>");
+	    $('.filter_others').parent().parent().css({display: "none"});
+	    $('.pure-menu-link').removeClass("filter_selected");
+	}
+
+    }
+
+    $('#story_counter').html(
+	$('.email-item').length
+    );
+    
     //*** Displaying story content ***//
 
-    $('.email-item').click(function() {
-        console.log("clicked");
-        $('#main').css({visibility: "visible"});
-        $('.email-item').removeClass("email-item-selected");
-        $(this).addClass("email-item-selected");
-        
-        title = $(this).find('.email-subject').html();
-        date = $(this).find('.email-date').html();
-        content = $(this).find('.email-desc').html();
-        author = $(this).find('.email-name').html();
-        id = $(this).find('.email-id').html();
-
-        $('.email-content-title').html(title);
-        $('.email-content-date').html(date);
-        $('.email-content-body').html(content);
-        $('.email-content-author').html(author);
-        $('.email-content-id').html(id);
-
-    });
+    if(location.href!=url){
+	$('.email-item').click(function() {
+            console.log("clicked");
+            $('#main').css({visibility: "visible"});
+            $('.email-item').removeClass("email-item-selected");
+            $(this).addClass("email-item-selected");
+            
+            title = $(this).find('.email-subject').html();
+            date = $(this).find('.email-date').html();
+            content = $(this).find('.email-desc').html();
+            author = $(this).find('.email-name').html();
+            id = $(this).find('.email-id').html();
+	    
+            $('.email-content-title').html(title);
+            $('.email-content-date').html(date);
+            $('.email-content-body').html(content);
+            $('.email-content-author').html(author);
+            $('.email-content-id').html(id);
+	    
+	});
+    }
                   
     //*** Adding story using ajax ***//
                   
@@ -135,7 +155,7 @@ map
 
     filter_mine.onclick = function() {
 	if($('.filter_mine').length === 0){
-	    $('#list').append("<div id='no_stories' class='email-item pure-g'><div class='pure-u-3-4'>You do not have any stories!</div></div>");
+	    $('#list').append("<div id='no_stories' class='pure-g'><div id='none' class='pure-u-3-4'>You do not have any stories!<p>Get started by clicking the<br />'Add New Story' button to the left.</p></div></div>");
 	    $('.filter_others').parent().parent().css({display: "none"});
 	    $('.pure-menu-link').removeClass("filter_selected");
 	}
@@ -155,6 +175,6 @@ map
 	$('.pure-menu-link').removeClass("filter_selected");
 	$(this).addClass("filter_selected");
     }
-    
+            
 });
 

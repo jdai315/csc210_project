@@ -78,11 +78,8 @@
     <div class="nav-inner">
 
       <div class="pure-u">
-	<ul class="pure-menu-list">
-        <li class="pure-menu-item"><a href="/" class="pure-menu-link">NOVEL</a>
-	</li>
-	</ul>
-       </div>
+	<a id="logo" href="/" class="pure-menu-link">NOVEL</a>
+      </div>
        
       <div class="pure-u">
 	<ul class="pure-menu-list">
@@ -116,16 +113,19 @@
 
     {% for content in contents %}
     <div class="email-item pure-g">
-      <div class="pure-u-3-4">
+      <div class="pure-u-3-5">
         {% if content[4]|safe == user %}
-	<span class="email-label-mine filter_mine"></span> {% else %} <span class="email-label-others filter_others"></span> {% endif %} <h5 class="email-name">{{ content[4]|safe }}</h5>
-        
+	<span class="email-label-mine filter_mine"></span> {% else %} <span class="email-label-others filter_others"></span> {% endif %}
+	<h5 class="email-name cut-off">{{ content[4]|safe }}</h5>
         <h4 class="email-subject">{{ content[1]|safe }} </h4>
-	<p class="email-date"><span>{{ content[3]|safe }} </span></p>
-	ID:<p class="email-id"><span>{{ content[0]|safe }}</span></p><p>ParentID: {{ content[5]|safe }}</p>
+	<p class="email-date"><span>{{ content[3]|safe }}</span></p>
         <p style="word-wrap: break-word" class="email-desc cut-off">
           {{ content[2]|safe }}
         </p>
+      </div>
+      <div class="pure-u-2-5 shrink">
+	<p class="small_text email-id">Story ID: {{ content[0]|safe }}</p>
+	<p class="small_text">Parent ID: {{ content[5]|safe }}</p>
       </div>
     </div>
     {% endfor %}

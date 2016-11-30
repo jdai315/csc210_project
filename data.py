@@ -52,6 +52,20 @@ def checkUser(username, password):
         #this converts the database value into a string
         return password == exist[0].encode("ascii")
 
+#update user password
+def updatePW(username, new_password):
+
+     #connect to the database 'userpw'
+    conn = sqlite3.connect("database")
+    c = conn.cursor()
+
+    #update to the new password associated with this username
+    c.execute('UPDATE users SET pw= ? WHERE name= ?',(new_password,username))
+    exist = c.fetchone()
+
+    conn.commit()
+    conn.close()
+    return True
 
 
 #add a new story (if the story is a root, parentid=None)

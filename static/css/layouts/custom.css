@@ -38,3 +38,35 @@
 .nostory {
     text-align: center;
 }
+
+.alert {
+    color: red;
+}
+
+.small_text {
+    margin: 0px auto;
+    font-size: 12px;
+}
+
+.shrink {
+    padding-left: 20px;
+    padding-top: 10px;
+}
+
+#logo {
+    font-size: 28px;
+}
+
+#no_stories {
+    text-align: center;
+    margin: 10px;
+    padding: 5px;
+}
+
+#none {
+    font-size: 20px;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    width: 100%;
+}
