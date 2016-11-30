@@ -152,6 +152,15 @@ def home():
     else:
         return redirect("/")
 
+@app.route("/profile",  methods=["GET","POST"])
+@authenticate
+def profile(): 
+    if 'user' in session:
+        contents = data.getStories()
+        return render_template("profile.html", user=session['user'], contents=contents)
+    else:
+        return redirect("/")
+
 @app.route('/edit', methods=["GET", "POST"])
 def edit():
     title = request.form["title"]

@@ -126,6 +126,7 @@ map
     var filter_others = document.getElementById("others");
 
     filter_all.onclick = function() {
+	$('#no_stories').remove();
 	$('.filter_mine').parent().parent().css({display: "block"});
 	$('.filter_others').parent().parent().css({display: "block"});
 	$('.pure-menu-link').removeClass("filter_selected");
@@ -133,19 +134,27 @@ map
     }
 
     filter_mine.onclick = function() {
-	$('.filter_mine').parent().parent().css({display: "block"});
-	$('.filter_others').parent().parent().css({display: "none"});
-	$('.pure-menu-link').removeClass("filter_selected");
-	$(this).addClass("filter_selected");
+	if($('.filter_mine').length === 0){
+	    $('#list').append("<div id='no_stories' class='email-item pure-g'><div class='pure-u-3-4'>You do not have any stories!</div></div>");
+	    $('.filter_others').parent().parent().css({display: "none"});
+	    $('.pure-menu-link').removeClass("filter_selected");
+	}
+	else{
+	    $('#no_stories').remove();
+	    $('.filter_mine').parent().parent().css({display: "block"});
+	    $('.filter_others').parent().parent().css({display: "none"});
+	    $('.pure-menu-link').removeClass("filter_selected");
+	    $(this).addClass("filter_selected");
+	}
     }
 
     filter_others.onclick = function() {
+	$('#no_stories').remove();
 	$('.filter_mine').parent().parent().css({display: "none"});
 	$('.filter_others').parent().parent().css({display: "block"});
 	$('.pure-menu-link').removeClass("filter_selected");
 	$(this).addClass("filter_selected");
     }
-
     
 });
 
