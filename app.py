@@ -175,6 +175,17 @@ def profile():
         return redirect("/profile")
         
 
+    #story() is NOT working yet, just a placeholder for now
+@app.route("/story", methods=["GET","POST"])
+@app.route("/story/<filters>")
+@authenticate
+def story(filters):
+    if 'user' in session:
+        return render_template("story.html", user=session['user'],contents=contents)
+    else:
+        return redirect("/")
+
+    
 @app.route('/edit', methods=["GET", "POST"])
 def edit():
     title = request.form["title"]

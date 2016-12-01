@@ -117,8 +117,8 @@
         {% if content[4]|safe == user %}
 	<span class="email-label-mine filter_mine"></span> {% else %} <span class="email-label-others filter_others"></span> {% endif %}
 	<h5 class="email-name cut-off">{{ content[4]|safe }}</h5>
-        <h4 class="email-subject">{{ content[1]|safe }} </h4>
-	<p class="email-date"><span>{{ content[3]|safe }}</span></p>
+        <h4 class="email-subject cut-off">{{ content[1]|safe }} </h4>
+	<p class="email-date"><span class="small_date">{{ content[3]|safe }}</span></p>
         <p style="word-wrap: break-word" class="email-desc cut-off">
           {{ content[2]|safe }}
         </p>

@@ -74,8 +74,8 @@ def addStory(title, content, user, parentid=None):
     #connect to 'database'
     conn = sqlite3.connect("database")
     c = conn.cursor()
-    now = datetime.datetime.now()
-        
+    now = datetime.datetime.now().strftime("%B %d, %Y - %I:%M %p")
+    
     #create a table if it doesn't exist
     # (drop the table if you need to start from scratch)
  #   c.execute('DROP TABLE stories')
@@ -97,14 +97,16 @@ def addStory(title, content, user, parentid=None):
         conn.close()
         return False
 
+#retreive all stories
 def getStories():
     
     conn = sqlite3.connect("database")
     c = conn.cursor()
     c.execute('CREATE TABLE IF NOT EXISTS stories(id integer primary key, title varchar(24), content varchar(100), date text, user varchar(24), parentid integer, FOREIGN KEY(user) REFERENCES users(name))')
-    c.execute('SELECT * FROM stories') # fetch only root stories (those without a parent)
+    c.execute('SELECT * FROM stories')
+    # fetch only root stories (those without a parent)
 
-#reverse the order of the stories to show most recent at the top
+    #reverse the order of the stories to show most recent at the top
     ex = c.fetchall()
     exist = ex[::-1]
     
@@ -119,22 +121,28 @@ def getStories():
         conn.close()
         return exist
 
-
-
-
-# JV: I'm not sure who wrote this, so I commented it out for reference
-
-##def editStory(user=0, others=0):
-##
-##    conn = sqlite3.connect("database")
-##    c = conn.cursor()
-##
-##    #Edit from the table if youre the user to write it
-##    c.execute('UPDATE TABLE SET stories(title varchar(24) primary key, content varchar(100), date text, user varchar(24), FOREIGN KEY(user) REFERENCES users(name))')
-
-
+#get a single story's data by ID
+def getStory(story_id):
     
+    conn = sqlite3.connect("database")
+    c = conn.cursor()
+    c.execute('CREATE TABLE IF NOT EXISTS stories(id integer primary key, title varchar(24), content varchar(100), date text, user varchar(24), parentid integer, FOREIGN KEY(user) REFERENCES users(name))')
 
+    #get the story based on inputted ID
+    c.execute('SELECT * FROM stories WHERE id=?',(story_id,))
 
+    exist = c.fetchone()
+
+    #no story with this id -> return null
+    if exist is None:
+        conn.commit()
+        conn.close()
+        return null
+
+    #return this story's data if it exists
+    else:
+        conn.commit()
+        conn.close()
+        return exist
 
 

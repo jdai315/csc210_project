@@ -70,3 +70,11 @@
     margin-bottom: 20px;
     width: 100%;
 }
+
+.small_date {
+    font-size: 11px;
+}
+
+.email-content-date .small_date {
+    font-size: 15px;
+}

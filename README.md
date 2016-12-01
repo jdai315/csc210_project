@@ -3,11 +3,19 @@
 <h2>Currently working on Milestone #5</h2>
 <br>
 
+Latest Push Updates (Dec, 1):
+<br>
+<ul>
+<li>Added a mySQL function getStory() to retreive data given a unique story ID</li>
+<li>Fixed readability of dates, titles</li>
+</ul>
+<br>
+
 Push updates (Nov, 30):
 <br>
 <ul>
 <li>Added a profile page where users can update their passwords and check their activity</li>
-<li>Visual tree structure in the works (will probably use Raphael.js)<li>
+<li>Visual tree structure in the works (will probably use Raphael.js)</li>
 <li>Database representation of tree completed</li>
 </ul>
 <br>
@@ -16,7 +24,7 @@ Push updates (Nov, 18):
 <br>
 <ul>
 <li>Added AJAX story creation - Jo</li>
-<li>Added upvote/downvote system, animation - V<li>
+<li>Added upvote/downvote system, animation - V</li>
 <li>Added dynamic story filtering - Je</li>
 </ul>
 <br>

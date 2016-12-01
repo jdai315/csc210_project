@@ -211,6 +211,7 @@ a {
 
         .email-content-title {
             margin: 0.5em 0 0;
+	    line-height: 38px;
         }
         .email-content-subtitle {
             font-size: 1em;
