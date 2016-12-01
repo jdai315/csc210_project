@@ -121,12 +121,20 @@ $(document).ready(function() {
         
         */
         
-        
     var MAP_WIDTH  = 620;
     var MAP_HEIGHT = 600;
+    
 
     var mapContainer = document.getElementById("raphael");
     var map = new Raphael(mapContainer, MAP_WIDTH, MAP_HEIGHT);
+    fitToContainer(map);
+    var x = mapContainer.offsetWidth/2;
+    var y = 50;
+    x.toString();
+    y.toString();
+    console.log(x);
+    var p = "m" + x + "," + y + "l-30,60";
+    //var p = "m" + "300,150"  + "l-30,60";
     
     var style = {
         stroke: "#aaa",
@@ -136,8 +144,16 @@ $(document).ready(function() {
         };
 
 map
-  .path("m 300,150 30,50 -80,90 12,5 z")
+    .path(p)
+  //.path("M 300,150v50l-30,60")
   .attr(style);
+  
+  function fitToContainer(canvas){
+        canvas.style.width='100%';
+        canvas.style.height='100%';
+        canvas.width  = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+    }
         
     //*** Filtering stories ***//
 
