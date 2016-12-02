@@ -177,11 +177,11 @@ def profile():
 
     #story() is NOT working yet, just a placeholder for now
 @app.route("/story", methods=["GET","POST"])
-@app.route("/story/<filters>")
-@authenticate
-def story(filters):
+@app.route("/story/<ID>")
+def story(ID):
     if 'user' in session:
-        return render_template("story.html", user=session['user'],contents=contents)
+        result = data.getStory(ID)
+        return render_template("story.html", user=session['user'],result=result)
     else:
         return redirect("/")
 

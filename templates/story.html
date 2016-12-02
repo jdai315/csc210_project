@@ -43,33 +43,10 @@
     </div>
 </div>
 
-<!--Edit story??
 
-<div id="editStory" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <span class="close">x</span>
-            <h2 class="modal-text"> Add a story </h2>
-        </div>
-        <div class="modal-body" style="padding: 40px;">
-            <form method="POST" class="myForm pure-form pure-form-stacked">
-                <fieldset>
-                    <label for="title">Story Title</label>
-                    <input name="title" id="title" type="text" class="pure-input-1" placeholder="Title">
-                        
-                        <label for="content">Story Content</label>
-                        <textarea name="content" id="content" class="pure-input-1" placeholder="Write here!"></textarea>
-                        </fieldset>
-                <button type="submit" id="submit" class="pure-button pure-input-1-3 pure-button-primary is-center">Submit</button>
-                
-            </form>
-        </div>
-        <div class="modal-footer">
 
-        </div>
-    </div>
-</div>
--->
+
+
 <div id="layout" class="content pure-g">
   
   <div id="nav" class="pure-u">
@@ -106,14 +83,14 @@
   </div>
 
 
-  <div id="main" class="pure-u-1">
+  <div id="editDashboard" class="pure-u-1">
     <div class="email-content">
       <div class="email-content-header pure-g">
         <div class="pure-u-1-2">
-          <h1 class="email-content-title"></h1>
+          <h1 class="email-content-title">{{ result[1]|safe }}</h1>
           <p class="email-content-subtitle">
-          From <a class="email-content-author"></a> at <span class="email-content-date"></span><BR>
-          <span class="email-content-id"></span>
+          From <a class="email-content-author">{{ result[4]|safe }}</a> at <span class="email-content-date">{{ result[3]|safe }}</span><BR>
+          <span class="email-content-id">{{ result[0]|safe }}</span>
           </p>
         </div>
         <div class="email-content-controls pure-u-1-2">
@@ -145,8 +122,8 @@
         </div>
       </div>
       
-      <!--<div style="word-wrap: break-word" class="email-content-body"></div>-->
-      <!--<canvas></canvas>-->
+      <div style="word-wrap: break-word" class="email-content-body">{{ result[2]|safe }}</div>
+
       
 
 

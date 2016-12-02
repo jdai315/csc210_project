@@ -96,13 +96,19 @@ $(document).ready(function() {
                                 for (i=0; i< nodes.length;i++){ // finding all children whose parentID == ID
                                     if (nodes[i][5] == ID){
                                         childArray.push(nodes[i]);
+                                        console.log(ID);
                                     }
                                 }
                                 var numChildren = childArray.length;
+                                console.log(numChildren);
+
+                                var url = "/story/" + ID;
     
                                 p.image("/static/img/icons/doc.png", x-(img/2), y-(img/2), img, img)
-                                .hover(function(){this.attr({src: "/static/img/icons/doc_hovered.png"});}, function(){this.attr({src: "/static/img/icons/doc.png"});}).attr({cursor: "pointer"})
-                                .click(function () {});
+                                .hover(function(){this.attr({src: "/static/img/icons/doc_hovered.png"});}, function(){this.attr({src: "/static/img/icons/doc.png"});}).attr({cursor: "pointer", href: url});
+                           
+                           
+                                console.log("Printed icon");
     
                                 if (numChildren == 1){
                                     y += 200;
@@ -142,7 +148,7 @@ $(document).ready(function() {
                                 }
                             }
 
-                            printNode();
+                            printNode(ID);
                             console.log(path);
                             p.path(path).attr(style);
                             // DONE RENDERING TREE
@@ -204,100 +210,8 @@ $(document).ready(function() {
 
     $('.submitbranch').click(function() {
         return addEdit();
-        $('#main').css({visibility: "hidden"});
     })
 
-    //*** Drawing tree ***//
-    
-
-/*
-    var canvas = document.querySelector('canvas'),
-    ctx = canvas.getContext('2d');
-    canvas.style.backgroundColor = 'rgba(158, 167, 184, 0.2)';
-    fitToContainer(canvas);
-    var x = canvas.width/2;
-    var y = 50;
-    ctx.beginPath();
-    
-
-    
-    var myImage = new Image();
-    myImage.src = 'static/img/icons/doc.png';
-    myImage.onload = function(){ctx.drawImage(myImage,x-25,y-25,50,50);}
-    ctx.moveTo(x,y);
-
-    ctx.lineTo(startX,300);
-    //ctx.strokeStyle="red";
-    ctx.stroke();
-
-    function fitToContainer(canvas){
-        canvas.style.width='100%';
-        canvas.style.height='100%';
-        canvas.width  = canvas.offsetWidth;
-        canvas.height = canvas.offsetHeight;
-    }
-        
-        */
-        
-            
-    /*
-    var MAP_WIDTH  = 620;
-    var MAP_HEIGHT = 600;
-    var mapContainer = document.getElementById("raphael");
-    var map = new Raphael(mapContainer, MAP_WIDTH, MAP_HEIGHT);
-    fitToContainer(map);
-    var x = mapContainer.offsetWidth/2;
-    var y = 50;
-    x.toString();
-    y.toString();
-    console.log(x);
-    var p = "m" + x + "," + y + "l-30,60";
-    //var p = "m" + "300,150"  + "l-30,60";
-    
-    var style = {
-        stroke: "#aaa",
-        "stroke-width": 2,
-        "stroke-linejoin": "round",
-        cursor: "pointer"
-        };
-
-map
-    .path(p)
-  //.path("M 300,150v50l-30,60")
-  .attr(style);
-  
-  
-  
-        
-
-        
-    var w = 800;
-    var h = 600;
-    var img = 100;
-    var p = Raphael("raphael");
-    p.setViewBox(0, 0, w, h, true);
-    p.canvas.setAttribute('preserveAspectRatio', 'none');
-    var path = "M " + w / 2 + " 100"; // starting position of path
-    var style = {
-        stroke: "#7B7B7A",
-        "stroke-width": 4,
-        "stroke-linejoin": "round"
-    };
-    
-    
-    $('.email.item')
-    
-    function printNode() {
-    path += "l 0 200 ";
-    p.path(path).attr(style);
-    p.image("/static/img/icons/doc.png", (w/2)-(img/2), img/2, img, img)
-    .hover(function(){this.attr({src: "/static/img/icons/doc_hovered.png"});}, function(){this.attr({src: "/static/img/icons/doc.png"});}).attr({cursor: "pointer"})
-    .id(1)
-    .click(function () {});
-    }
-    
-    printNode();
-*/
 
     //*** Filtering stories ***//
 

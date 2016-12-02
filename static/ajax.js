@@ -95,7 +95,7 @@ function addEdit()
             }
             else
             {
-                console.log("success")
+                console.log("Edit success")
             }
         }
     }
