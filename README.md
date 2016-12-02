@@ -3,7 +3,16 @@
 <h2>Currently working on Milestone #5</h2>
 <br>
 
-Latest Push Updates (Dec, 1):
+Latest Push Updates (Dec, 2):
+<br>
+<ul>
+<li>Tree drawing functional</li>
+<li>Edit story function works for up to one story per parent</li>
+<li>Various usability and bug fixes</li>
+</ul>
+<br>
+
+Push Updates (Dec, 1):
 <br>
 <ul>
 <li>Added a mySQL function getStory() to retreive data given a unique story ID</li>

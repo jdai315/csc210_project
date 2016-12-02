@@ -2,16 +2,19 @@
 
 {% block content %}
 
-{% set active_page = "home" %}
+{% set active_page = "story" %}
 
 {% set navigation_bar = [
 ('/home', 'home', 'Home'),
+('/profile', 'profile', 'View Profile'),
+('/story', 'story', 'Edit Story'),
 ('/addstory', 'addStory', 'Add Story'),
 ('/logout', 'logout', 'Logout'),
 ] -%}
 
-<link rel="stylesheet" href="../static/css/layouts/animate.css">
-<link rel="stylesheet" href="../static/css/layouts/email.css">
+<link rel="stylesheet" href="../../static/css/layouts/animate.css">
+<link rel="stylesheet" href="../../static/css/layouts/email.css">
+<link rel="stylesheet" href="../../static/css/layouts/custom.css">
 
 <!-- load jQuery -->
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -43,10 +46,6 @@
     </div>
 </div>
 
-
-
-
-
 <div id="layout" class="content pure-g">
   
   <div id="nav" class="pure-u">
@@ -55,13 +54,16 @@
     <div class="nav-inner">
 
       <div class="pure-u">
-	<a id="logo" href="/" class="pure-menu-link">NOVEL</a>
+	<ul class="pure-menu-list">
+        <li class="pure-menu-item"><a href="/" class="pure-menu-link">NOVEL</a>
+	</li>
+	</ul>
       </div>
-       
+      
       <div class="pure-u">
 	<ul class="pure-menu-list">
         <li class="pure-menu-item"><a href="/home" class="pure-menu-link">Welcome {{user}}!</a>
-	</li>
+</li>
 	</ul>
       </div>
       
@@ -69,52 +71,83 @@
       
       <div class="pure-menu">
         <ul class="pure-menu-list">
-          <li class="pure-menu-item"><a href="/profile" class="pure-menu-link">View Profile</a></li>
+	  <li class="pure-menu-item"><a href="/home" class="pure-menu-link">Home</a></li>
+	  <li class="pure-menu-item"><a href="/profile" class="pure-menu-link">View Profile</a></li>
           <li class="pure-menu-item"><a href="/logout" class="pure-menu-link">Logout</a></li>
-	  
-          <li class="pure-menu-heading">Filter Feed</li>
-          <li class="pure-menu-item"><p id="all" class="pure-menu-link"><span>All Stories</span></p></li>
-	  <li class="pure-menu-item"><p id="mine" class="pure-menu-link"><span class="email-label-mine"></span>My Stories</p></li>
-	  <li class="pure-menu-item"><p id="others" class="pure-menu-link"><span class="email-label-others"></span>Other Stories</p></li>
 	</ul>
       </div>
       
     </div>
   </div>
 
+  <!--list of the other child stories in the same generation as the one the user clicked to edit-->
+  <div id="list" class="pure-u-1">
+    {% if contents[0] != null %}
+    
+    <div id="ajaxposts"></div>
 
-  <div id="editDashboard" class="pure-u-1">
+    <div id="no_stories" class="pure-g">
+      <div id="none" class="pure-u-3-4">
+	Other Child Stories in this Generation
+      </div>
+    </div>
+
+    <div class="email_list">
+      {% for content in contents %}
+
+      {% if content[5]|safe == result[5]|safe %}
+      <div class="email-item pure-g">
+	<div class="pure-u-3-5">
+          {% if content[4]|safe == user %}
+	  <span class="email-label-mine filter_mine"></span>
+	  {% else %}
+	  <span class="email-label-others filter_others"></span>
+	  {% endif %}
+	  <h5 class="email-name cut-off">{{ content[4]|safe }}</h5>
+          <h4 class="email-subject cut-off">{{ content[1]|safe }} </h4>
+	  <p class="email-date"><span class="small_date">{{ content[3]|safe }}</span></p>
+          <p style="word-wrap: break-word" class="email-desc cut-off">
+            {{ content[2]|safe }}
+          </p>
+	</div>
+	<div class="pure-u-2-5 shrink">
+	  <p class="small_text email-id">Story ID: {{ content[0]|safe }}</p>
+	  <p class="small_text">Parent ID: {{ content[5]|safe }}</p>
+	</div>
+      </div>
+      {% endif %}
+      
+      {% endfor %}
+    </div>
+
+    {% else %}
+    <div id="no_stories" class="pure-g">
+      <div id="none" class="pure-u-3-4">
+	There are no other child stories in the same generation of the story you are editting
+      </div>
+    </div>
+    
+    {% endif %}
+  </div>
+
+  <!--story[] is the originally selected child node to be editted-->
+  
+  <div id="main" class="pure-u-1">
     <div class="email-content">
       <div class="email-content-header pure-g">
         <div class="pure-u-1-2">
           <h1 class="email-content-title">{{ result[1]|safe }}</h1>
           <p class="email-content-subtitle">
-          From <a class="email-content-author">{{ result[4]|safe }}</a> at <span class="email-content-date">{{ result[3]|safe }}</span><BR>
-          <span class="email-content-id">{{ result[0]|safe }}</span>
+            From <a class="email-content-author">{{ result[4]|safe }}</a> at <span class="email-content-date">{{ result[3]|safe }}</span><BR>
+            <span class="email-content-id">Story ID: {{ result[0]|safe }}</span>
           </p>
         </div>
         <div class="email-content-controls pure-u-1-2">
-
-          <script type ="text/javascript">
-
-          var Upvote = 0
-          function pClick(){
-            Upvote += 1;
-            document.getElementById("upVote").innerHTML = Upvote;
-          };
-          </script>
-          <button class="button-success pure-button" onClick="pClick()">Upvote &nbsp;<a id="upVote">0</a></button>
-          
-
-          <script type ="text/javascript">
-
-          var dVote = 0
-          function dClick(){
-            dVote += 1;
-            document.getElementById("dVote").innerHTML = dVote;
-          };
-          </script>
-          <button class="button-error pure-button" onClick="dClick()">Downvote &nbsp;<a id="dVote">0</a></button>
+	  
+          <!-- table with summary stats of story-->
+	  <button class="button-success pure-button" onClick="pClick()">Upvote<a id="upVote">0</a></button>
+	  
+          <button class="button-error pure-button" onClick="dClick()">Downvote<a id="dVote">0</a></button>
           <button class="secondary-button pure-button edit">Edit Story</button>
           <button class="secondary-button pure-button delete">Delete Story</button>
           <button class="secondary-button pure-button submitbranch" style="display: none;">Submit Branch</button>
@@ -123,21 +156,17 @@
       </div>
       
       <div style="word-wrap: break-word" class="email-content-body">{{ result[2]|safe }}</div>
-
-      
-
-
       
     </div>
+    
   </div>
-  
+
 </div>
 
 
 <!-- include JS -->
-<script type="text/javascript" src="/static/home1.js"></script>
-<script type="text/javascript" src="/static/ajax.js"></script>
-<script type="text/javascript" src="/static/raphael.js"></script>
+<script type="text/javascript" src="../static/home1.js"></script>
+<script type="text/javascript" src="../static/ajax.js"></script>
 <script src="http://yui.yahooapis.com/3.17.2/build/yui/yui-min.js"></script>
 
 {% endblock %}

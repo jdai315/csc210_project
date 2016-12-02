@@ -65,7 +65,7 @@ function addStory()
                 list.insertBefore(newDiv, currentDiv)
                 
                 //$( "#ajaxposts" ).before( newDiv )
-                
+                $('#no_stories').css({visibility: hidden})
                 
             }
         }
@@ -104,7 +104,7 @@ function addEdit()
     req.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
     var tit = document.getElementsByClassName('email-content-title')[0].innerText
     var con = document.getElementsByClassName('email-content-body')[0].innerText
-    var parentid = document.getElementsByClassName('email-content-id')[0].innerText
+    var parentid = document.getElementsByClassName('email-content-id')[0].innerText.substring(9)
     var postVars = 'title='+tit+'&content='+con+'&parentid='+parentid
     req.send(postVars)
     

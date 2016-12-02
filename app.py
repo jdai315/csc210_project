@@ -155,7 +155,7 @@ def home():
 def profile(): 
     if request.method =='GET':
         if 'user' in session:
-            contents = data.loadStories()
+            contents = data.getStories()
             return render_template("profile.html", user=session['user'], contents=contents)
         else:
             return redirect("/")
@@ -181,7 +181,8 @@ def profile():
 def story(ID):
     if 'user' in session:
         result = data.getStory(ID)
-        return render_template("story.html", user=session['user'],result=result)
+        contents = data.getStories()
+        return render_template("story.html", user=session['user'],result=result, contents=contents)
     else:
         return redirect("/")
 

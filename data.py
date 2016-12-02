@@ -98,14 +98,13 @@ def addStory(title, content, user, parentid=None):
         return False
 
 #retreive all stories
-def loadStories():
-    
+def getStories():
+
     conn = sqlite3.connect("database")
     c = conn.cursor()
-    val = "None"
+
     c.execute('CREATE TABLE IF NOT EXISTS stories(id integer primary key, title varchar(24), content varchar(100), date text, user varchar(24), parentid integer, FOREIGN KEY(user) REFERENCES users(name))')
-    c.execute('SELECT title, date, user FROM stories WHERE parentID is null') # fetch only root stories (those without a parent)
-    
+    c.execute('SELECT * FROM stories')
 
     #reverse the order of the stories to show most recent at the top
     ex = c.fetchall()
@@ -114,7 +113,31 @@ def loadStories():
     if exist is None:
         conn.commit()
         conn.close()
-        print "you have no stories"
+        print "there are no stories"
+        return null
+    
+    else:
+        conn.commit()
+        conn.close()
+        return exist
+
+#retreive stories for home feed (root stories only)
+def loadStories():
+    
+    conn = sqlite3.connect("database")
+    c = conn.cursor()
+    val = "None"
+    c.execute('CREATE TABLE IF NOT EXISTS stories(id integer primary key, title varchar(24), content varchar(100), date text, user varchar(24), parentid integer, FOREIGN KEY(user) REFERENCES users(name))')
+    c.execute('SELECT * FROM stories WHERE parentID is null') # fetch only root stories (those without a parent) 
+
+    #reverse the order of the stories to show most recent at the top
+    ex = c.fetchall()
+    exist = ex[::-1]
+    
+    if exist is None:
+        conn.commit()
+        conn.close()
+        print "there are no stories"
         return null
     
     else:

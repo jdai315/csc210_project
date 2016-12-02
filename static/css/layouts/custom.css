@@ -61,6 +61,8 @@
     text-align: center;
     margin: 10px;
     padding: 5px;
+    border-bottom-style: solid;
+    border-width: 2px;
 }
 
 #none {
