@@ -105,37 +105,7 @@
     </div>
   </div>
 
-  <div id="list" class="pure-u-1">
 
-    {% if contents[0] != null %}
-    
-    <div id="ajaxposts"></div>
-
-    {% for content in contents %}
-    <div class="email-item pure-g">
-      <div class="pure-u-3-5">
-        {% if content[2]|safe == user %}
-	<span class="email-label-mine filter_mine"></span> {% else %} <span class="email-label-others filter_others"></span> {% endif %}
-	<h5 class="email-name cut-off">{{ content[2]|safe }}</h5>
-        <h4 class="email-subject cut-off">{{ content[0]|safe }} </h4>
-	<p class="email-date"><span class="small_date">{{ content[1]|safe }}</span></p>
-        <!--<p style="word-wrap: break-word" class="email-desc cut-off">
-          {{ content[2]|safe }}
-        </p>
-      </div>
-      <div class="pure-u-2-5 shrink">
-	<p class="small_text email-id">Story ID: {{ content[0]|safe }}</p>
-	<p class="small_text">Parent ID: {{ content[5]|safe }}</p>-->
-      </div>
-    </div>
-    {% endfor %}
-
-    {% endif %}
-
-  <!-- email-item-selected is a class in the email item -->
-    
-  </div>
-  
   <div id="main" class="pure-u-1">
     <div class="email-content">
       <div class="email-content-header pure-g">
@@ -143,18 +113,42 @@
           <h1 class="email-content-title"></h1>
           <p class="email-content-subtitle">
           From <a class="email-content-author"></a> at <span class="email-content-date"></span><BR>
-          <!--<span class="email-content-id"></span>-->
+          <span class="email-content-id"></span>
           </p>
         </div>
         <div class="email-content-controls pure-u-1-2">
 
-          <!-- table with summary stats for story will go here-->
+          <script type ="text/javascript">
+
+          var Upvote = 0
+          function pClick(){
+            Upvote += 1;
+            document.getElementById("upVote").innerHTML = Upvote;
+          };
+          </script>
+          <button class="button-success pure-button" onClick="pClick()">Upvote &nbsp;<a id="upVote">0</a></button>
+          
+
+          <script type ="text/javascript">
+
+          var dVote = 0
+          function dClick(){
+            dVote += 1;
+            document.getElementById("dVote").innerHTML = dVote;
+          };
+          </script>
+          <button class="button-error pure-button" onClick="dClick()">Downvote &nbsp;<a id="dVote">0</a></button>
+          <button class="secondary-button pure-button edit">Edit Story</button>
+          <button class="secondary-button pure-button delete">Delete Story</button>
+          <button class="secondary-button pure-button submitbranch" style="display: none;">Submit Branch</button>
+          <button class="secondary-button pure-button cancel" style="display: none;">Cancel</button>
         </div>
       </div>
       
       <!--<div style="word-wrap: break-word" class="email-content-body"></div>-->
+      <!--<canvas></canvas>-->
       
-      <div id="raphael"></div>
+
 
       
     </div>

@@ -145,7 +145,7 @@ def add():
 @authenticate
 def home(): 
     if 'user' in session:
-        contents = data.getStories()
+        contents = data.loadStories()
         return render_template("home.html", user=session['user'], contents=contents)
     else:
         return redirect("/")
@@ -155,7 +155,7 @@ def home():
 def profile(): 
     if request.method =='GET':
         if 'user' in session:
-            contents = data.getStories()
+            contents = data.loadStories()
             return render_template("profile.html", user=session['user'], contents=contents)
         else:
             return redirect("/")
@@ -193,6 +193,13 @@ def edit():
     parentid = request.form["parentid"]
     data.addStory(title, content, session['user'], parentid)
     return jsonify(title=title, content=content, user=session['user'])
+
+@app.route('/tree', methods=["GET", "POST"])
+def tree():
+    title = request.form["title"]
+    result = data.loadTree(title)
+    return jsonify(result=result, user=session['user'])
+
     
 if __name__ == "__main__":
     app.debug = True

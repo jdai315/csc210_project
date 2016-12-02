@@ -98,13 +98,14 @@ def addStory(title, content, user, parentid=None):
         return False
 
 #retreive all stories
-def getStories():
+def loadStories():
     
     conn = sqlite3.connect("database")
     c = conn.cursor()
+    val = "None"
     c.execute('CREATE TABLE IF NOT EXISTS stories(id integer primary key, title varchar(24), content varchar(100), date text, user varchar(24), parentid integer, FOREIGN KEY(user) REFERENCES users(name))')
-    c.execute('SELECT * FROM stories')
-    # fetch only root stories (those without a parent)
+    c.execute('SELECT title, date, user FROM stories WHERE parentID is null') # fetch only root stories (those without a parent)
+    
 
     #reverse the order of the stories to show most recent at the top
     ex = c.fetchall()
@@ -120,6 +121,28 @@ def getStories():
         conn.commit()
         conn.close()
         return exist
+
+def loadTree(title):
+
+    conn = sqlite3.connect("database")
+    c = conn.cursor()
+    c.execute('SELECT * FROM stories where title= ?', (title,))
+    # fetch only root stories (those without a parent)
+
+    #reverse the order of the stories to show most recent at the top
+    exist = c.fetchall()
+    
+    if exist is None:
+        conn.commit()
+        conn.close()
+        print "you have no stories"
+        return null
+    
+    else:
+        conn.commit()
+        conn.close()
+        return exist
+    
 
 #get a single story's data by ID
 def getStory(story_id):

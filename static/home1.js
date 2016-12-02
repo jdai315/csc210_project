@@ -31,15 +31,156 @@ $(document).ready(function() {
             
             title = $(this).find('.email-subject').html();
             date = $(this).find('.email-date').html();
-            content = $(this).find('.email-desc').html();
+            //content = $(this).find('.email-desc').html();
             author = $(this).find('.email-name').html();
-            id = $(this).find('.email-id').html();
+            //id = $(this).find('.email-id').html();
 	    
             $('.email-content-title').html(title);
             $('.email-content-date').html(date);
-            $('.email-content-body').html(content);
+            //$('.email-content-body').html(content);
             $('.email-content-author').html(author);
-            $('.email-content-id').html(id);
+            //$('.email-content-id').html(id);
+            
+  
+            function loadTree()
+            {
+                var req = new XMLHttpRequest()
+                req.onreadystatechange = function()
+                {
+                    if (req.readyState == 4)
+                    {
+                        if (req.status != 200)
+                        {
+                            console.log("error")
+                        }
+                        else
+                        {
+                            console.log("success")
+                            var response = JSON.parse(req.responseText);
+                            var nodes = response.result;
+                            console.log(nodes);
+                           
+        // ON SUCCESS, RENDER TREE DIAGRAM WITH RAPHAEL.JS USING JSON DATA:
+        // See http://jsfiddle.net/mklement/7rpmH/ for great demo on Raphael resize
+        // See also http://bertanguven.com/raphael-js-setsize-function
+        // Documentation: https://dmitrybaranovskiy.github.io/raphael/reference.html
+    
+    
+    
+    // ****** ROOT
+    var numNodes = nodes.length;
+    var root;
+    for (i=0; i< nodes.length;i++){ // finding the root
+        if (nodes[i][5] == null){
+            root = nodes[i];
+        }
+    }
+    var ID = root[0];
+    // ******
+    
+    
+
+    // initializing the Raphael grid:
+    document.getElementById("raphael").innerHTML = ""; // wipe clean previous grid if any
+    var w = 800;
+    var h = 600;
+    var img = 100;
+    var p = Raphael("raphael");
+    p.setViewBox(0, 0, w, h, true);
+    p.canvas.setAttribute('preserveAspectRatio', 'none');
+    var x = w / 2;
+    var y = 100;
+    var start, path = "M " + x + " " + y; // starting position of path
+    var style = {
+        stroke: "#7B7B7A",
+        "stroke-width": 4,
+        "stroke-linejoin": "round"
+    };
+    
+    
+    
+    
+    function printNode(ID) {
+    
+    var childArray = new Array();
+    for (i=0; i< nodes.length;i++){ // finding all children whose parentID == ID
+        if (nodes[i][5] == ID){
+            childArray.push(nodes[i]);
+        }
+    }
+    var numChildren = childArray.length;
+    
+    
+     p.image("/static/img/icons/doc.png", x-(img/2), y-(img/2), img, img)
+    .hover(function(){this.attr({src: "/static/img/icons/doc_hovered.png"});}, function(){this.attr({src: "/static/img/icons/doc.png"});}).attr({cursor: "pointer"})
+    .click(function () {});
+    
+     
+    
+    if (numChildren == 1){
+        y += 200;
+        console.log(x);
+        console.log(y);
+        path += " L " + x + " " + y;
+        //path += " l 0 200";
+    
+        printNode(childArray[0][0]);
+        y -= 200;
+        console.log(x);
+        console.log(y);
+        path += " M " + x + " " + y;
+        }
+
+    
+    else if (numChildren > 1){
+        for (i=0; i< numChildren;i++){
+            var angle = ((((numChildren-1) / i)*400)-200);
+            x += angle;
+            y += 200;
+            path += " L " + x + " " + y;
+            console.log(x);
+            console.log(y);
+        
+            printNode(childArray[i][0]);
+            x -= angle;
+            y -= 200;
+            path += " M " + x + " " + y;
+            console.log(x);
+            console.log(y);
+            
+
+            
+        }
+    }
+}
+
+    printNode();
+    console.log(path);
+    p.path(path).attr(style);
+         
+              
+                           
+                           
+    // DONE RENDERING TREE
+                           
+                        }
+                    }
+                }
+    
+                req.open('POST', '/tree')
+                req.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+                var tit = document.getElementsByClassName('email-content-title')[0].innerText
+                var postVars = 'title='+tit
+                req.send(postVars)
+                return false
+            }
+
+loadTree(); // call Ajax
+
+    
+
+
+
 	    
 	});
     }
@@ -121,10 +262,10 @@ $(document).ready(function() {
         
         */
         
+            
+    /*
     var MAP_WIDTH  = 620;
     var MAP_HEIGHT = 600;
-    
-
     var mapContainer = document.getElementById("raphael");
     var map = new Raphael(mapContainer, MAP_WIDTH, MAP_HEIGHT);
     fitToContainer(map);
@@ -148,13 +289,39 @@ map
   //.path("M 300,150v50l-30,60")
   .attr(style);
   
-  function fitToContainer(canvas){
-        canvas.style.width='100%';
-        canvas.style.height='100%';
-        canvas.width  = canvas.offsetWidth;
-        canvas.height = canvas.offsetHeight;
-    }
+  
+  
         
+
+        
+    var w = 800;
+    var h = 600;
+    var img = 100;
+    var p = Raphael("raphael");
+    p.setViewBox(0, 0, w, h, true);
+    p.canvas.setAttribute('preserveAspectRatio', 'none');
+    var path = "M " + w / 2 + " 100"; // starting position of path
+    var style = {
+        stroke: "#7B7B7A",
+        "stroke-width": 4,
+        "stroke-linejoin": "round"
+    };
+    
+    
+    $('.email.item')
+    
+    function printNode() {
+    path += "l 0 200 ";
+    p.path(path).attr(style);
+    p.image("/static/img/icons/doc.png", (w/2)-(img/2), img/2, img, img)
+    .hover(function(){this.attr({src: "/static/img/icons/doc_hovered.png"});}, function(){this.attr({src: "/static/img/icons/doc.png"});}).attr({cursor: "pointer"})
+    .id(1)
+    .click(function () {});
+    }
+    
+    printNode();
+*/
+
     //*** Filtering stories ***//
 
     var filter_all = document.getElementById("all");
