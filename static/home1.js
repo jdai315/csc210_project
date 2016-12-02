@@ -135,6 +135,11 @@ $(document).ready(function() {
                                         console.log(y);
                                     }
                                 }
+                           
+                                else if (numChildren == 0){
+                                    return;
+                           
+                                }
                             }
 
                             printNode();
