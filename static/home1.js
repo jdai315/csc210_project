@@ -60,109 +60,87 @@ $(document).ready(function() {
                             var nodes = response.result;
                             console.log(nodes);
                            
-        // ON SUCCESS, RENDER TREE DIAGRAM WITH RAPHAEL.JS USING JSON DATA:
-        // See http://jsfiddle.net/mklement/7rpmH/ for great demo on Raphael resize
-        // See also http://bertanguven.com/raphael-js-setsize-function
-        // Documentation: https://dmitrybaranovskiy.github.io/raphael/reference.html
+                            // ON SUCCESS, RENDER TREE DIAGRAM WITH RAPHAEL.JS USING JSON DATA:
+                            // Documentation: https://dmitrybaranovskiy.github.io/raphael/reference.html
     
-    
-    
-    // ****** ROOT
-    var numNodes = nodes.length;
-    var root;
-    for (i=0; i< nodes.length;i++){ // finding the root
-        if (nodes[i][5] == null){
-            root = nodes[i];
-        }
-    }
-    var ID = root[0];
-    // ******
-    
-    
+                            // Find the root node
+                            var numNodes = nodes.length;
+                            var root;
+                            for (i=0; i< nodes.length;i++){
+                                if (nodes[i][5] == null){
+                                    root = nodes[i];
+                                }
+                            }
+                            var ID = root[0];
 
-    // initializing the Raphael grid:
-    document.getElementById("raphael").innerHTML = ""; // wipe clean previous grid if any
-    var w = 800;
-    var h = 600;
-    var img = 100;
-    var p = Raphael("raphael");
-    p.setViewBox(0, 0, w, h, true);
-    p.canvas.setAttribute('preserveAspectRatio', 'none');
-    var x = w / 2;
-    var y = 100;
-    var start, path = "M " + x + " " + y; // starting position of path
-    var style = {
-        stroke: "#7B7B7A",
-        "stroke-width": 4,
-        "stroke-linejoin": "round"
-    };
+                            // initializing the Raphael canvas:
+                            document.getElementById("raphael").innerHTML = ""; // wipe clean previous grid if any
+                            var w = 800;
+                            var h = 600;
+                            var img = 100;
+                            var p = Raphael("raphael");
+                            p.setViewBox(0, 0, w, h, true);
+                            p.canvas.setAttribute('preserveAspectRatio', 'none');
+                            var x = w / 2;
+                            var y = 100;
+                            var start, path = "M " + x + " " + y; // starting position of path
+                            var style = {
+                                stroke: "#7B7B7A",
+                                "stroke-width": 4,
+                                "stroke-linejoin": "round"
+                            };
+                           
+                            // printNode() takes the ID of a node, determines the node's children,  prints an icon-node that links to that node's content, and draws stems to the children. Function called recursively to generate tree.
+                            function printNode(ID) {
+                                var childArray = new Array();
+                                for (i=0; i< nodes.length;i++){ // finding all children whose parentID == ID
+                                    if (nodes[i][5] == ID){
+                                        childArray.push(nodes[i]);
+                                    }
+                                }
+                                var numChildren = childArray.length;
     
+                                p.image("/static/img/icons/doc.png", x-(img/2), y-(img/2), img, img)
+                                .hover(function(){this.attr({src: "/static/img/icons/doc_hovered.png"});}, function(){this.attr({src: "/static/img/icons/doc.png"});}).attr({cursor: "pointer"})
+                                .click(function () {});
     
+                                if (numChildren == 1){
+                                    y += 200;
+                                    console.log(x);
+                                    console.log(y);
+                                    path += " L " + x + " " + y;
+                                    //path += " l 0 200";
     
-    
-    function printNode(ID) {
-    
-    var childArray = new Array();
-    for (i=0; i< nodes.length;i++){ // finding all children whose parentID == ID
-        if (nodes[i][5] == ID){
-            childArray.push(nodes[i]);
-        }
-    }
-    var numChildren = childArray.length;
-    
-    
-     p.image("/static/img/icons/doc.png", x-(img/2), y-(img/2), img, img)
-    .hover(function(){this.attr({src: "/static/img/icons/doc_hovered.png"});}, function(){this.attr({src: "/static/img/icons/doc.png"});}).attr({cursor: "pointer"})
-    .click(function () {});
-    
-     
-    
-    if (numChildren == 1){
-        y += 200;
-        console.log(x);
-        console.log(y);
-        path += " L " + x + " " + y;
-        //path += " l 0 200";
-    
-        printNode(childArray[0][0]);
-        y -= 200;
-        console.log(x);
-        console.log(y);
-        path += " M " + x + " " + y;
-        }
+                                    printNode(childArray[0][0]);
+                                    y -= 200;
+                                    console.log(x);
+                                    console.log(y);
+                                    path += " M " + x + " " + y;
+                                }
 
-    
-    else if (numChildren > 1){
-        for (i=0; i< numChildren;i++){
-            var angle = ((((numChildren-1) / i)*400)-200);
-            x += angle;
-            y += 200;
-            path += " L " + x + " " + y;
-            console.log(x);
-            console.log(y);
+                                else if (numChildren > 1){
+                                    for (i=0; i< numChildren;i++){
+                                        var angle = ((((numChildren-1) / i)*400)-200);
+                                        x += angle;
+                                        y += 200;
+                                        path += " L " + x + " " + y;
+                                        console.log(x);
+                                        console.log(y);
         
-            printNode(childArray[i][0]);
-            x -= angle;
-            y -= 200;
-            path += " M " + x + " " + y;
-            console.log(x);
-            console.log(y);
-            
+                                        printNode(childArray[i][0]);
+                                        x -= angle;
+                                        y -= 200;
+                                        path += " M " + x + " " + y;
+                                        console.log(x);
+                                        console.log(y);
+                                    }
+                                }
+                            }
 
-            
-        }
-    }
-}
-
-    printNode();
-    console.log(path);
-    p.path(path).attr(style);
-         
-              
-                           
-                           
-    // DONE RENDERING TREE
-                           
+                            printNode();
+                            console.log(path);
+                            p.path(path).attr(style);
+                            // DONE RENDERING TREE
                         }
                     }
                 }
@@ -175,13 +153,7 @@ $(document).ready(function() {
                 return false
             }
 
-loadTree(); // call Ajax
-
-    
-
-
-
-	    
+            loadTree(); // call Ajax
 	});
     }
                   
