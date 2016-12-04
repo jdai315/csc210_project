@@ -195,7 +195,9 @@ $(document).ready(function() {
     submit.onclick = function() {
         modal.style.display = "none";
         console.log("home1.js triggered");
+        document.getElementById("submit").submit();
         return addStory();
+
                   
     }
                   
@@ -220,7 +222,8 @@ $(document).ready(function() {
     })
 
     $('.submitbranch').click(function() {
-        return addEdit();
+        $('.email-content-body').attr("contenteditable", "false");
+        //return addEdit();
     })
 
 
