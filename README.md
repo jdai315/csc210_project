@@ -3,7 +3,15 @@
 <h2>Currently working on Milestone #5</h2>
 <br>
 
-Latest Push Updates (Dec, 2):
+Latest Push Updates (Dec, 3):
+<br>
+<ul>
+<li> Added votes.js to keep track of the upvotes and downvotes </li>
+<li> Edited data.py and app.py so that votes are kept unique to story and user </li>
+</ul>
+<br>
+
+Push Updates (Dec, 2):
 <br>
 <ul>
 <li>Tree drawing functional</li>
