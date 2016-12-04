@@ -176,6 +176,7 @@ def profile():
         
 
     #story() is NOT working yet, just a placeholder for now
+
 @app.route("/story", methods=["GET","POST"])
 @app.route("/story/<ID>")
 def story(ID):
@@ -203,7 +204,7 @@ def tree():
 
 @app.route("/profile", methods=["GET", "POST"])
 def rateStory(score):
-    score = 0
+    #score = 0
     uv = 0
     dv = 0
     uw = request.form["user"]

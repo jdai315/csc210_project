@@ -194,10 +194,11 @@ def getStory(story_id):
 def rateStory(user):
      conn = sqlite3.connect("database")
      c = conn.cursor()
+     #create a new table called votes that will use user, and story id to get data
      c.execute('CREATE TABLE IF NOT EXISTS stories(upvote integer, downvote integer, id integer primary key, title varchar(24), content varchar(100), date text, user varchar(24), parentid integer, FOREIGN KEY(user) REFERENCES users(name))')
      
-     #going to get votes based on stories
-     #c.execute('SELECT * FROM stories WHERE user=?', (user)
+     #get votes based on inputted id or user name
+     c.execute('SELECT * FROM stories WHERE user=? AND id=?',(user,story_id))
      #exist = c.fetchone()
 
 

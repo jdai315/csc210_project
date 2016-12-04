@@ -145,8 +145,14 @@
         <div class="email-content-controls pure-u-1-2">
 	  
           <!-- table with summary stats of story-->
+          
+
 	       <button class="button-success pure-button" onClick="pClick()">Upvote<a id="upVote">0</a></button>
           <button class="button-error pure-button" onClick="dClick()">Downvote<a id="dVote">0</a></button>
+
+          
+
+
           <button class="secondary-button pure-button edit">Edit Story</button>
           <button class="secondary-button pure-button delete">Delete Story</button>
           <button class="secondary-button pure-button submitbranch" style="display: none;">Submit Branch</button>
@@ -167,5 +173,6 @@
 <script type="text/javascript" src="../static/home1.js"></script>
 <script type="text/javascript" src="../static/ajax.js"></script>
 <script src="http://yui.yahooapis.com/3.17.2/build/yui/yui-min.js"></script>
+<script type="text/javascript" src="../static/votes.js"></script>
 
 {% endblock %}
