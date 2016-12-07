@@ -84,6 +84,7 @@ function addStory()
 
 function addEdit()
 {
+    console.log("ajax.js add edit function")
     var req = new XMLHttpRequest()
     req.onreadystatechange = function()
     {
@@ -100,11 +101,13 @@ function addEdit()
         }
     }
     
+    console.log("test")
     req.open('POST', '/edit')
+    console.log
     req.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
     var tit = document.getElementsByClassName('email-content-title')[0].innerText
     var con = document.getElementsByClassName('email-content-body')[0].innerText
-    var parentid = document.getElementsByClassName('email-content-id')[0].innerText.substring(9)
+    var parentid = document.getElementsByClassName('email-content-id')[0].innerText
     var postVars = 'title='+tit+'&content='+con+'&parentid='+parentid
     req.send(postVars)
     

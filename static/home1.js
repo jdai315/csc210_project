@@ -4,6 +4,7 @@ $(document).ready(function() {
     // this following code is specific only to the /profile page //
     var url = "http://localhost:5678/profile";
     var url2 = "http://localhost:5678/story";
+    var url3 = "http://localhost:5678/home";
     
     console.log(location.href);
     
@@ -16,6 +17,7 @@ $(document).ready(function() {
 	}
 
     }
+    /*
     else if(location.href.includes(url2)){
 	$('#main').css({visibility: "visible"});
 	if($('.email_list').length === 0){
@@ -23,8 +25,8 @@ $(document).ready(function() {
 	    $('.filter_others').parent().parent().css({display: "none"});
 	    $('.pure-menu-link').removeClass("filter_selected");
 	}
-    }
-
+    }*/
+    
     $('#story_counter').html(
 	$('.email-item').length
     );
@@ -40,15 +42,17 @@ $(document).ready(function() {
             
             title = $(this).find('.email-subject').html();
             date = $(this).find('.email-date').html();
-            content = $(this).find('.email-desc').html();
+            //content = $(this).find('.email-desc').html();
             author = $(this).find('.email-name').html();
             //id = $(this).find('.email-id').html();
 	    
             $('.email-content-title').html(title);
             $('.email-content-date').html(date);
-            $('.email-content-body').html(content);
+            //$('.email-content-body').html(content);
             $('.email-content-author').html(author);
             //$('.email-content-id').html(id);
+            
+            if(location.href!=url2){
             
   
             function loadTree()
@@ -86,12 +90,16 @@ $(document).ready(function() {
                             document.getElementById("raphael").innerHTML = ""; // wipe clean previous grid if any
                             var w = 800;
                             var h = 600;
-                            var img = 100;
+                            var img = 70;
                             var p = Raphael("raphael");
                             p.setViewBox(0, 0, w, h, true);
                             p.canvas.setAttribute('preserveAspectRatio', 'none');
                             var x = w / 2;
                             var y = 100;
+                           
+                            console.log(x);
+                            console.log(y);
+                           
                             var start, path = "M " + x + " " + y; // starting position of path
                             var style = {
                                 stroke: "#7B7B7A",
@@ -100,61 +108,79 @@ $(document).ready(function() {
                             };
                            
                             // printNode() takes the ID of a node, determines the node's children,  prints an icon-node that links to that node's content, and draws stems to the children. Function called recursively to generate tree.
+                           
+                           
+                           
+                           
+                           
+                           
                             function printNode(ID) {
                                 var childArray = new Array();
                                 for (i=0; i< nodes.length;i++){ // finding all children whose parentID == ID
                                     if (nodes[i][5] == ID){
                                         childArray.push(nodes[i]);
-                                        console.log(ID);
+                                        //console.log(ID);
                                     }
                                 }
                                 var numChildren = childArray.length;
-                                console.log(numChildren);
+                                console.log("Number of children: " + numChildren);
 
                                 var url = "/story/" + ID;
     
                                 p.image("/static/img/icons/doc.png", x-(img/2), y-(img/2), img, img)
-                                .hover(function(){this.attr({src: "/static/img/icons/doc_hovered.png"});}, function(){this.attr({src: "/static/img/icons/doc.png"});}).attr({cursor: "pointer", href: url});
+                                .hover(
+                                    function(){
+                                        this.attr({src: "/static/img/icons/doc_hovered.png"});
+                                    },
+                                    function(){
+                                        this.attr({src: "/static/img/icons/doc.png"});
+                                    })
+                                .attr({cursor: "pointer", href: url});
                            
                            
                                 console.log("Printed icon");
     
                                 if (numChildren == 1){
-                                    y += 200;
-                                    console.log(x);
-                                    console.log(y);
+                                    y += 100;
+                                    console.log("X: " + x);
+                                    console.log("Y: " + y);
                                     path += " L " + x + " " + y;
                                     //path += " l 0 200";
     
                                     printNode(childArray[0][0]);
-                                    y -= 200;
-                                    console.log(x);
-                                    console.log(y);
+                                    y -= 100;
+                                    console.log("X: " + x);
+                                    console.log("Y: " + y);
                                     path += " M " + x + " " + y;
                                 }
 
                                 else if (numChildren > 1){
-                                    for (i=0; i< numChildren;i++){
-                                        var angle = ((((numChildren-1) / i)*400)-200);
+                                    for (i=0; i < numChildren;i++){
+                                        var newI = i;
+                                        var newNum = numChildren;
+                                        var angle = (((newI / (newNum-1))*200)-100);
                                         x += angle;
-                                        y += 200;
+                                        y += 100;
                                         path += " L " + x + " " + y;
-                                        console.log(x);
-                                        console.log(y);
+                                        console.log("X: " + x);
+                                        console.log("Y: " + y);
+                                        console.log(childArray);
         
                                         printNode(childArray[i][0]);
                                         x -= angle;
-                                        y -= 200;
+                                        y -= 100;
                                         path += " M " + x + " " + y;
-                                        console.log(x);
-                                        console.log(y);
+                                        console.log("X: " + x);
+                                        console.log("Y: " + y);
+                                        i = newI;
                                     }
                                 }
                            
                                 else if (numChildren == 0){
+                                    console.log("No children");
                                     return;
-                           
                                 }
+                                console.log("Number of children: " + numChildren);
                             }
 
                             printNode(ID);
@@ -174,7 +200,9 @@ $(document).ready(function() {
             }
 
             loadTree(); // call Ajax
+        }
 	});
+        
     }
                   
     //*** Adding story using ajax ***//
@@ -195,7 +223,7 @@ $(document).ready(function() {
     submit.onclick = function() {
         modal.style.display = "none";
         console.log("home1.js triggered");
-        document.getElementById("submit").submit();
+        //document.getElementById("submit").submit();
         return addStory();
 
                   
@@ -223,7 +251,7 @@ $(document).ready(function() {
 
     $('.submitbranch').click(function() {
         $('.email-content-body').attr("contenteditable", "false");
-        //return addEdit();
+        return addEdit();
     })
 
 

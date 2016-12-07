@@ -190,6 +190,7 @@ def story(ID):
     
 @app.route('/edit', methods=["GET", "POST"])
 def edit():
+    print "made it"
     title = request.form["title"]
     content = request.form["content"]
     parentid = request.form["parentid"]

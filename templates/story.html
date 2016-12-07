@@ -111,8 +111,8 @@
           </p>
 	</div>
 	<div class="pure-u-2-5 shrink">
-	  <p class="small_text email-id">Story ID: {{ content[0]|safe }}</p>
-	  <p class="small_text">Parent ID: {{ content[5]|safe }}</p>
+	  Story ID:  <p class="small_text email-id">{{ content[0]|safe }}</p>
+	  Parent ID: <p class="small_text">{{ content[5]|safe }}</p>
 	</div>
       </div>
       {% endif %}
@@ -139,7 +139,7 @@
           <h1 class="email-content-title">{{ result[1]|safe }}</h1>
           <p class="email-content-subtitle">
             From <a class="email-content-author">{{ result[4]|safe }}</a> at <span class="email-content-date">{{ result[3]|safe }}</span><BR>
-            <span class="email-content-id">Story ID: {{ result[0]|safe }}</span>
+            Story ID: <span class="email-content-id">{{ result[0]|safe }}</span>
           </p>
         </div>
         <div class="email-content-controls pure-u-1-2">

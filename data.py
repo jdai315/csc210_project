@@ -82,7 +82,7 @@ def addStory(title, content, user, parentid=None):
     c.execute('CREATE TABLE IF NOT EXISTS stories(id integer primary key, title varchar(24), content varchar(100), date text, user varchar(24), parentid integer, FOREIGN KEY(user) REFERENCES users(name))')
 
     #this is where the cursor checks if the story already exists
-    c.execute('SELECT content FROM stories WHERE title= ? AND user= ? AND parentid= ?',(title, user, parentid))
+    c.execute('SELECT content FROM stories WHERE title= ? AND content= ? AND user= ? AND parentid= ?',(title, content, user, parentid))
     exist = c.fetchone()
     
     #if it isnt already in the table, insert it
@@ -128,7 +128,7 @@ def loadStories():
     c = conn.cursor()
     val = "None"
     c.execute('CREATE TABLE IF NOT EXISTS stories(id integer primary key, title varchar(24), content varchar(100), date text, user varchar(24), parentid integer, FOREIGN KEY(user) REFERENCES users(name))')
-    c.execute('SELECT * FROM stories WHERE parentID is null') # fetch only root stories (those without a parent) 
+    c.execute('SELECT id, title, date, user FROM stories WHERE parentID is null') # fetch only root stories (those without a parent) 
 
     #reverse the order of the stories to show most recent at the top
     ex = c.fetchall()
