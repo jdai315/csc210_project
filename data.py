@@ -197,8 +197,21 @@ def rateStory(user):
      #create a new table called votes that will use user, and story id to get data
      c.execute('CREATE TABLE IF NOT EXISTS stories(upvote integer, downvote integer, id integer primary key, title varchar(24), content varchar(100), date text, user varchar(24), parentid integer, FOREIGN KEY(user) REFERENCES users(name))')
      
-     #get votes based on inputted id or user name
+     #get votes based on inputted id and the user name
      c.execute('SELECT * FROM stories WHERE user=? AND id=?',(user,story_id))
-     #exist = c.fetchone()
+     exist = c.fetchone()
+
+     if exist is None:
+        conn.commit()
+        conn.close()
+        return null
+
+    #return this story's data if it exists
+     else:
+        conn.commit()
+        conn.close()
+        return exist
+
+
 
 

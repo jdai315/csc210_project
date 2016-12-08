@@ -1,3 +1,30 @@
+
+
+
+
+
+
+function rateVotes{
+
+var count = 0;
+var uv = count + 1;
+var dv = count - 1;
+
+$('#upVote').click(function(){
+	console.log("I have been pressed!");
+	count++;
+	
+});
+
+
+$('#dVote').click(function(){
+	console.log("I have been pressed!");
+	count--;
+	
+});
+
+}
+
 var counter = 0; //
 var uv = counter + 1;
 var dv = counter - 1;
