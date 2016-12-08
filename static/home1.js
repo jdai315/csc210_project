@@ -6,7 +6,6 @@ $(document).ready(function() {
     var url2 = "http://localhost:5678/story";
     var url3 = "http://localhost:5678/home";
     
-    console.log(location.href);
     
     if(location.href==url){
 	$('#main').css({visibility: "visible"});
@@ -17,19 +16,15 @@ $(document).ready(function() {
 	}
 
     }
-    /*
-    else if(location.href.includes(url2)){
-	$('#main').css({visibility: "visible"});
-	if($('.email_list').length === 0){
-	    $('#list').append("<div id='no_stories' class='pure-g'><div id='none' class='pure-u-3-4'>There are no children of this story</div></div>");
-	    $('.filter_others').parent().parent().css({display: "none"});
-	    $('.pure-menu-link').removeClass("filter_selected");
-	}
-    }*/
     
-    $('#story_counter').html(
-	$('.email-item').length
-    );
+    else if(location.href.indexOf("story") != -1){
+	$('#main').css({visibility: "visible"});
+
+    }
+     
+
+    // ... to this
+    
     
     //*** Displaying story content ***//
 
@@ -52,7 +47,7 @@ $(document).ready(function() {
             $('.email-content-author').html(author);
             //$('.email-content-id').html(id);
             
-            if(location.href!=url2){
+            if(location.href.indexOf("story") == -1){
             
   
             function loadTree()
