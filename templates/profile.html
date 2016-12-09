@@ -52,10 +52,7 @@
     <div class="nav-inner">
 
       <div class="pure-u">
-	<ul class="pure-menu-list">
-        <li class="pure-menu-item"><a href="/" class="pure-menu-link">NOVEL</a>
-	</li>
-	</ul>
+        <a id="logo" href="/" class="pure-menu-link">NOVEL</a>
       </div>
       
       <div class="pure-u">
@@ -91,14 +88,14 @@
  	<span class="email-label-mine filter_mine"></span>
 	<h5 class="email-name cut-off">{{ content[4]|safe }}</h5>
         <h4 class="email-subject cut-off">{{ content[1]|safe }} </h4>
-	<p class="email-date"><span>{{ content[3]|safe }} </span></p>
-        <p style="word-wrap: break-word" class="email-desc cut-off">
-          {{ content[2]|safe }}
-        </p>
+	<p class="email-date"><span class="small_date">Created on {{ content[3]|safe }}</span></p>
+        <!--<p style="word-wrap: break-word" class="email-desc cut-off">
+	  {{ content[2]|safe }}
+        </p>-->
       </div>
       <div class="pure-u-2-5 shrink">
 	<p class="small_text email-id">Story ID: {{ content[0]|safe }}</p>
-	<p class="small_text">Parent ID: {{ content[5]|safe }}</p>
+	<!--<p class="small_text">Parent ID: {{ content[5]|safe }}</p>-->
       </div>
     </div>
     {% endif %}

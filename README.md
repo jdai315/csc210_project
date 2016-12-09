@@ -3,7 +3,16 @@
 <h2>Currently working on Milestone #5</h2>
 <br>
 
-Latest Push Updates (Dec, 3):
+Latest Push Updates (Dec, 8):
+<br>
+<ul>
+<li> Added new formatting to the story.html to make room for subtrees </li>
+<li> Fixed CSS across the nav menu </li>
+<li> Fixed date formatting on the profile page </li>
+</ul>
+</br>
+
+Push Updates (Dec, 3):
 <br>
 <ul>
 <li> Added votes.js to keep track of the upvotes and downvotes </li>

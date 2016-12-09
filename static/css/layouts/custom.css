@@ -81,3 +81,17 @@
 .email-content-date .small_date {
     font-size: 15px;
 }
+
+#back-icon {
+    width: 90px;
+}
+
+#edit-reply {
+    margin: 0px;
+    font-size: 26px;
+}
+
+#edit-version-title {
+    margin-top: 5px;
+    color: blue;
+}

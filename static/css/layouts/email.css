@@ -23,7 +23,7 @@ a {
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
-    border-radius: 20px;
+    border-radius: 15px;
 }
 .primary-button {
     color: #fff;
@@ -134,6 +134,34 @@ a {
     color: rgb(75, 113, 151);
 }
 
+#edit_top {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    height: 100px;
+    border-bottom-style: solid;
+    border-width: 1px;
+    border-color: gray;
+    display: flex;
+    overflow: auto;
+}
+
+#go_back, #subtree {
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+    vertical-align: middle;
+}
+
+#go_back {
+    width: 30%;
+    border-right-style: solid;
+    border-width: 1px;
+    border-color: gray;
+}
+
+#subtree {
+    width: 70%;
+}
 
 /*
  * -- EMAIL STYLES --
@@ -328,6 +356,10 @@ svg { height: 100%; width: 100%; }
         position: relative;
     }
 
+    div#layout.edit-layout {
+	padding-left:200px;
+    }
+
     /* These are position:fixed; elements that will be in the left 500px of the screen */
     #nav, #list {
         position: fixed;
@@ -340,6 +372,11 @@ svg { height: 100%; width: 100%; }
         width:200px;
         height: 100%;
     }
+    div#nav.edit-nav {
+	margin-left: -200px;
+	width:200px;
+	height: 100%;
+    }
 
     /* Show the menu items on the larger screen */
     .nav-inner {
@@ -350,7 +387,7 @@ svg { height: 100%; width: 100%; }
     /* Hide the "Menu" button on larger screens */
     #nav .nav-menu-button {
         display: none;
-    }
+    }	
 
     #list {
         margin-left: -350px;
@@ -362,7 +399,6 @@ svg { height: 100%; width: 100%; }
     #main {
 	visibility: hidden;
         position: fixed;
-        top: 30%;
         right: 0;
         bottom: 0;
         left: 200px;
@@ -371,7 +407,7 @@ svg { height: 100%; width: 100%; }
         height: 100%;
     }
     
-        #editDashboard {
+    #editDashboard {
         visibility: visible;
         position: fixed;
         top: 30%;
