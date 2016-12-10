@@ -14,17 +14,12 @@ $(document).ready(function() {
 	    $('.filter_others').parent().parent().css({display: "none"});
 	    $('.pure-menu-link').removeClass("filter_selected");
 	}
-
     }
     
     else if(location.href.indexOf("story") != -1){
 	$('#main').css({visibility: "visible"});
 
     }
-     
-
-    // ... to this
-    
     
     //*** Displaying story content ***//
 
@@ -95,7 +90,7 @@ $(document).ready(function() {
                             console.log(x);
                             console.log(y);
                            
-                            var start, path = "M " + x + " " + y; // starting position of path
+                            var start, path = "M " + x + " " + y; // starting absolute position of path
                             var style = {
                                 stroke: "#7B7B7A",
                                 "stroke-width": 4,
@@ -104,17 +99,16 @@ $(document).ready(function() {
                            
                             // printNode() takes the ID of a node, determines the node's children,  prints an icon-node that links to that node's content, and draws stems to the children. Function called recursively to generate tree.
                            
-                           
-                           
-                           
-                           
-                           
                             function printNode(ID) {
                                 var childArray = new Array();
+                                var thisNode;
                                 for (i=0; i< nodes.length;i++){ // finding all children whose parentID == ID
                                     if (nodes[i][5] == ID){
                                         childArray.push(nodes[i]);
                                         //console.log(ID);
+                                    }
+                                    else if (nodes[i][0] == ID){
+                                        thisNode = nodes[i];
                                     }
                                 }
                                 var numChildren = childArray.length;
@@ -122,15 +116,21 @@ $(document).ready(function() {
 
                                 var url = "/story/" + ID;
     
-                                p.image("/static/img/icons/doc.png", x-(img/2), y-(img/2), img, img)
+                                p.image("/static/img/icons/doc3.png", x-(img/2), y-(img/2), img, img)
                                 .hover(
                                     function(){
-                                        this.attr({src: "/static/img/icons/doc_hovered.png"});
+                                        this.attr({src: "/static/img/icons/doc3_hovered.png"});
                                     },
                                     function(){
-                                        this.attr({src: "/static/img/icons/doc.png"});
+                                        this.attr({src: "/static/img/icons/doc3.png"});
                                     })
                                 .attr({cursor: "pointer", href: url});
+                           
+                                var upVote = thisNode[6];
+                                var downVote = thisNode[7];
+                                p.text(x-(img/2.5), y+(img/2.5), upVote).attr({"font-size": 30, "font-weight": "bold", fill: "#02820B"});
+                                p.text(x+(img/2.5), y+(img/2.5), downVote).attr({"font-size": 30, "font-weight": "bold", fill: "#B71306"});
+                           
                            
                            
                                 console.log("Printed icon");
