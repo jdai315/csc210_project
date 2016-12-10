@@ -114,7 +114,38 @@ function addEdit()
     return false
 }
 
-
+function vote()
+{
+    console.log("ajax.js add edit function")
+    var req = new XMLHttpRequest()
+    req.onreadystatechange = function()
+    {
+        if (req.readyState == 4)
+        {
+            if (req.status != 200)
+            {
+                console.log("error")
+            }
+            else
+            {
+                console.log("Edit success")
+            }
+        }
+    }
+    
+    console.log("test")
+    req.open('POST', '/rateStory')
+    console.log
+    req.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+    var up = document.getElementById('upVote').innerText
+    console.log("up count: " + up)
+    var down = document.getElementById('dVote').innerText
+    var id = document.getElementsByClassName('email-content-id')[0].innerText
+    var postVars = 'up='+up+'&down='+down+'&id='+id
+    req.send(postVars)
+    
+    return false
+}
 
 
 

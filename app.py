@@ -203,14 +203,13 @@ def tree():
     result = data.loadTree(title)
     return jsonify(result=result, user=session['user'])
 
-@app.route("/story", methods=["GET", "POST"])
+@app.route("/rateStory", methods=["GET", "POST"])
 def rateStory():
-    print "in vote state"
-    uw = request.form["user"]
-    uv = request.form["upvote"]
-    dv = request.form["downvote"]
-    data.rateVotes(upvote, downvote, session['user'])
-    return jsonify(upvote=upvote, downvote=downvote, user=session['user'])
+    up = request.form["up"]
+    down = request.form["down"]
+    ID = request.form["id"]
+    data.rate(up, down, ID)
+    return jsonify(up=up, down=down, ID=ID)
 
 if __name__ == "__main__":
     app.debug = True

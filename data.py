@@ -75,19 +75,21 @@ def addStory(title, content, user, parentid=None):
     conn = sqlite3.connect("database")
     c = conn.cursor()
     now = datetime.datetime.now().strftime("%B %d, %Y - %I:%M %p")
+    initialup = 0
+    initialdown = 0
     
     #create a table if it doesn't exist
     # (drop the table if you need to start from scratch)
- #   c.execute('DROP TABLE stories')
-    c.execute('CREATE TABLE IF NOT EXISTS stories(id integer primary key, title varchar(24), content varchar(100), date text, user varchar(24), parentid integer, FOREIGN KEY(user) REFERENCES users(name))')
+   # c.execute('DROP TABLE stories')
+    c.execute('CREATE TABLE IF NOT EXISTS stories(id integer primary key, title varchar(24), content varchar(100), date text, user varchar(24), parentid integer, upvotes integer, downvotes integer, FOREIGN KEY(user) REFERENCES users(name))')
 
     #this is where the cursor checks if the story already exists
     c.execute('SELECT content FROM stories WHERE title= ? AND content= ? AND user= ? AND parentid= ?',(title, content, user, parentid))
     exist = c.fetchone()
-    
+
     #if it isnt already in the table, insert it
     if exist is None:
-        c.execute('INSERT OR IGNORE INTO stories(title, content, date, user, parentid) VALUES(?,?,?,?,?)', (title, content, now, user, parentid))
+        c.execute('INSERT OR IGNORE INTO stories(title, content, date, user, parentid, upvotes, downvotes) VALUES(?,?,?,?,?,?,?)', (title, content, now, user, parentid, initialup, initialdown))
         conn.commit()
         conn.close()
         return True
@@ -103,7 +105,7 @@ def getStories():
     conn = sqlite3.connect("database")
     c = conn.cursor()
 
-    c.execute('CREATE TABLE IF NOT EXISTS stories(id integer primary key, title varchar(24), content varchar(100), date text, user varchar(24), parentid integer, FOREIGN KEY(user) REFERENCES users(name))')
+    c.execute('CREATE TABLE IF NOT EXISTS stories(id integer primary key, title varchar(24), content varchar(100), date text, user varchar(24), parentid integer, upvotes integer, downvotes integer, FOREIGN KEY(user) REFERENCES users(name))')
     c.execute('SELECT * FROM stories')
 
     #reverse the order of the stories to show most recent at the top
@@ -127,7 +129,7 @@ def loadStories():
     conn = sqlite3.connect("database")
     c = conn.cursor()
     val = "None"
-    c.execute('CREATE TABLE IF NOT EXISTS stories(id integer primary key, title varchar(24), content varchar(100), date text, user varchar(24), parentid integer, FOREIGN KEY(user) REFERENCES users(name))')
+    c.execute('CREATE TABLE IF NOT EXISTS stories(id integer primary key, title varchar(24), content varchar(100), date text, user varchar(24), parentid integer, upvotes integer, downvotes integer, FOREIGN KEY(user) REFERENCES users(name))')
     c.execute('SELECT id, title, date, user FROM stories WHERE parentID is null') # fetch only root stories (those without a parent) 
 
     #reverse the order of the stories to show most recent at the top
@@ -172,7 +174,7 @@ def getStory(story_id):
     
     conn = sqlite3.connect("database")
     c = conn.cursor()
-    c.execute('CREATE TABLE IF NOT EXISTS stories(id integer primary key, title varchar(24), content varchar(100), date text, user varchar(24), parentid integer, FOREIGN KEY(user) REFERENCES users(name))')
+    c.execute('CREATE TABLE IF NOT EXISTS stories(id integer primary key, title varchar(24), content varchar(100), date text, user varchar(24), parentid integer, upvotes integer, downvotes integer, FOREIGN KEY(user) REFERENCES users(name))')
 
     #get the story based on inputted ID
     c.execute('SELECT * FROM stories WHERE id=?',(story_id,))
@@ -183,7 +185,7 @@ def getStory(story_id):
     if exist is None:
         conn.commit()
         conn.close()
-        return null
+        return None
 
     #return this story's data if it exists
     else:
@@ -191,20 +193,20 @@ def getStory(story_id):
         conn.close()
         return exist
 
-def rateStory(user):
+def rate(up, down, ID):
      conn = sqlite3.connect("database")
      c = conn.cursor()
      #create a new table called votes that will use user, and story id to get data
-     c.execute('CREATE TABLE IF NOT EXISTS stories(upvote integer, downvote integer, id integer primary key, title varchar(24), content varchar(100), date text, user varchar(24), parentid integer, FOREIGN KEY(user) REFERENCES users(name))')
+     c.execute('CREATE TABLE IF NOT EXISTS stories(id integer primary key, title varchar(24), content varchar(100), date text, user varchar(24), parentid integer, upvotes integer, downvotes integer, FOREIGN KEY(user) REFERENCES users(name))')
      
      #get votes based on inputted id and the user name
-     c.execute('SELECT * FROM stories WHERE user=? AND id=?',(user,story_id))
+     c.execute('UPDATE stories SET upvotes= ?, downvotes= ? WHERE id= ?',(up, down, ID))
      exist = c.fetchone()
 
      if exist is None:
         conn.commit()
         conn.close()
-        return null
+        return None
 
     #return this story's data if it exists
      else:

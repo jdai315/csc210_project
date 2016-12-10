@@ -1,65 +1,64 @@
+//$(document).ready(function() {
 
 
+document.getElementById("uv").addEventListener("click", function() {
+    var editID = document.getElementsByClassName('email-content-id')[0].innerText;
+    var up = editID + "up";
+    var down = editID + "down";
+	console.log("Up vote");
+	console.log(up);
 
-console.log($("#count").text());
-
-
-//function rateVotes(){
-/*
-var count = 0;
-var uv = count + 1;
-var dv = count - 1;
-*/
-
-var uv = $("#upVote").text();
-var dv = $("#dVote").text();
-
-function checkifUserVoted(){
-return localStorage.getItem("voted");
-}
-
-function uVote(){
-	console.log("I have been pressed!");
-	//console.log(count++);
+    if (parseInt(localStorage.getItem(up)) == 1){
+        console.log("already 1 upvote!");
+        return false;
+        
+    } else {
+        console.log("no upvotes yet!");
     
-    if(localStorage.getItem("up")==1)
-    var vote = checkIfUserVoted() != uv ? uv : counter;
-    localStorage.setItem("voted", vote);
-    $("#count").text(vote);
-  
-};
-
-
-function dVote(){
-	console.log("I have been pressed!");
-	count--;
-};
-
-//}
-
-var counter = 0; //
-var uv = counter + 1;
-var dv = counter - 1;
-
-
-
-
-if (!localStorage.getItem("voted")) {
-  localStorage.setItem("voted", counter);
-  $("#count").text(counter);
-}
-
-/*Add 1 vote to the counter if the user presses upvote button, and only one user can add 1 at once
-$("#upVote").click(function(){
-
-});
-*/
-
-//Reduce vote by 1 if the user presses the downvote button
-$("#dVote").click(function(){
-var vote = checkIfUserVoted() != dv ? dv : counter;
-  localStorage.setItem("voted", vote);
-  $("#count").text(vote);
+        localStorage.setItem(up, 1);
+        
+        var uptext = $("#upVote").text();
+        console.log(uptext);
+        uptext++;
+        //console.log(uptext);
+        $("#upVote").text(uptext);
+        
+        
+        if (parseInt(localStorage.getItem(down)) == 1){
+            localStorage.setItem(down, 0);
+            
+            var downtext = $("#dVote").text();
+            downtext--;
+            $("#dVote").text(downtext);
+            
+        }
+    }
+    vote(); // ajax call
 });
 
-//Now we have to add these votes to the DB and then call them when necessary
+document.getElementById("dv").addEventListener("click", function() {
+	console.log("Down vote");
+	var editID = document.getElementsByClassName('email-content-id')[0].innerText;
+    var up = editID + "up";
+    var down = editID + "down";
+
+    if (parseInt(localStorage.getItem(down)) == 1){
+        return false;
+    } else {
+        localStorage.setItem(down, 1);
+        
+        var downtext = $("#dVote").text();
+        downtext++;
+        $("#dVote").text(downtext);
+        
+        if (parseInt(localStorage.getItem(up)) == 1){
+            localStorage.setItem(up, 0);
+            
+            var uptext = $("#upVote").text();
+            uptext--;
+            $("#upVote").text(uptext);
+            
+        }
+    }
+    vote(); // ajax call
+});
