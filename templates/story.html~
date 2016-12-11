@@ -46,15 +46,18 @@
     </div>
 </div>
 
-<div id="layout" class="content pure-g edit-layout">
+<div id="layout" class="content pure-g">
   
-  <div id="nav" class="pure-u edit-nav">
+  <div id="nav" class="pure-u">
     <a href="/home" class="nav-menu-button">Menu</a>
     
     <div class="nav-inner">
 
       <div class="pure-u">
-	<a id="logo" href="/" class="pure-menu-link">NOVEL</a>
+	<ul class="pure-menu-list">
+        <li class="pure-menu-item"><a href="/" class="pure-menu-link">NOVEL</a>
+	</li>
+	</ul>
       </div>
       
       <div class="pure-u">
@@ -76,37 +79,64 @@
       
     </div>
   </div>
-  
-  <!--result[] is the originally selected child node to be editted-->
-  
-  <div id="main" class="pure-u-1">
 
-    <div id="edit_top" class="pure-u-1">
-      <div id="go_back">
-	<button class="secondary-button pure-button button-large"><a href="/home"><img id="back-icon" src="../static/img/icons/back.png" alt="back"></a></button>
+  <!--list of the other child stories in the same generation as the one the user clicked to edit-->
+  <div id="list" class="pure-u-1">
+    {% if contents[0] != null %}
+    
+    <div id="ajaxposts"></div>
+
+    <div id="no_stories" class="pure-g">
+      <div id="none" class="pure-u-3-4">
+	Other Child Stories in this Generation
       </div>
-      <div id="subtree">
+    </div>
 
-	{% if contents[0] != null %}
-	<div id="subtree_raphael">@Joseph the div for the subtree is called 'subtree_raphael'
+    <div class="email_list">
+      {% for content in contents %}
+
+      {% if content[5]|safe == result[5]|safe %}
+      <div class="email-item pure-g">
+	<div class="pure-u-3-5">
+          {% if content[4]|safe == user %}
+	  <span class="email-label-mine filter_mine"></span>
+	  {% else %}
+	  <span class="email-label-others filter_others"></span>
+	  {% endif %}
+	  <h5 class="email-name cut-off">{{ content[4]|safe }}</h5>
+          <h4 class="email-subject cut-off">{{ content[1]|safe }} </h4>
+	  <p class="email-date"><span class="small_date">{{ content[3]|safe }}</span></p>
+          <p style="word-wrap: break-word" class="email-desc cut-off">
+            {{ content[2]|safe }}
+          </p>
 	</div>
-	
-	{% else %}
-	<div id="no_stories" class="pure-g">
-	  <div id="none">
-	    There are no other child stories in the same generation of the story you are editting
-	  </div>
+	<div class="pure-u-2-5 shrink">
+	  Story ID:  <p class="small_text email-id">{{ content[0]|safe }}</p>
+	  Parent ID: <p class="small_text">{{ content[5]|safe }}</p>
 	</div>
-	{% endif %}
-	
+      </div>
+      {% endif %}
+      
+      {% endfor %}
+    </div>
+
+    {% else %}
+    <div id="no_stories" class="pure-g">
+      <div id="none" class="pure-u-3-4">
+	There are no other child stories in the same generation of the story you are editting
       </div>
     </div>
     
+    {% endif %}
+  </div>
+
+  <!--story[] is the originally selected child node to be editted-->
+  
+  <div id="main" class="pure-u-1">
     <div class="email-content">
       <div class="email-content-header pure-g">
         <div class="pure-u-1-2">
-          <!--<span id="edit-reply">Re: </span>-->
-	  <h1 id="edit-version-title" class="email-content-title">{{ result[1]|safe }}</h1>
+          <h1 class="email-content-title">{{ result[1]|safe }}</h1>
           <p class="email-content-subtitle">
             From <a class="email-content-author">{{ result[4]|safe }}</a> at <span class="email-content-date">{{ result[3]|safe }}</span><BR>
             Story ID: <span class="email-content-id">{{ result[0]|safe }}</span>
@@ -117,19 +147,16 @@
           <!-- table with summary stats of story-->
           
 
-          <button class="button-success pure-button" id="uv">Upvote<a id="upVote">{{ result[6]|safe }}</a></button>
-          <button class="button-error pure-button" id="dv">Downvote<a id="dVote">{{ result[7]|safe }}</a></button>
-          <!--<button class="button-success pure-button">Count<a id="count">0</a></button>-->
+         <button class="button-success pure-button" onClick="uVote()">Upvote<a id="upVote"> 0</a></button>
+         <button class="button-error pure-button" onClick="dVote()">Downvote<a id="dVote"> 0</a></button>
+         <button class="button-success pure-button">Count<a id="count">0</a></button>
+
+
+
 
           <button class="secondary-button pure-button edit">Edit Story</button>
-
-	  <form method="POST">
-	    <input name="delete_id" value={{ result[0]|safe }} style="display: none;"></input>
-            <button type="submit" class="secondary-button pure-button delete">Delete Story</button>
-	  </form>
-	  
-          <button class="secondary-button pure-button submitbranch" type="submit" style="display: none;">Submit Branch</button>
-	      
+          <button class="secondary-button pure-button delete">Delete Story</button>
+          <button class="secondary-button pure-button submitbranch" onclick="location.href='http://0.0.0.0:5678/home'"style="display: none;">Submit Branch</button>
           <button class="secondary-button pure-button cancel" style="display: none;">Cancel</button>
         </div>
       </div>

@@ -99,6 +99,48 @@ def addStory(title, content, user, parentid=None):
         conn.close()
         return False
 
+#delete a story with no children
+def deleteStory(user, id):
+
+    #connect to 'database'
+    conn = sqlite3.connect("database")
+    c = conn.cursor()
+
+    #create a table if it doesn't exist
+    # (drop the table if you need to start from scratch)
+    #c.execute('DROP TABLE stories')
+    c.execute('CREATE TABLE IF NOT EXISTS stories(id integer primary key, title varchar(24), content varchar(100), date text, user varchar(24), parentid integer, upvotes integer, downvotes integer, FOREIGN KEY(user) REFERENCES users(name))')
+
+    #this is where the cursor checks if the story already exists
+    c.execute('SELECT * FROM stories WHERE id= ? AND user= ?',(id, user))
+    exist = c.fetchone()
+
+    #if it doesn't exist, do nothing
+    if exist is None:
+        print "cannot delete someone elses story"
+        conn.commit()
+        conn.close()
+        return False
+
+    #if it does exist, check if it has any children
+    else:
+        #this is where the cursor checks if the story already exists
+        c.execute('SELECT * FROM stories WHERE parentid= ?',(id,))
+        ex = c.fetchone()
+
+        #if there are no children of this parent story, delete it
+        if ex is None:
+            c.execute('DELETE FROM stories WHERE id= ?',(id,))
+            print "story " + id + " successfully deleted"
+            conn.commit()
+            conn.close()
+            return True
+        else:
+            print "can't delete: this story has children"
+            conn.commit()
+            conn.close()
+            return False
+
 #retreive all stories
 def getStories():
 

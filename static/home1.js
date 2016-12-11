@@ -10,7 +10,7 @@ $(document).ready(function() {
     if(location.href==url){
 	$('#main').css({visibility: "visible"});
 	if($('.filter_mine').length === 0){
-	    $('#list').append("<div id='no_stories' class='pure-g'><div id='none' class='pure-u-3-4'>You do not have any stories!<p>Get started by clicking the<br />'Add New Story' button to the left.</p></div></div>");
+	    $('#no_stories').css({display: "block"});
 	    $('.filter_others').parent().parent().css({display: "none"});
 	    $('.pure-menu-link').removeClass("filter_selected");
 	}
@@ -24,7 +24,8 @@ $(document).ready(function() {
     //*** Displaying story content ***//
 
     if(location.href!=url){
-	$('.email-item').click(function() {
+	$(document).on('click', '.email-item', function(){
+//	$('.email-item').click(function() {
             console.log("clicked");
             $('#main').css({visibility: "visible"});
             $('.email-item').removeClass("email-item-selected");
@@ -225,7 +226,9 @@ $(document).ready(function() {
     }
                   
     //*** Editing story using ajax ***//
-       
+
+    var original_text = $('.email-content-body').text();
+    
     $('.edit').click(function() {
         $('.email-content-body').attr("contenteditable", "true");
 	$('.email-content-body').css({color: "blue"});
@@ -236,12 +239,14 @@ $(document).ready(function() {
     })
                   
     $('.cancel, .email-item').click(function() {
+	$('.email-content-body').text(original_text);
         $('.email-content-body').attr("contenteditable", "false");
 	$('.email-content-body').css({color: "black"});
         $('.cancel').css({display: "none"});
         $('.delete').css({display: "inline"});
         $('.submitbranch').css({display: "none"});
         $('.edit').css({display: "inline"});
+	
     })
 
     $('.submitbranch').click(function() {
@@ -258,7 +263,7 @@ $(document).ready(function() {
 
     if(filter_all != null){
 	filter_all.onclick = function() {
-	    $('#no_stories').remove();
+	    $('#no_stories').css({display: "none"});
 	    $('.filter_mine').parent().parent().css({display: "block"});
 	    $('.filter_others').parent().parent().css({display: "block"});
 	    $('.pure-menu-link').removeClass("filter_selected");
@@ -269,7 +274,7 @@ $(document).ready(function() {
     if(filter_mine != null){
 	filter_mine.onclick = function() {
 	    if($('.filter_mine').length === 0){
-		$('#list').append("<div id='no_stories' class='pure-g'><div id='none' class='pure-u-3-4'>You do not have any stories!<p>Get started by clicking the<br />'Add New Story' button to the left.</p></div></div>");
+		$('#no_stories').css({display: "block"});
 		$('.filter_others').parent().parent().css({display: "none"});
 		$('.pure-menu-link').removeClass("filter_selected");
 	    }
@@ -286,7 +291,7 @@ $(document).ready(function() {
 
     if(filter_others != null){
 	filter_others.onclick = function() {
-	    $('#no_stories').remove();
+	    $('#no_stories').css({display: "none"});
 	    $('.filter_mine').parent().parent().css({display: "none"});
 	    $('.filter_others').parent().parent().css({display: "block"});
 	    $('.pure-menu-link').removeClass("filter_selected");

@@ -178,19 +178,22 @@ def profile():
     #story() is NOT working yet, just a placeholder for now
 
 @app.route("/story", methods=["GET","POST"])
-@app.route("/story/<ID>")
+@app.route("/story/<ID>", methods=["GET","POST"])
 def story(ID):
     if 'user' in session:
         result = data.getStory(ID)
         contents = data.getStories()
-        return render_template("story.html", user=session['user'],result=result, contents=contents)
+        if request.method == 'GET':
+            return render_template("story.html", user=session['user'],result=result, contents=contents)
+        else:
+            id = request.form["delete_id"]
+            return deleteStory(id)
     else:
         return redirect("/")
 
     
 @app.route('/edit', methods=["GET", "POST"])
 def edit():
-    print "made it"
     title = request.form["title"]
     content = request.form["content"]
     parentid = request.form["parentid"]
@@ -210,6 +213,12 @@ def rateStory():
     ID = request.form["id"]
     data.rate(up, down, ID)
     return jsonify(up=up, down=down, ID=ID)
+
+@app.route("/delete", methods=["GET", "POST"])
+def deleteStory(id):
+    data.deleteStory(session['user'], id)
+    return redirect("/home")
+ 
 
 if __name__ == "__main__":
     app.debug = True

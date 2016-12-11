@@ -3,7 +3,17 @@
 <h2>Currently working on Milestone #5</h2>
 <br>
 
-Latest Push Updates (Dec, 8):
+Latest Push Updates (Dec, 10):
+<br>
+<ul>
+<li>Added redirect back to user home page after a successful story edit</li>
+<li>Ajax-added stories can now be clicked and their trees displayed</li>
+<li>Cancelling an edit returns the original story's content</li>
+<li>Added a delete feature which allows users to delete stories only if they authored them and if the story has no children associated with it</li>
+</ul>
+<br>
+
+Push Updates (Dec, 8):
 <br>
 <ul>
 <li> Added new formatting to the story.html to make room for subtrees </li>
