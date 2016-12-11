@@ -25,6 +25,7 @@ $(document).ready(function() {
 
     if(location.href!=url){
 	$(document).on('click', '.email-item', function(){
+       $('email-item').attr("selected", "selected");
 //	$('.email-item').click(function() {
             console.log("clicked");
             $('#main').css({visibility: "visible"});
@@ -42,6 +43,9 @@ $(document).ready(function() {
             //$('.email-content-body').html(content);
             $('.email-content-author').html(author);
             //$('.email-content-id').html(id);
+
+            //display the selected content even after leaving the page
+            
             
             if(location.href.indexOf("story") == -1){
             
