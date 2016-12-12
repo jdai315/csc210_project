@@ -65,6 +65,16 @@
       </div>
       
       <button id="modalBtn" class="primary-button pure-button">Add New Story</button>
+
+      {% with messages = get_flashed_messages() %}
+         {% if messages %}
+            <ul>
+               {% for message in messages %}
+               <li<{{ message }}</li>
+               {% endfor %}
+            </ul>
+         {% endif %}
+      {% endwith %}
       
       <div class="pure-menu">
         <ul class="pure-menu-list">

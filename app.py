@@ -146,6 +146,7 @@ def add():
 def home(): 
     if 'user' in session:
         contents = data.loadStories()
+        flash("You have added a story!")
         return render_template("home.html", user=session['user'], contents=contents)
     else:
         return redirect("/")
@@ -185,6 +186,7 @@ def story(ID):
             return render_template("story.html", user=session['user'],result=result, contents=contents)
         else:
             id = request.form["delete_id"]
+            flash("You have deleted your edit!")
             return deleteStory(id)
     else:
         return redirect("/")
