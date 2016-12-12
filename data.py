@@ -194,9 +194,7 @@ def loadTree(title):
     conn = sqlite3.connect("database")
     c = conn.cursor()
     c.execute('SELECT * FROM stories where title= ?', (title,))
-    # fetch only root stories (those without a parent)
 
-    #reverse the order of the stories to show most recent at the top
     exist = c.fetchall()
     
     if exist is None:
@@ -210,7 +208,26 @@ def loadTree(title):
         conn.close()
         return exist
     
+def loadSubTree(title,ID):
 
+    conn = sqlite3.connect("database")
+    c = conn.cursor()
+    c.execute('SELECT parentid FROM stories WHERE title= ? AND id= ?', (title,ID))
+    parent = c.fetchone()
+    c.execute('SELECT * FROM stories WHERE title= ? AND (parentid= ? OR id= ?)', (title,ID,parent))
+
+    exist = c.fetchall()
+    
+    if exist is None:
+        conn.commit()
+        conn.close()
+        return null
+    
+    else:
+        conn.commit()
+        conn.close()
+        return exist
+    
 #get a single story's data by ID
 def getStory(story_id):
     

@@ -206,6 +206,13 @@ def tree():
     result = data.loadTree(title)
     return jsonify(result=result, user=session['user'])
 
+@app.route('/subTree', methods=["GET", "POST"])
+def subTree():
+    title = request.form["title"]
+    ID = request.form["id"]
+    result = data.loadSubTree(title,ID)
+    return jsonify(result=result, user=session['user'])
+
 @app.route("/rateStory", methods=["GET", "POST"])
 def rateStory():
     up = request.form["up"]
