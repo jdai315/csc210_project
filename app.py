@@ -175,8 +175,6 @@ def profile():
         return redirect("/profile")
         
 
-    #story() is NOT working yet, just a placeholder for now
-
 @app.route("/story", methods=["GET","POST"])
 @app.route("/story/<ID>", methods=["GET","POST"])
 def story(ID):

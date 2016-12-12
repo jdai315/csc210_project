@@ -3,7 +3,18 @@
 <h2>Currently working on Milestone #5</h2>
 <br>
 
-Latest Push Updates (Dec, 10):
+Latest Push Updates (Dec, 11):
+<br>
+<ul>
+<li>Stories on profile are now links to their editing pages</li>
+<li>Changed button formats</li>
+<li>User can now cancel their upvote or downvote</li>
+<li>User's vote remains highlighted upon reload of story page</li> 
+<li>Users cannot delete stories they are not the authors of now</li>
+</ul>
+<br>
+
+Push Updates (Dec, 10):
 <br>
 <ul>
 <li>Added redirect back to user home page after a successful story edit</li>

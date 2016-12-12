@@ -5,8 +5,15 @@ $(document).ready(function() {
     var url = "http://localhost:5678/profile";
     var url2 = "http://localhost:5678/story";
     var url3 = "http://localhost:5678/home";
-    
-    
+
+    //profile page: link to each story through click
+    $('.direct-link').click(function() {
+	var id = $(this).find('.email-id').html();
+	var url = "http://localhost:5678/story/" + id;
+	window.location.assign(url);
+    });
+
+    //show profile info on profile page
     if(location.href==url){
 	$('#main').css({visibility: "visible"});
 	if($('.filter_mine').length === 0){

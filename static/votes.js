@@ -1,63 +1,75 @@
-//$(document).ready(function() {
-
-
+$(document).ready(function() {
+    var editID = document.getElementsByClassName('email-content-id')[0].innerText;
+    var up = editID + "up";
+    var down = editID + "down";
+    if(parseInt(localStorage.getItem(up)) == 1){
+	$(".button-success").css("background-color", "rgb(28, 184, 65)");
+	$(".button-error").css("background-color",  "white");
+    }
+    if(parseInt(localStorage.getItem(down)) == 1){
+	$(".button-success").css("background-color", "white");
+	$(".button-error").css("background-color", "rgb(202, 60, 60)");
+    }
+});
+		 
 document.getElementById("uv").addEventListener("click", function() {
     var editID = document.getElementsByClassName('email-content-id')[0].innerText;
     var up = editID + "up";
     var down = editID + "down";
-	console.log("Up vote");
-	console.log(up);
+    console.log("Up vote");
+    console.log(up);
 
     if (parseInt(localStorage.getItem(up)) == 1){
-        console.log("already 1 upvote!");
+        console.log("vote cancelled");
+	localStorage.setItem(down, 0);
+	localStorage.setItem(up, 0);
+	$('#upVote').text(0);
+	$('#dVote').text(0);
+	$(".button-success").css("background-color", "white");
+	$(".button-error").css("background-color", "white");
+	vote();
         return false;
         
     } else {
-        console.log("no upvotes yet!");
-    
         localStorage.setItem(up, 1);
-        
-        var uptext = $("#upVote").text();
-        console.log(uptext);
-        uptext++;
-        //console.log(uptext);
-        $("#upVote").text(uptext);
-        
-        
-        if (parseInt(localStorage.getItem(down)) == 1){
+        $("#upVote").text(1);
+	$(".button-success").css("background-color", "rgb(28, 184, 65)");
+	$(".button-error").css("background-color",  "white");
+
+	if (parseInt(localStorage.getItem(down)) == 1){
             localStorage.setItem(down, 0);
-            
-            var downtext = $("#dVote").text();
-            downtext--;
-            $("#dVote").text(downtext);
-            
+            $("#dVote").text(0);        
         }
     }
     vote(); // ajax call
 });
 
 document.getElementById("dv").addEventListener("click", function() {
-	console.log("Down vote");
-	var editID = document.getElementsByClassName('email-content-id')[0].innerText;
+    var editID = document.getElementsByClassName('email-content-id')[0].innerText;
     var up = editID + "up";
     var down = editID + "down";
 
     if (parseInt(localStorage.getItem(down)) == 1){
+	console.log("vote cancelled");
+	localStorage.setItem(down, 0);
+	localStorage.setItem(up, 0);
+	$('#upVote').text(0);
+	$('#dVote').text(0);
+	$(".button-success").css("background-color", "white");
+	$(".button-error").css("background-color", "white");
+	vote();
         return false;
     } else {
-        localStorage.setItem(down, 1);
-        
-        var downtext = $("#dVote").text();
-        downtext++;
-        $("#dVote").text(downtext);
+	
+        localStorage.setItem(down, 1);      
+        $("#dVote").text(1);
+        $(".button-success").css("background-color", "white");
+	$(".button-error").css("background-color", "rgb(202, 60, 60)");
         
         if (parseInt(localStorage.getItem(up)) == 1){
             localStorage.setItem(up, 0);
-            
-            var uptext = $("#upVote").text();
-            uptext--;
-            $("#upVote").text(uptext);
-            
+            $("#upVote").text(0);	   
+
         }
     }
     vote(); // ajax call

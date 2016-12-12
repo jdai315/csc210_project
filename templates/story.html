@@ -105,7 +105,7 @@
     <div class="email-content">
       <div class="email-content-header pure-g">
         <div class="pure-u-1-2">
-          <!--<span id="edit-reply">Re: </span>-->
+          <span id="edit-reply">Re: </span>
 	  <h1 id="edit-version-title" class="email-content-title">{{ result[1]|safe }}</h1>
           <p class="email-content-subtitle">
             From <a class="email-content-author">{{ result[4]|safe }}</a> at <span class="email-content-date">{{ result[3]|safe }}</span><BR>
@@ -116,22 +116,31 @@
 	  
           <!-- table with summary stats of story-->
           
+	  <div id="vote_div">
+            <button class="button-success pure-button" id="uv"><img id="vote-icon" src="../../static/img/icons/like.png" alt="upvote">
+	      <a id="upVote">{{ result[6]|safe }}</a>
+	    </button>
+            <button class="button-error pure-button" id="dv"><img id="vote-icon" src="../../static/img/icons/dislike.png" alt="downvote">
+	      <a id="dVote">{{ result[7]|safe }}</a>
+	    </button>
+            <!--<button class="button-success pure-button">Count<a id="count">0</a></button>-->
+	  </div>
 
-          <button class="button-success pure-button" id="uv">Upvote<a id="upVote">{{ result[6]|safe }}</a></button>
-          <button class="button-error pure-button" id="dv">Downvote<a id="dVote">{{ result[7]|safe }}</a></button>
-          <!--<button class="button-success pure-button">Count<a id="count">0</a></button>-->
+	  <div id="button_div">
+	    {% if result[4]|safe == user %}
+	    <form id="delete_form" method="POST">
+	      <input name="delete_id" value={{ result[0]|safe }} style="display: none;"></input>
+              <button type="submit" class="secondary-button pure-button delete">Delete Story</button>
+	    </form>
+	    {% endif %}
+	    
+            <button class="primary-button pure-button edit button-big">Edit Story</button>
+	    
+            <button class="primary-button pure-button submitbranch button-big" type="submit" style="display: none;">Submit Branch</button>
+            <button class="secondary-button pure-button cancel button-big" style="display: none;">Cancel</button>
+	  </div>
+	</div>
 
-          <button class="secondary-button pure-button edit">Edit Story</button>
-
-	  <form method="POST">
-	    <input name="delete_id" value={{ result[0]|safe }} style="display: none;"></input>
-            <button type="submit" class="secondary-button pure-button delete">Delete Story</button>
-	  </form>
-	  
-          <button class="secondary-button pure-button submitbranch" type="submit" style="display: none;">Submit Branch</button>
-	      
-          <button class="secondary-button pure-button cancel" style="display: none;">Cancel</button>
-        </div>
       </div>
       
       <div style="word-wrap: break-word" class="email-content-body">{{ result[2]|safe }}</div>

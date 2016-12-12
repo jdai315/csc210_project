@@ -87,6 +87,10 @@
     width: 90px;
 }
 
+#vote-icon {
+    width: 32px;
+}
+
 #edit-reply {
     margin: 0px;
     font-size: 26px;
@@ -94,5 +98,14 @@
 
 #edit-version-title {
     margin-top: 5px;
+    margin-bottom: 5px;
     color: blue;
+}
+
+#upVote {
+    display: none;
+}
+
+#dVote {
+    display: none;
 }

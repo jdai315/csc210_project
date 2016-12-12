@@ -49,11 +49,19 @@ a {
 }
 
 .button-success {
-    background: rgb(28, 184, 65);
+    background-color: white;
 }
 
 .button-error {
-    background: rgb(202, 60, 60);
+    background-color: white;
+}
+
+.button-big {
+    font-size: 120%;
+}
+
+#delete_form {
+    display: inline;
 }
 
 /*
@@ -250,7 +258,7 @@ a {
                 color: #999;
             }
     .email-content-controls {
-        margin-top: 2em;
+        margin: 0px;
         text-align: right;
     }
         .email-content-controls .secondary-button {
