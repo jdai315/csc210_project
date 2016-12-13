@@ -86,6 +86,7 @@ function addStory()
     var con = document.getElementById('content').value
     var postVars = 'title='+tit+'&content='+con
     req.send(postVars)
+    alert("You have added a story!");
     
     return false
 }

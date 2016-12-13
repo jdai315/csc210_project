@@ -138,7 +138,6 @@ def read_cookies():
 def add():
     title = request.form["title"]
     content = request.form["content"]
-    flash("You have added a story!")
     data.addStory(title, content, session['user'])
     return jsonify(title=title, content=content, user=session['user'])
 
