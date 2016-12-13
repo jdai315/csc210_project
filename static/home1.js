@@ -456,7 +456,23 @@ $(document).ready(function() {
     //*** Editing story using ajax ***//
 
     var original_text = $('.email-content-body').text();
-    
+
+    $('#del_button').click(function() {
+	var editID = document.getElementsByClassName('email-content-id')[0].innerText;
+	var up = editID + "up";
+	var down = editID + "down";
+	var vid = editID + "user";
+
+	console.log("del check")
+	localStorage.setItem(up, 0);
+	localStorage.setItem(down, 0);
+	localStorage.setItem(vid, 0);
+	console.log(localStorage.getItem(up));
+	console.log(localStorage.getItem(down));
+	console.log(localStorage.getItem(vid));
+	
+    });
+			   
     $('.edit').click(function() {
         $('.email-content-body').attr("contenteditable", "true");
 	$('.email-content-body').css({color: "blue"});
@@ -465,7 +481,7 @@ $(document).ready(function() {
         $('.submitbranch').css({display: "inline"});
         $('.cancel').css({display: "inline"});
 	$('#vote_div').css({display: "none"});
-    })
+    });
     
     $('.cancel, .email-item').click(function() {
 	$('.email-content-body').text(original_text);
@@ -476,7 +492,7 @@ $(document).ready(function() {
         $('.submitbranch').css({display: "none"});
         $('.edit').css({display: "inline"});
 	$('#vote_div').css({display: "inline"});
-    })
+    });
 
     $('.submitbranch').click(function() {
         $('.email-content-body').attr("contenteditable", "false");

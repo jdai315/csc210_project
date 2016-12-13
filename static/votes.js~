@@ -3,28 +3,6 @@ $(document).ready(function() {
     var up = editID + "up";
     var down = editID + "down";
     var vid = editID + "user";
-
-    console.log(localStorage.getItem(up));
-    console.log(localStorage.getItem(down));
-
-
-    if(
-	(localStorage.getItem(up)==null)
-	    ||
-	    (isNaN(parseInt(localStorage.getItem(up))))
-    ){
-	localStorage.setItem(up, 0);
-    }
-    if(
-	(localStorage.getItem(down)==null)
-	    ||
-    	    (isNaN(parseInt(localStorage.getItem(down))))
-    ){
-	localStorage.setItem(down, 0);
-    }
-    
-    console.log(localStorage.getItem(up));
-    console.log(localStorage.getItem(down));
     
     $("#upVote").text(localStorage.getItem(up));
     $("#dVote").text(localStorage.getItem(down));

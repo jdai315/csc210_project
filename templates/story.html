@@ -141,7 +141,7 @@
 	    {% if result[4]|safe == user %}
 	    <form id="delete_form" method="POST">
 	      <input name="delete_id" value={{ result[0]|safe }} style="display: none;"></input>
-              <button type="submit" class="secondary-button pure-button delete">Delete Story</button>
+              <button id="del_button" type="submit" class="secondary-button pure-button delete">Delete Story</button>
 	    </form>
 	    {% endif %}
 	    
