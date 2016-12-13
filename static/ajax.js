@@ -19,7 +19,9 @@ function addStory()
                 
                 var newDiv = document.createElement("div")
                 newDiv.className += "email-item pure-g"
-                
+		if(location.href.indexOf("profile")!=-1){
+		    newDiv.className = "email-item direct-link pure-g"
+		}
                 var childDiv = document.createElement("div")
                 childDiv.className += "pure-u-3-5"
                 
