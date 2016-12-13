@@ -110,6 +110,7 @@ function addEdit()
             {
                 console.log("Edit success")
 		window.location.replace("http://localhost:5678/home")
+        alert("You have added an edit!");
             }
         }
     }
