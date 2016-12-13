@@ -221,20 +221,15 @@ $(document).ready(function() {
 		
 		if(redirect_title!=null){
 		    console.log("trying to load previous tree");
-		    var findTitle = redirect_title;
-		    console.log(findTitle);
+		    var findTitle = $.trim(redirect_title);
 		    var correctItem;
 		    //find the root story by title
 		    $('.email-subject').each(function() {
-			console.log($(this).html());
-			if($(this).html().indexOf(findTitle)!=-1){
+			if($.trim($(this).html())==findTitle){
 			    correctItem = $(this);
-			    console.log(correctItem);
 			}
 		    });
-		    console.log(correctItem);
 		    var parentItem = correctItem.parent().parent()
-		    console.log(parentItem);
 		    parentItem.click();
 		}
 		

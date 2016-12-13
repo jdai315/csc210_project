@@ -91,7 +91,8 @@ document.getElementById("dv").addEventListener("click", function() {
     } else {	
 	if (parseInt(localStorage.getItem(vid)) == 1){
             localStorage.setItem(up, parseInt(localStorage.getItem(up))-1);
-            $("#uVote").text(parseInt(localStorage.getItem(up)));        
+	    console.log(parseInt(localStorage.getItem(up)));
+            $("#upVote").text(parseInt(localStorage.getItem(up)));        
         }
 	localStorage.setItem(vid, -1);
         localStorage.setItem(down, parseInt(localStorage.getItem(down))+1);     

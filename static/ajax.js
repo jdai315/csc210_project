@@ -152,6 +152,7 @@ function vote()
     var up = document.getElementById('upVote').innerText
     console.log("up count: " + up)
     var down = document.getElementById('dVote').innerText
+    console.log("down count: " + down)
     var id = document.getElementsByClassName('email-content-id')[0].innerText
     var postVars = 'up='+up+'&down='+down+'&id='+id
     req.send(postVars)
