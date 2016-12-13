@@ -138,6 +138,7 @@ def read_cookies():
 def add():
     title = request.form["title"]
     content = request.form["content"]
+    flash("You have added a story!")
     data.addStory(title, content, session['user'])
     return jsonify(title=title, content=content, user=session['user'])
 
@@ -146,7 +147,6 @@ def add():
 def home(): 
     if 'user' in session:
         contents = data.loadStories()
-        flash("You have added a story!")
         return render_template("home.html", user=session['user'], contents=contents)
     else:
         return redirect("/")
