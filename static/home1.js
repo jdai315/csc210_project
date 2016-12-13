@@ -214,29 +214,35 @@ $(document).ready(function() {
             }
 	});
 
-	if(location.href.indexOf('home') != -1){
-	    var redirect_title = localStorage.getItem('root');
-	    console.log(redirect_title);
-	    
-	    if(redirect_title!=null){
-		console.log("trying to load previous tree");
-		var findTitle = redirect_title;
-		var correctItem;
-		//find the root story by title
-		$('.email-subject').each(function() {
-		    if($(this).html()===findTitle){
-			correctItem = $(this);
-		    }
-		});
-		console.log(correctItem);
-		var parentItem = correctItem.parent().parent()
-		console.log(parentItem);
-		parentItem.click();
+	$(document).ready(function() {
+	    if(location.href.indexOf('home') != -1){
+		var redirect_title = localStorage.getItem('root');
+		console.log(redirect_title);
+		
+		if(redirect_title!=null){
+		    console.log("trying to load previous tree");
+		    var findTitle = redirect_title;
+		    console.log(findTitle);
+		    var correctItem;
+		    //find the root story by title
+		    $('.email-subject').each(function() {
+			console.log($(this).html());
+			if($(this).html().indexOf(findTitle)!=-1){
+			    correctItem = $(this);
+			    console.log(correctItem);
+			}
+		    });
+		    console.log(correctItem);
+		    var parentItem = correctItem.parent().parent()
+		    console.log(parentItem);
+		    parentItem.click();
+		}
+		
+		else{
+		    console.log("no previous story recorded");
+		}
 	    }
-	    else{
-		console.log("no previous story recorded");
-	    }
-	}
+	});
         
     }
     
