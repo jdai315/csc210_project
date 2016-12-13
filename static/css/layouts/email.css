@@ -48,11 +48,7 @@ a {
     font-size: 90%;
 }
 
-.button-success {
-    background-color: white;
-}
-
-.button-error {
+.button-success, .button-error {
     background-color: white;
 }
 

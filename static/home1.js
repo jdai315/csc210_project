@@ -430,6 +430,7 @@ $(document).ready(function() {
         $('.delete').css({display: "none"});
         $('.submitbranch').css({display: "inline"});
         $('.cancel').css({display: "inline"});
+	$('#vote_div').css({display: "none"});
     })
                   
     $('.cancel, .email-item').click(function() {
@@ -440,7 +441,7 @@ $(document).ready(function() {
         $('.delete').css({display: "inline"});
         $('.submitbranch').css({display: "none"});
         $('.edit').css({display: "inline"});
-	
+	$('#vote_div').css({display: "inline"});
     })
 
     $('.submitbranch').click(function() {

@@ -3,7 +3,14 @@
 <h2>Currently working on Milestone #5</h2>
 <br>
 
-Latest Push Updates (Dec, 11):
+Latest Push Updates (Dec, 12):
+<br>
+<ul>
+<li>Fixed votes counter, some CSS</li>
+</ul>
+<br>
+
+Push Updates (Dec, 11):
 <br>
 <ul>
 <li>Stories on profile are now links to their editing pages</li>

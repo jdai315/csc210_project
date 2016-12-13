@@ -103,6 +103,10 @@
     color: blue;
 }
 
-#upVote, #dVote {
-    color: black;
+#upVote {
+    display: none;
+}
+
+#dVote {
+    display: none;
 }
