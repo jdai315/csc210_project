@@ -106,3 +106,7 @@
 #upVote, #dVote {
     color: black;
 }
+
+#parentid {
+    display: none;
+}

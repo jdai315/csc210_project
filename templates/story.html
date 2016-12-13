@@ -120,7 +120,8 @@
           <p class="email-content-subtitle">
             From <a class="email-content-author">{{ result[4]|safe }}</a> at <span class="email-content-date">{{ result[3]|safe }}</span><BR>
             Story ID: <span class="email-content-id">{{ result[0]|safe }}</span>
-          </p>
+	    <span id="parentid">{{ result[5]|safe }}</span>
+	  </p>
         </div>
         <div class="email-content-controls pure-u-1-2">
 	  

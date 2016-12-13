@@ -6,6 +6,13 @@
 Latest Push Updates (Dec, 12):
 <br>
 <ul>
+<li>localStorage feature: last selected story is remembered and displayed on home.html</li>
+</ul>
+<br>
+
+Push Updates (Dec, 12):
+<br>
+<ul>
 <li>Fixed votes counter, some CSS</li>
 </ul>
 <br>
