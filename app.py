@@ -198,6 +198,7 @@ def edit():
     content = request.form["content"]
     parentid = request.form["parentid"]
     data.addStory(title, content, session['user'], parentid)
+    flash("You made an edit!")
     return jsonify(title=title, content=content, user=session['user'])
 
 @app.route('/tree', methods=["GET", "POST"])
