@@ -25,9 +25,10 @@ $(document).ready(function() {
     
     console.log(localStorage.getItem(up));
     console.log(localStorage.getItem(down));
+
     
-    $("#upVote").text(localStorage.getItem(up));
-    $("#dVote").text(localStorage.getItem(down));
+    //$("#upVote").text(localStorage.getItem(up));
+    //$("#dVote").text(localStorage.getItem(down));
     
     if(parseInt(localStorage.getItem(vid)) == 1){
 	$(".button-success").css("background-color", "rgb(28, 184, 65)");
