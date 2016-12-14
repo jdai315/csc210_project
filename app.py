@@ -69,8 +69,6 @@ def register():
             flash("Sorry, the username is already taken.")
             return redirect("/register")
 
-
-
 #set cookies
 @app.route("/login")
 def set_cookies():
@@ -84,56 +82,7 @@ def set_cookies():
 def read_cookies():
     user_id = request.cookies.get('user')
 
-#@app.route("/addstory", methods=["GET","POST"])
-#private page only available to logged-in users
-#@authenticate
-#def addstory():
-#    if request.method == 'GET':
-#        return render_template("addstory.html", user=session['user'])    
-#    else:
-#        title = request.form["title"]
-#        content = request.form["content"]
-#
-#        if not(title and not title.isspace()):
-#            flash("Please add a title to your story")
-#            return redirect("/addstory")
-#        elif not(content and not content.isspace()):
-#            flash("Story must have content!")
-#            return redirect("/addstory")
-#        elif data.addStory(title, content, session['user']):
-#            flash("Story successfully added!")
-#            return redirect("/home")
-#        else:
-#            flash("A story with this title already exists!")
-#            return render_template("addstory.html",user=session['user'])
-
-#Edit story based on the addstory, call on the existing item intact and change content
-##@app.route("/addstory", methods=["GET","POST"])
-##@authenticate
-##def editStory():
-##    if request.method == "GET":
-##        return render_template("addstory.html", user=session['user'])
-##    else:
-##        title = request.form["title"]
-##        content = request.form["content"]
-
-##@app.route("/stories", methods=["GET","POST"])
-##@authenticate
-##def stories():
-##    if request.method == 'GET':
-##        return render_template("stories.html", user=session['user'])
-##    else:
-##        title = request.form["findTitle"]
-##        content = data.getStory(title, session['user'])
-##
-##        if not(title and not title.isspace()):
-##            flash("Please type a title to search for")
-##            return redirect("/stories")
-##        else:
-##            flash("Search results")
-##            return render_template("stories.html", user=session['user'], loadTitle=title, loadContent=content)
-
-
+#AJAX: adding a story to database
 @app.route("/add", methods=["GET", "POST"])
 def add():
     title = request.form["title"]
@@ -190,7 +139,7 @@ def story(ID):
     else:
         return redirect("/")
 
-    
+#AJAX: make an edit to an existing story, which adds a row to SQL table "stories"    
 @app.route('/edit', methods=["GET", "POST"])
 def edit():
     title = request.form["title"]
@@ -200,19 +149,14 @@ def edit():
     flash("You made an edit!")
     return jsonify(title=title, content=content, user=session['user'])
 
+#AJAX: load the tree on home.html for a specified root story
 @app.route('/tree', methods=["GET", "POST"])
 def tree():
     title = request.form["title"]
     result = data.loadTree(title)
     return jsonify(result=result, user=session['user'])
 
-@app.route('/subTree', methods=["GET", "POST"])
-def subTree():
-    title = request.form["title"]
-    ID = request.form["id"]
-    result = data.loadSubTree(title,ID)
-    return jsonify(result=result, user=session['user'])
-
+#AJAX: update votes for a story
 @app.route("/rateStory", methods=["GET", "POST"])
 def rateStory():
     up = request.form["up"]

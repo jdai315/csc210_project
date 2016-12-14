@@ -42,7 +42,7 @@ def checkUser(username, password):
     c.execute('SELECT pw from users WHERE name= ?',(username,))
     exist = c.fetchone()
 
-    #if user doesnt exist, test fails. if password isnt the same as the stored password, test fails. otherwise, the test passes.
+    #if user doesnt exist, test fails. if password isn't the same as the stored password, test fails. otherwise, the test passes.
     if exist is None:
         conn.close()
         return False
@@ -75,6 +75,8 @@ def addStory(title, content, user, parentid=None):
     conn = sqlite3.connect("database")
     c = conn.cursor()
     now = datetime.datetime.now().strftime("%B %d, %Y - %I:%M %p")
+
+    # initialize up and down votes to 0
     initialup = 0
     initialdown = 0
     
@@ -105,11 +107,6 @@ def deleteStory(user, id):
     #connect to 'database'
     conn = sqlite3.connect("database")
     c = conn.cursor()
-
-    #create a table if it doesn't exist
-    # (drop the table if you need to start from scratch)
-    #c.execute('DROP TABLE stories')
-    c.execute('CREATE TABLE IF NOT EXISTS stories(id integer primary key, title varchar(24), content varchar(100), date text, user varchar(24), parentid integer, upvotes integer, downvotes integer, FOREIGN KEY(user) REFERENCES users(name))')
 
     #this is where the cursor checks if the story already exists
     c.execute('SELECT * FROM stories WHERE id= ? AND user= ?',(id, user))
@@ -189,6 +186,7 @@ def loadStories():
         conn.close()
         return exist
 
+#fetches all stories with the specified title, used to build tree diagram
 def loadTree(title):
 
     conn = sqlite3.connect("database")
@@ -201,26 +199,6 @@ def loadTree(title):
         conn.commit()
         conn.close()
         print "you have no stories"
-        return null
-    
-    else:
-        conn.commit()
-        conn.close()
-        return exist
-    
-def loadSubTree(title,ID):
-
-    conn = sqlite3.connect("database")
-    c = conn.cursor()
-    c.execute('SELECT parentid FROM stories WHERE title= ? AND id= ?', (title,ID))
-    parent = c.fetchone()
-    c.execute('SELECT * FROM stories WHERE title= ? AND (parentid= ? OR id= ?)', (title,ID,parent))
-
-    exist = c.fetchall()
-    
-    if exist is None:
-        conn.commit()
-        conn.close()
         return null
     
     else:
@@ -252,6 +230,7 @@ def getStory(story_id):
         conn.close()
         return exist
 
+#update votes for an edit with specified ID 
 def rate(up, down, ID):
      conn = sqlite3.connect("database")
      c = conn.cursor()

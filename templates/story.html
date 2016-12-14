@@ -87,7 +87,7 @@
     </div>
   </div>
   
-  <!--result[] is the originally selected child node to be editted-->
+  <!--result[] is the originally selected child node to be edited-->
   
   <div id="main" class="pure-u-1">
 
@@ -98,13 +98,12 @@
       <div id="subtree">
 
 	{% if contents[0] != null %}
-	<div id="subtree_raphael">@Joseph the div for the subtree is called 'subtree_raphael'
-	</div>
+	<div id="subtree_raphael"></div>
 	
 	{% else %}
 	<div id="no_stories" class="pure-g">
 	  <div id="none">
-	    There are no other child stories in the same generation of the story you are editting
+	    There are no other child stories in the same generation of the story you are editing
 	  </div>
 	</div>
 	{% endif %}
@@ -124,8 +123,6 @@
 	  </p>
         </div>
         <div class="email-content-controls pure-u-1-2">
-	  
-          <!-- table with summary stats of story-->
           
 	  <div id="vote_div">
             <button class="button-success pure-button" id="uv"><img id="vote-icon" src="../../static/img/icons/like.png" alt="upvote">
@@ -134,7 +131,6 @@
             <button class="button-error pure-button" id="dv"><img id="vote-icon" src="../../static/img/icons/dislike.png" alt="downvote">
 	      <a id="dVote">{{ result[7]|safe }}</a>
 	    </button>
-            <!--<button class="button-success pure-button">Count<a id="count">0</a></button>-->
 	  </div>
 
 	  <div id="button_div">
