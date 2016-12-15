@@ -82,7 +82,7 @@ def addStory(title, content, user, parentid=None):
     
     #create a table if it doesn't exist
     # (drop the table if you need to start from scratch)
- #   c.execute('DROP TABLE stories')
+  #  c.execute('DROP TABLE stories')
     c.execute('CREATE TABLE IF NOT EXISTS stories(id integer primary key, title varchar(24), content varchar(100), date text, user varchar(24), parentid integer, upvotes integer, downvotes integer, FOREIGN KEY(user) REFERENCES users(name))')
 
     #this is where the cursor checks if the story already exists
